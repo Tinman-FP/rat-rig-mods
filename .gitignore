@@ -1,0 +1,8 @@
+# macOS
+.DS_Store
+
+# Local slicer output and scratch files
+*.gcode
+*.bgcode
+*.tmp
+*.bak
