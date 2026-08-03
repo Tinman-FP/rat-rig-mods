@@ -1,5 +1,5 @@
 path	size_bytes	sha256
-printed-parts/README.md	1347	8d719b81ec0568f4cde08b5d95f82a6e730c1bf801f81b827cc9da37f80232f3
+printed-parts/README.md	1571	a510fbe8e30e5bc832e035cd4add907a2c4cf3cc0ccb770f10a441a16c43137f
 printed-parts/community-mods/README.md	475	b7591021c2ebd6c4c3fbf711ccac505c02c7a0dd5c2d983420c72951930c0652
 printed-parts/community-mods/enclosure/archives/door-hinges-ratrig-vcore-4-model_files.zip	204057	5d4a9b22f5c57cdc1b56861f28b8a3b14a46543272322451f83fbf36250b33d6
 printed-parts/community-mods/enclosure/door-hinges-vcore-4/1019674-door-hinges-ratrig-vcore-4-5b52db0c-2409-4ab7-a9e2-2d2204f91477.pdf	134078	c75df4c689072565d4239381d825ee4e270e77c0be78e022c0f52c346608a343
@@ -68,9 +68,11 @@ printed-parts/community-mods/lighting/v-core-led-daylight-mount/rat-rig-toolhead
 printed-parts/community-mods/lighting/v-core-led-daylight-mount/rat-rig-toolhead-10-duct-and-fan-mount-for-beacon-probe-model_files/body_beacon-mount_rev2.stp	1043478	d60329798789f0773a67d7f6c5b85d2bab84204d4fbc8b533b4c3173839bab1a
 printed-parts/community-mods/lighting/v-core-led-daylight-mount/rat-rig-toolhead-10-duct-and-fan-mount-for-beacon-probe-model_files/uhf-duct_beacon-mount.stl	2047484	e1575bdcd78cdb8f6c17a12bc1f9180e2ec308f1b3c0d2a57213b53142833c7f
 printed-parts/community-mods/lighting/v-core-led-daylight-mount/rat-rig-toolhead-10-duct-and-fan-mount-for-beacon-probe-model_files/uhf-duct_beacon-mount.stp	2524288	cf6a2343e673df62a9c09cda0aa4ff428209020e88ea520eef4e3e510e3621f6
-printed-parts/custom-mods/README.md	608	1ea199316f41c81027f4c91776cb5a97fbc596f08ca79ab9e4197da20346b026
+printed-parts/custom-mods/README.md	697	98c61ec464a18cfb9afa22d72979ff576804c67814fb1b3bfa40b4770ab4c6aa
 printed-parts/custom-mods/chamber-heater/Noctua 140mm Fan adapter.step	34006	20614aadc6799cb88c04d108b1e0c94d83f21ff7348740465ee44436033c0cd0
+printed-parts/custom-mods/chamber-heater/README.md	603	914e0de3d4d18ca421c526eb9d7e6cf7da67e1d521171183645c2ddf84685939
 printed-parts/custom-mods/chamber-heater/Rat Rig Chamber Heater.step	181081	2718de67daf712ffdf91d33d2d9830821b649e6c4c1a82306dd30e26839e4fa3
+printed-parts/custom-mods/chamber-heater/Rat Rig Vcore 4 Chamber Heater.step	4818958	dc24930b18572669040693cc4ef9d49824677e4cb3f79fb9d194d34ecc882988
 printed-parts/custom-mods/electronics-enclosure/Rat Rig Electronics Enclosure Cover 2 120mm Fans.step	248758	4155674744c1296a53799db93fe90cc09ce2761cdefd7900ff1f5d0dd7b165ad
 printed-parts/custom-mods/enclosure-panels/Door Hinge mount.3mf	31043	3069d27466dcc7c83a17253cb8b831df9d3de1c3b24b6aed6d919f05b2da23b8
 printed-parts/custom-mods/enclosure-panels/Plexi spacers.3mf	32566	826a04439cb6b24a5d1a4886e69ba8dd387e15981f29ca82f1aa5d1a80efad65
@@ -83,6 +85,9 @@ printed-parts/custom-mods/toolhead/dragon-water-apus/Dragon Water Hotend ST.stp	
 printed-parts/custom-mods/toolhead/dragon-water-apus/RAT RIG DRAGON WATER AND APUS 2 CLEAN.f3d	12888640	0442c777a1b155a577c505a9ad7395cf04554c034cf5d36a1e14c8e0ffadde89
 printed-parts/custom-mods/toolhead/dragon-water-apus/RAT RIG DRAGON WATER AND APUS 2 CLEAN.stl	11440484	6270342c0c1a55e52cdf16adb22da1f0ec03654d276dcbd24738d417cd50fd0d
 printed-parts/custom-mods/toolhead/nozzle-wiper/Rat Rig Nozzle Wiper.3mf	27696	54b41a7a65c6cd7c9e09abdb252153bfeca86e5dac9782e9b0e6213e3c26b655
+printed-parts/custom-mods/v-core-4-400-idex/README.md	541	cd1bb714b7ed78dd5eaee610e1eff118d0a84b945e6a7b1a441c0d2103852d93
+printed-parts/custom-mods/v-core-4-400-idex/Rat Rig V-core 4 Idex 400mm.step	139715668	f540b335980438e99b7d3224561d56917d56b1bff6dfe4413dbabe9ed725cdf9
+printed-parts/custom-mods/v-core-4-400-idex/Rat Rig Vcore 4 Idex 400 Top Hat.step	11500502	dfa817ad62d6665258438abbbe992e13ff6416ca8449339d772f374806c7ea5e
 printed-parts/custom-mods/wire-management/Rat Rig Wire Covers.step	54105	3d405894f06177c8658eafcb51cf6439f513e0405e2921f3413b91366ef786b9
 printed-parts/rat-rig-official/README.md	399	ea126847f1c0105e19f9b76abf510226074ade5e7532ae0248e33c4b0f6d8560
 printed-parts/rat-rig-official/archives/v-core_40_printed_parts.zip	10252304	269ab0d693ee159f44d166783eeac0bac50562efb9d4a2c94031ce3e0e9dc1b2

@@ -21,6 +21,8 @@ Rat Rig mod collection and publication:
 
 The `printed-parts/` directory was copied from William Tinney's local Rat Rig printed-parts collection on July 15, 2026.
 
+Additional Rat Rig V-Core 4 400 IDEX and chamber-heater STEP files were added from William Tinney's local GitHub upload staging folder on August 3, 2026.
+
 ## Upstream And Third-Party Parts
 
 Where source folders include their own README or LICENSE files, those files are preserved with the models and continue to govern the original upstream designs.

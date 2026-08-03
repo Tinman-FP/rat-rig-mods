@@ -8,6 +8,10 @@ Source copied from:
 
 Published on July 15, 2026.
 
+Updated on August 3, 2026 with Rat Rig V-Core 4 400 IDEX STEP references and a smaller V-Core 4 chamber-heater STEP variant from:
+
+`/Users/williamtinney/Library/CloudStorage/Dropbox/3D Printing/Rat Rig/Mods/Github Uploads`
+
 ## Contents
 
 - [custom-mods](custom-mods/) - custom Tinman-FP Rat Rig parts and assemblies.
