@@ -14,10 +14,16 @@ Source copied from:
 
 Published on July 15, 2026.
 
+Additional Rat Rig V-Core 4 400 IDEX and chamber-heater STEP files copied from:
+
+`/Users/williamtinney/Library/CloudStorage/Dropbox/3D Printing/Rat Rig/Mods/Github Uploads`
+
+Updated on August 3, 2026.
+
 Current bundle size:
 
-- 161 source files, plus repository README and manifest files
-- about 297 MB
+- 171 files under `printed-parts/`, plus repository README and manifest files
+- about 446 MB
 - STL, STEP/STP, 3MF, F3D, PDF, ZIP, README, and license files
 
 The source folder contained one macOS `.DS_Store` metadata file; it was intentionally omitted.

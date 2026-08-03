@@ -9,6 +9,7 @@ Tinman-FP Rat Rig custom build files and project-specific mod parts.
 - `enclosure-panels/` - side panel, top hat, plexi spacer, screw mount, and hinge-related project files.
 - `full-assemblies/` - large full-printer assembly reference CAD.
 - `toolhead/` - Dragon Water/APUS-related toolhead files and nozzle wiper projects.
+- `v-core-4-400-idex/` - Rat Rig V-Core 4 400 IDEX assembly and top-hat STEP references.
 - `wire-management/` - wire cover CAD.
 
 Review all dimensions, materials, and clearances before printing or installing.
