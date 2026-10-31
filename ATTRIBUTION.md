@@ -30,3 +30,13 @@ Credit remains with the original designers, maintainers, and vendors for those u
 ## Custom Build Files
 
 Custom Rat Rig build files and collected project-specific mod files are credited to William Tinney / Tinman-FP.
+
+## INDX Conversion
+
+The [INDX](INDX/) folder is an unofficial conversion design by William Tinney / Tinman-FP. The CAD scripting, interference checks and documentation were done with Claude Code.
+
+- **Bondtech:** the INDX Smart Head, tools, Tool Dock 1515 and 4010 radial-cooling ducts in the assembly come from Bondtech's published INDX CAD (https://www.bondtech.se/). Bondtech owns those designs.
+- **Rat Rig:** the assembly is built on Rat Rig's V-Core 4.1 500 IDEX model, with the parts this conversion removes taken out.
+- **Qidi:** the wiper pads are Qidi nozzle wiper pads, a purchased part.
+- **MakerBeam:** the dock and station rails are MakerBeam XL-compatible 1515 extrusion.
+- **Tinman-FP:** the printed parts, scripts, Klipper drafts and documents in `INDX/` are Tinman-FP's.

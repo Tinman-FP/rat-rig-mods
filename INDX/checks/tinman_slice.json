@@ -1,0 +1,109 @@
+{
+ "tinman_result": {
+  "error_string": "Success.",
+  "export_time": 2,
+  "layer_height": 0.23999999463558197,
+  "plate_index": 0,
+  "prepare_time": 0,
+  "return_code": 0,
+  "sliced_plates": [
+   {
+    "id": 1,
+    "sliced_time": 4,
+    "sliced_time_with_cache": 2,
+    "triangle_count": 17300,
+    "warning_message": ""
+   },
+   {
+    "id": 2,
+    "sliced_time": 4,
+    "sliced_time_with_cache": 2,
+    "triangle_count": 14606,
+    "warning_message": ""
+   },
+   {
+    "id": 3,
+    "sliced_time": 3,
+    "sliced_time_with_cache": 3,
+    "triangle_count": 9332,
+    "warning_message": ""
+   },
+   {
+    "id": 4,
+    "sliced_time": 0,
+    "sliced_time_with_cache": 0,
+    "triangle_count": 2224,
+    "warning_message": ""
+   }
+  ],
+  "sparse_infill_density": 45.0,
+  "wall_loops": 6
+ },
+ "plates": [
+  {
+   "plate": 1,
+   "name": "Carriage, joints, front idlers",
+   "hours": 15.5,
+   "grams": 298.5,
+   "objects": [
+    "carriage_id_0_copy_0",
+    "carriage_clamp_cap_1_id_1_copy_0",
+    "carriage_clamp_cap_2_id_2_copy_0",
+    "carriage_clamp_cap_3_id_3_copy_0",
+    "carriage_clamp_cap_4_id_4_copy_0",
+    "joint_L_id_5_copy_0",
+    "joint_R_id_6_copy_0",
+    "front_idler_L_id_7_copy_0",
+    "front_idler_R_id_8_copy_0"
+   ],
+   "warnings": []
+  },
+  {
+   "plate": 2,
+   "name": "Rear corners",
+   "hours": 11.6,
+   "grams": 225.0,
+   "objects": [
+    "rear_corner_L_base_id_0_copy_0",
+    "rear_corner_R_base_id_1_copy_0",
+    "rear_corner_L_top_id_2_copy_0",
+    "rear_corner_R_top_id_3_copy_0"
+   ],
+   "warnings": []
+  },
+  {
+   "plate": 3,
+   "name": "Purge cradles and rail brackets",
+   "hours": 18.0,
+   "grams": 344.4,
+   "objects": [
+    "dock_bracket_L_id_0_copy_0",
+    "dock_bracket_R_id_1_copy_0",
+    "station_bracket_L_id_2_copy_0",
+    "station_bracket_R_id_3_copy_0",
+    "station_cradle_T0_id_4_copy_0",
+    "station_cradle_T1_id_5_copy_0",
+    "station_cradle_T2_id_6_copy_0",
+    "station_cradle_T3_id_7_copy_0",
+    "station_cradle_T4_id_8_copy_0"
+   ],
+   "warnings": []
+  },
+  {
+   "plate": 4,
+   "name": "Purge buckets",
+   "hours": 12.4,
+   "grams": 224.5,
+   "objects": [
+    "purge_bucket_T0_id_0_copy_0",
+    "purge_bucket_T1_id_1_copy_0",
+    "purge_bucket_T2_id_2_copy_0",
+    "purge_bucket_T3_id_3_copy_0",
+    "purge_bucket_T4_id_4_copy_0"
+   ],
+   "warnings": []
+  }
+ ],
+ "total_hours": 57.5,
+ "total_grams": 1092.4
+}

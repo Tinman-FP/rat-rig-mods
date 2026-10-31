@@ -1,0 +1,191 @@
+{
+ "fixed_vs_context": [],
+ "poses": [
+  {
+   "xc": -290.0,
+   "yg": -225.8,
+   "tag": "clearance",
+   "hits": []
+  },
+  {
+   "xc": -290.0,
+   "yg": 0.0,
+   "tag": "mid",
+   "hits": []
+  },
+  {
+   "xc": -290.0,
+   "yg": 263.0,
+   "tag": "rear_stop",
+   "hits": []
+  },
+  {
+   "xc": -263.0,
+   "yg": -266.8,
+   "tag": "front_stop",
+   "hits": []
+  },
+  {
+   "xc": -263.0,
+   "yg": -225.8,
+   "tag": "clearance",
+   "hits": []
+  },
+  {
+   "xc": -263.0,
+   "yg": 0.0,
+   "tag": "mid",
+   "hits": []
+  },
+  {
+   "xc": -263.0,
+   "yg": 263.0,
+   "tag": "rear_stop",
+   "hits": []
+  },
+  {
+   "xc": -31.0,
+   "yg": -266.8,
+   "tag": "front_stop",
+   "hits": []
+  },
+  {
+   "xc": -31.0,
+   "yg": -225.8,
+   "tag": "clearance",
+   "hits": []
+  },
+  {
+   "xc": -31.0,
+   "yg": 0.0,
+   "tag": "mid",
+   "hits": []
+  },
+  {
+   "xc": -31.0,
+   "yg": 263.0,
+   "tag": "rear_stop",
+   "hits": []
+  },
+  {
+   "xc": 201.0,
+   "yg": -266.8,
+   "tag": "front_stop",
+   "hits": []
+  },
+  {
+   "xc": 201.0,
+   "yg": -225.8,
+   "tag": "clearance",
+   "hits": []
+  },
+  {
+   "xc": 201.0,
+   "yg": 0.0,
+   "tag": "mid",
+   "hits": []
+  },
+  {
+   "xc": 201.0,
+   "yg": 263.0,
+   "tag": "rear_stop",
+   "hits": []
+  },
+  {
+   "xc": 290.0,
+   "yg": -225.8,
+   "tag": "clearance",
+   "hits": []
+  },
+  {
+   "xc": 290.0,
+   "yg": 0.0,
+   "tag": "mid",
+   "hits": []
+  },
+  {
+   "xc": 290.0,
+   "yg": 263.0,
+   "tag": "rear_stop",
+   "hits": []
+  },
+  {
+   "xc": -234.0,
+   "yg": -225.8,
+   "tag": "clear_move",
+   "hits": []
+  },
+  {
+   "xc": -205.0,
+   "yg": -225.8,
+   "tag": "clear_move",
+   "hits": []
+  },
+  {
+   "xc": -118.0,
+   "yg": -225.8,
+   "tag": "clear_move",
+   "hits": []
+  },
+  {
+   "xc": -89.0,
+   "yg": -225.8,
+   "tag": "clear_move",
+   "hits": []
+  },
+  {
+   "xc": -2.0,
+   "yg": -225.8,
+   "tag": "clear_move",
+   "hits": []
+  },
+  {
+   "xc": 27.0,
+   "yg": -225.8,
+   "tag": "clear_move",
+   "hits": []
+  },
+  {
+   "xc": 114.0,
+   "yg": -225.8,
+   "tag": "clear_move",
+   "hits": []
+  },
+  {
+   "xc": 143.0,
+   "yg": -225.8,
+   "tag": "clear_move",
+   "hits": []
+  },
+  {
+   "xc": -263.0,
+   "yg": -265.8,
+   "tag": "pickup",
+   "hits": []
+  },
+  {
+   "xc": -147.0,
+   "yg": -265.8,
+   "tag": "pickup",
+   "hits": []
+  },
+  {
+   "xc": -31.0,
+   "yg": -265.8,
+   "tag": "pickup",
+   "hits": []
+  },
+  {
+   "xc": 85.0,
+   "yg": -265.8,
+   "tag": "pickup",
+   "hits": []
+  },
+  {
+   "xc": 201.0,
+   "yg": -265.8,
+   "tag": "pickup",
+   "hits": []
+  }
+ ]
+}

@@ -5,3 +5,5 @@
 *.step filter=lfs diff=lfs merge=lfs -text
 *.stp filter=lfs diff=lfs merge=lfs -text
 *.3mf filter=lfs diff=lfs merge=lfs -text
+*.brep filter=lfs diff=lfs merge=lfs -text
+*.solidcraft filter=lfs diff=lfs merge=lfs -text

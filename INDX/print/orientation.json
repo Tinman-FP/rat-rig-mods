@@ -1,0 +1,407 @@
+[
+ {
+  "part": "carriage",
+  "down": "+Z",
+  "why": "top plate down: the X-block face prints as a clean top surface; the 1.4 mm INDX lip touches first, so support fills under the plate",
+  "support": true,
+  "size_mm": [
+   92.0,
+   46.0,
+   49.0
+  ],
+  "bed_contact_mm2": 204,
+  "volume_cm3": 63.94,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "carriage_clamp_cap_1",
+  "down": "-Y",
+  "why": "flat face down",
+  "support": false,
+  "size_mm": [
+   19.8,
+   20.1,
+   5.0
+  ],
+  "bed_contact_mm2": 380,
+  "volume_cm3": 1.79,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "carriage_clamp_cap_2",
+  "down": "-Y",
+  "why": "flat face down",
+  "support": false,
+  "size_mm": [
+   19.8,
+   19.1,
+   7.5
+  ],
+  "bed_contact_mm2": 360,
+  "volume_cm3": 2.68,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "carriage_clamp_cap_3",
+  "down": "-Y",
+  "why": "flat face down",
+  "support": false,
+  "size_mm": [
+   19.8,
+   19.1,
+   5.0
+  ],
+  "bed_contact_mm2": 360,
+  "volume_cm3": 1.69,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "carriage_clamp_cap_4",
+  "down": "-Y",
+  "why": "flat face down",
+  "support": false,
+  "size_mm": [
+   19.8,
+   20.1,
+   7.5
+  ],
+  "bed_contact_mm2": 380,
+  "volume_cm3": 2.83,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "joint_L",
+  "down": "+Z",
+  "why": "top plate down; supports under the lower deck",
+  "support": true,
+  "size_mm": [
+   61.5,
+   63.0,
+   61.6
+  ],
+  "bed_contact_mm2": 3600,
+  "volume_cm3": 61.71,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "joint_R",
+  "down": "+Z",
+  "why": "top plate down; supports under the lower deck",
+  "support": true,
+  "size_mm": [
+   61.5,
+   63.0,
+   61.6
+  ],
+  "bed_contact_mm2": 3600,
+  "volume_cm3": 61.71,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "front_idler_L",
+  "down": "-Y",
+  "why": "front wall down",
+  "support": true,
+  "size_mm": [
+   53.5,
+   67.1,
+   41.0
+  ],
+  "bed_contact_mm2": 919,
+  "volume_cm3": 23.05,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "front_idler_R",
+  "down": "-Y",
+  "why": "front wall down",
+  "support": true,
+  "size_mm": [
+   53.5,
+   48.1,
+   41.0
+  ],
+  "bed_contact_mm2": 805,
+  "volume_cm3": 22.04,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "rear_corner_L_base",
+  "down": "-Z",
+  "why": "plate down; supports under the bearing bridge",
+  "support": true,
+  "size_mm": [
+   88.5,
+   70.5,
+   36.5
+  ],
+  "bed_contact_mm2": 4419,
+  "volume_cm3": 63.52,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "rear_corner_R_base",
+  "down": "-Z",
+  "why": "plate down; supports under the bearing bridge",
+  "support": true,
+  "size_mm": [
+   88.5,
+   70.5,
+   27.0
+  ],
+  "bed_contact_mm2": 4853,
+  "volume_cm3": 47.45,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "rear_corner_L_top",
+  "down": "-Z",
+  "why": "as fitted: layers in the plate; supports under the plate and feet",
+  "support": true,
+  "size_mm": [
+   59.5,
+   72.0,
+   40.1
+  ],
+  "bed_contact_mm2": 71,
+  "volume_cm3": 25.51,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "rear_corner_R_top",
+  "down": "-Z",
+  "why": "as fitted: the motor face prints as a clean top surface; supports under the plate",
+  "support": true,
+  "size_mm": [
+   88.5,
+   72.0,
+   23.0
+  ],
+  "bed_contact_mm2": 362,
+  "volume_cm3": 50.16,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "dock_bracket_L",
+  "down": "-X",
+  "why": "upright plate down",
+  "support": false,
+  "size_mm": [
+   50.0,
+   25.3,
+   30.8
+  ],
+  "bed_contact_mm2": 850,
+  "volume_cm3": 10.7,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "dock_bracket_R",
+  "down": "+X",
+  "why": "upright plate down",
+  "support": false,
+  "size_mm": [
+   50.0,
+   25.3,
+   30.8
+  ],
+  "bed_contact_mm2": 850,
+  "volume_cm3": 10.7,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "station_bracket_L",
+  "down": "-X",
+  "why": "upright plate down",
+  "support": false,
+  "size_mm": [
+   50.0,
+   21.8,
+   30.8
+  ],
+  "bed_contact_mm2": 675,
+  "volume_cm3": 9.16,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "station_bracket_R",
+  "down": "+X",
+  "why": "upright plate down",
+  "support": false,
+  "size_mm": [
+   50.0,
+   21.8,
+   30.8
+  ],
+  "bed_contact_mm2": 675,
+  "volume_cm3": 9.16,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "station_cradle_T0",
+  "down": "-Z",
+  "why": "floor down; supports under the crossbar and the pad shelf",
+  "support": true,
+  "size_mm": [
+   88.0,
+   47.5,
+   74.0
+  ],
+  "bed_contact_mm2": 3370,
+  "volume_cm3": 40.23,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "station_cradle_T1",
+  "down": "-Z",
+  "why": "floor down; supports under the crossbar and the pad shelf",
+  "support": true,
+  "size_mm": [
+   88.0,
+   47.5,
+   74.0
+  ],
+  "bed_contact_mm2": 3370,
+  "volume_cm3": 40.23,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "station_cradle_T2",
+  "down": "-Z",
+  "why": "floor down; supports under the crossbar and the pad shelf",
+  "support": true,
+  "size_mm": [
+   88.0,
+   47.5,
+   74.0
+  ],
+  "bed_contact_mm2": 3370,
+  "volume_cm3": 40.23,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "station_cradle_T3",
+  "down": "-Z",
+  "why": "floor down; supports under the crossbar and the pad shelf",
+  "support": true,
+  "size_mm": [
+   88.0,
+   47.5,
+   74.0
+  ],
+  "bed_contact_mm2": 3370,
+  "volume_cm3": 40.23,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "station_cradle_T4",
+  "down": "-Z",
+  "why": "floor down; supports under the crossbar and the pad shelf",
+  "support": true,
+  "size_mm": [
+   88.0,
+   47.5,
+   74.0
+  ],
+  "bed_contact_mm2": 3370,
+  "volume_cm3": 40.23,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "purge_bucket_T0",
+  "down": "-Z",
+  "why": "floor down, open top up; the flange and back overhangs print unsupported",
+  "support": false,
+  "size_mm": [
+   88.0,
+   49.5,
+   50.7
+  ],
+  "bed_contact_mm2": 2849,
+  "volume_cm3": 37.54,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "purge_bucket_T1",
+  "down": "-Z",
+  "why": "floor down, open top up; the flange and back overhangs print unsupported",
+  "support": false,
+  "size_mm": [
+   88.0,
+   49.5,
+   50.7
+  ],
+  "bed_contact_mm2": 2849,
+  "volume_cm3": 37.54,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "purge_bucket_T2",
+  "down": "-Z",
+  "why": "floor down, open top up; the flange and back overhangs print unsupported",
+  "support": false,
+  "size_mm": [
+   88.0,
+   49.5,
+   50.7
+  ],
+  "bed_contact_mm2": 2849,
+  "volume_cm3": 37.54,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "purge_bucket_T3",
+  "down": "-Z",
+  "why": "floor down, open top up; the flange and back overhangs print unsupported",
+  "support": false,
+  "size_mm": [
+   88.0,
+   49.5,
+   50.7
+  ],
+  "bed_contact_mm2": 2849,
+  "volume_cm3": 37.54,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "purge_bucket_T4",
+  "down": "-Z",
+  "why": "floor down, open top up; the flange and back overhangs print unsupported",
+  "support": false,
+  "size_mm": [
+   88.0,
+   49.5,
+   50.7
+  ],
+  "bed_contact_mm2": 2849,
+  "volume_cm3": 37.54,
+  "solid": true,
+  "non_manifold": false
+ }
+]
