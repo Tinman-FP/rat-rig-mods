@@ -1,0 +1,417 @@
+{
+ "fixed_vs_context": [],
+ "poses": [
+  {
+   "xc": -216.0,
+   "back": 15.0,
+   "tag": "T0_approach",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": -216.0,
+   "back": 0.0,
+   "tag": "T0_purge",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": -216.0,
+   "back": -1.0,
+   "tag": "T0_front_stop",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": -212.0,
+   "back": 0.0,
+   "tag": "T0_wipe_left",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": -196.0,
+   "back": 0.0,
+   "tag": "T0_wipe_right",
+   "hits": [],
+   "nozzle_touches": [
+    "wiper_pad_T0"
+   ]
+  },
+  {
+   "xc": -212.0,
+   "back": 15.0,
+   "tag": "T0_leave",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": -220.0,
+   "back": 0.0,
+   "tag": "T0_purge_-4mm",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": -192.0,
+   "back": 0.0,
+   "tag": "T0_wipe_right_+4mm",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": -100.0,
+   "back": 15.0,
+   "tag": "T1_approach",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": -100.0,
+   "back": 0.0,
+   "tag": "T1_purge",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": -100.0,
+   "back": -1.0,
+   "tag": "T1_front_stop",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": -96.0,
+   "back": 0.0,
+   "tag": "T1_wipe_left",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": -80.0,
+   "back": 0.0,
+   "tag": "T1_wipe_right",
+   "hits": [],
+   "nozzle_touches": [
+    "wiper_pad_T1"
+   ]
+  },
+  {
+   "xc": -96.0,
+   "back": 15.0,
+   "tag": "T1_leave",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": -104.0,
+   "back": 0.0,
+   "tag": "T1_purge_-4mm",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": -76.0,
+   "back": 0.0,
+   "tag": "T1_wipe_right_+4mm",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": 16.0,
+   "back": 15.0,
+   "tag": "T2_approach",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": 16.0,
+   "back": 0.0,
+   "tag": "T2_purge",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": 16.0,
+   "back": -1.0,
+   "tag": "T2_front_stop",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": 20.0,
+   "back": 0.0,
+   "tag": "T2_wipe_left",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": 36.0,
+   "back": 0.0,
+   "tag": "T2_wipe_right",
+   "hits": [],
+   "nozzle_touches": [
+    "wiper_pad_T2"
+   ]
+  },
+  {
+   "xc": 20.0,
+   "back": 15.0,
+   "tag": "T2_leave",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": 12.0,
+   "back": 0.0,
+   "tag": "T2_purge_-4mm",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": 40.0,
+   "back": 0.0,
+   "tag": "T2_wipe_right_+4mm",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": 132.0,
+   "back": 15.0,
+   "tag": "T3_approach",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": 132.0,
+   "back": 0.0,
+   "tag": "T3_purge",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": 132.0,
+   "back": -1.0,
+   "tag": "T3_front_stop",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": 136.0,
+   "back": 0.0,
+   "tag": "T3_wipe_left",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": 152.0,
+   "back": 0.0,
+   "tag": "T3_wipe_right",
+   "hits": [],
+   "nozzle_touches": [
+    "wiper_pad_T3"
+   ]
+  },
+  {
+   "xc": 136.0,
+   "back": 15.0,
+   "tag": "T3_leave",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": 128.0,
+   "back": 0.0,
+   "tag": "T3_purge_-4mm",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": 156.0,
+   "back": 0.0,
+   "tag": "T3_wipe_right_+4mm",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": 248.0,
+   "back": 15.0,
+   "tag": "T4_approach",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": 248.0,
+   "back": 0.0,
+   "tag": "T4_purge",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": 248.0,
+   "back": -1.0,
+   "tag": "T4_front_stop",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": 252.0,
+   "back": 0.0,
+   "tag": "T4_wipe_left",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": 268.0,
+   "back": 0.0,
+   "tag": "T4_wipe_right",
+   "hits": [],
+   "nozzle_touches": [
+    "wiper_pad_T4"
+   ]
+  },
+  {
+   "xc": 252.0,
+   "back": 15.0,
+   "tag": "T4_leave",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": 244.0,
+   "back": 0.0,
+   "tag": "T4_purge_-4mm",
+   "hits": [],
+   "nozzle_touches": []
+  },
+  {
+   "xc": 272.0,
+   "back": 0.0,
+   "tag": "T4_wipe_right_+4mm",
+   "hits": [],
+   "nozzle_touches": []
+  }
+ ],
+ "bucket_pull": [
+  {
+   "tool": 0,
+   "pull": 0.0,
+   "hits": []
+  },
+  {
+   "tool": 0,
+   "pull": 20.0,
+   "hits": []
+  },
+  {
+   "tool": 0,
+   "pull": 40.0,
+   "hits": []
+  },
+  {
+   "tool": 0,
+   "pull": 60.0,
+   "hits": []
+  },
+  {
+   "tool": 1,
+   "pull": 0.0,
+   "hits": []
+  },
+  {
+   "tool": 1,
+   "pull": 20.0,
+   "hits": []
+  },
+  {
+   "tool": 1,
+   "pull": 40.0,
+   "hits": []
+  },
+  {
+   "tool": 1,
+   "pull": 60.0,
+   "hits": []
+  },
+  {
+   "tool": 2,
+   "pull": 0.0,
+   "hits": []
+  },
+  {
+   "tool": 2,
+   "pull": 20.0,
+   "hits": []
+  },
+  {
+   "tool": 2,
+   "pull": 40.0,
+   "hits": []
+  },
+  {
+   "tool": 2,
+   "pull": 60.0,
+   "hits": []
+  },
+  {
+   "tool": 3,
+   "pull": 0.0,
+   "hits": []
+  },
+  {
+   "tool": 3,
+   "pull": 20.0,
+   "hits": []
+  },
+  {
+   "tool": 3,
+   "pull": 40.0,
+   "hits": []
+  },
+  {
+   "tool": 3,
+   "pull": 60.0,
+   "hits": []
+  },
+  {
+   "tool": 4,
+   "pull": 0.0,
+   "hits": []
+  },
+  {
+   "tool": 4,
+   "pull": 20.0,
+   "hits": []
+  },
+  {
+   "tool": 4,
+   "pull": 40.0,
+   "hits": []
+  },
+  {
+   "tool": 4,
+   "pull": 60.0,
+   "hits": []
+  }
+ ],
+ "station_to_bed_arms_mm": {
+  "station_rail_1515": 20.5,
+  "station_bracket_L": 24.2,
+  "station_bracket_R": 27.61,
+  "station_cradle_T0": 2.0,
+  "purge_bucket_T0": 4.0,
+  "wiper_pad_T0": 2.0,
+  "station_cradle_T1": 3.63,
+  "purge_bucket_T1": 10.0,
+  "wiper_pad_T1": 3.72,
+  "station_cradle_T2": 1.59,
+  "purge_bucket_T2": 13.82,
+  "wiper_pad_T2": 1.5,
+  "station_cradle_T3": 2.0,
+  "purge_bucket_T3": 10.0,
+  "wiper_pad_T3": 2.0,
+  "station_cradle_T4": 2.0,
+  "purge_bucket_T4": 4.0,
+  "wiper_pad_T4": 2.0
+ }
+}

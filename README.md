@@ -24,6 +24,7 @@ The source folder contained one macOS `.DS_Store` metadata file; it was intentio
 
 ## Repository Layout
 
+- [INDX](INDX/) - V-Core 4.1 500 conversion from IDEX to a single carriage on true 12 mm-belt CoreXY with a Bondtech INDX five-tool changer, PPS-CF parts, and one purge bucket and wiper per tool. It includes the installation guide, bill of materials, Tinman print project, CAD and the parametric source. Design checked in CAD only; not yet built.
 - [printed-parts/custom-mods](printed-parts/custom-mods/) - Tinman-FP Rat Rig custom parts, panels, toolhead pieces, wire covers, chamber heater parts, and full assembly references.
 - [printed-parts/rat-rig-official](printed-parts/rat-rig-official/) - Rat Rig V-Core official printed-part sets and archived bundles preserved from the source folder.
 - [printed-parts/community-mods](printed-parts/community-mods/) - Imported/community mod files such as lighting mounts and V-Core door hinge models.

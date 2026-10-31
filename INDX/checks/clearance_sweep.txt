@@ -1,0 +1,26 @@
+Head vs a parked tool and its dock, head moved sideways along the clearance line (2026-10-30).
+Overlap volumes in mm3: head body + held tool / Bondtech's real 4010 radial ducts. Head offset in X from the dock's tool.
+
+Boxed ducts (conservative), offsets 0,6,12,18,24,31,40:
+clearance 26:   0.0  839.4   39.3  258.8  258.8  258.8  762.3
+clearance 30:   0.0  660.8   53.3 2940.0 3016.4 2764.5  638.6
+clearance 35:   0.0  363.1   79.6   92.6   92.6   92.6  396.3
+clearance 40:   0.0  105.8  374.9  550.4  555.2  516.2  147.5
+clearance 45:   0.0    0.0   11.4   12.1   12.1   12.1    0.0
+clearance 50, 55, 60, 65: all 0.0
+
+Real ducts, offsets +6,+12,+18,+24,+31,+40:
+clearance 26 mm, offsets 6..40, body+tool / real ducts:    0.0/   0.0     0.0/ 191.4     0.0/ 160.3     0.0/ 129.6     0.0/  14.4     0.0/   0.0
+clearance 35 mm, offsets 6..40, body+tool / real ducts:    0.0/   0.0     0.0/   9.3     0.0/   1.4     0.0/   0.7     0.0/   0.0     0.0/   0.0
+clearance 45 mm, offsets 6..40, body+tool / real ducts:    0.0/   0.0     0.0/   0.0     0.0/   0.0     0.0/   0.0     0.0/   0.0     0.0/   0.0
+
+Real ducts, offsets +9,+12,+15,+18,+24,+31:
+clearance 38 mm, offsets 6..40, body+tool / real ducts:    0.0/   0.0     0.0/   0.0     0.0/   0.0     0.0/   0.0     0.0/   0.0     0.0/   0.0
+clearance 40 mm, offsets 6..40, body+tool / real ducts:    0.0/   0.0     0.0/   0.0     0.0/   0.0     0.0/   0.0     0.0/   0.0     0.0/   0.0
+
+Real ducts, offsets -6,-9,-12,-15,-18,-24,-31 (dock body side):
+clearance 40 mm, offsets 6..40, body+tool / real ducts:    0.0/   0.0     0.0/   0.0     0.0/   0.0     0.0/   0.0     0.0/   0.0     0.0/   0.0     0.0/   0.0
+
+Result: 26 mm (Bondtech's default) clears the head body and tool but not the radial-cooling ducts.
+38 and 40 mm clear on both sides; INDX_CLEARANCE = 40 mm (clearance_y 0.0 in the draft config).
+Note: the 'offsets 6..40' text inside the real-duct lines is a fixed label; the offsets are those in each heading.
