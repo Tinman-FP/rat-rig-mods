@@ -39,10 +39,14 @@ ORIENT = {
     **{f"station_cradle_T{i}": ("-Z", "floor down; supports under the crossbar and the pad shelf") for i in range(5)},
     **{f"purge_bucket_T{i}": ("-Z", "floor down, open top up; the flange and back overhangs print unsupported")
        for i in range(5)},
+    **{f"ptfe_coupler_block_T{i}": ("-Y", "mounting plate down; supports under the bend and the coupler boss")
+       for i in range(5)},
+    "umbilical_saddle": ("-Y", "front face down, arm standing up; no supports"),
+    "umbilical_swivel": ("-X", "flat side down"),
 }
 SUPPORT = {"carriage", "joint_L", "joint_R", "front_idler_L", "front_idler_R", "rear_corner_L_base",
            "rear_corner_R_base", "rear_corner_L_top", "rear_corner_R_top",
-           *(f"station_cradle_T{i}" for i in range(5))}
+           *(f"station_cradle_T{i}" for i in range(5)), *(f"ptfe_coupler_block_T{i}" for i in range(5))}
 
 # rotation (axis, degrees) that takes the named direction to -Z
 TURN = {"-Z": None, "+Z": (V(1, 0, 0), 180), "-Y": (V(1, 0, 0), 90), "+Y": (V(1, 0, 0), -90),

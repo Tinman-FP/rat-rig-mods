@@ -2,7 +2,7 @@
 
 Nothing on this list has been ordered or fitted yet. `BOM.csv` holds the same list for a spreadsheet.
 
-## Printed parts (27 parts, PPS-CF, about 1,114 g modelled)
+## Printed parts (34 parts, PPS-CF, about 1,256 g modelled)
 
 All of them are in the Tinman project `print/VC41_CoreXY12_INDX_PPSCF_QidiPlus4_06.3mf`.
 
@@ -35,6 +35,13 @@ All of them are in the Tinman project `print/VC41_CoreXY12_INDX_PPSCF_QidiPlus4_
 | purge_bucket_T2 | 1 | 88 x 49.5 x 50.7 | 4 | Purge buckets, one per tool (identical, engraved T0-T4); 49 g |
 | purge_bucket_T3 | 1 | 88 x 49.5 x 50.7 | 4 | Purge buckets, one per tool (identical, engraved T0-T4); 49 g |
 | purge_bucket_T4 | 1 | 88 x 49.5 x 50.7 | 4 | Purge buckets, one per tool (identical, engraved T0-T4); 49 g |
+| ptfe_coupler_block_T0 | 1 | 38 x 59.6 x 44.7 | 5 | PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; 25 g; tree supports |
+| ptfe_coupler_block_T1 | 1 | 38 x 59.6 x 45.9 | 5 | PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; 24 g; tree supports |
+| ptfe_coupler_block_T2 | 1 | 38 x 59.6 x 45.9 | 5 | PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; 24 g; tree supports |
+| ptfe_coupler_block_T3 | 1 | 38 x 59.6 x 45.9 | 5 | PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; 24 g; tree supports |
+| ptfe_coupler_block_T4 | 1 | 38 x 59.6 x 45.2 | 5 | PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; 25 g; tree supports |
+| umbilical_saddle | 1 | 32 x 70.2 x 58.9 | 5 | Umbilical saddle on the INDX PCB cover, with a clevis at its tail; 15 g |
+| umbilical_swivel | 1 | 12 x 30 x 10.4 | 5 | Umbilical swivel: turns on the saddle's pin, so the umbilical lies back near the front and stands up near the back; 4 g |
 
 ## Motion
 
@@ -67,7 +74,7 @@ All of them are in the Tinman project `print/VC41_CoreXY12_INDX_PPSCF_QidiPlus4_
 | 8 | M3 hex nut | — | Any | Belt clamp caps |
 | 8 | M3 heat-set insert | For 4.0 mm holes, about 5.7 mm long | Any | Carriage INDX grid 4, front idler tension screws 4 |
 | 14 | 1515 M3 T-nut | MakerBeam XL compatible | MakerBeam | Cradles 10, rail brackets 4 |
-| 26 | 3030 M6 drop-in T-nut | — | Any | All M6 screws below |
+| 36 | 3030 M6 drop-in T-nut | — | Any | All M6 screws below |
 | 4 | M6 x 18 socket head screw | — | Any | Left rear corner base, up into the 3030s |
 | 4 | M6 x 14 socket head screw | — | Any | Right rear corner base, up into the 3030s |
 | 3 | M6 x 10 socket head screw | — | Any | Left rear corner top |
@@ -75,6 +82,7 @@ All of them are in the Tinman project `print/VC41_CoreXY12_INDX_PPSCF_QidiPlus4_
 | 2 | M6 x 12 socket head screw | — | Any | Left front idler block |
 | 2 | M6 x 16 socket head screw | — | Any | Right front idler block |
 | 8 | M6 x 14 socket head screw | — | Any | Dock and station rail brackets |
+| 10 | M6 x 10 socket head screw | — | Any | PTFE coupler blocks, into the front top 3030's inner slot |
 
 ## Docks and stations
 
@@ -83,6 +91,20 @@ All of them are in the Tinman project `print/VC41_CoreXY12_INDX_PPSCF_QidiPlus4_
 | 2 | 1515 aluminium extrusion, 739 mm | MakerBeam XL compatible | MakerBeam | Dock rail and station rail |
 | 5 | Qidi nozzle wiper pad | 15 x 27 x 4.7 mm | Qidi (owner's part) | One wiper per tool |
 | 1 | High-temperature RTV silicone | Rated 260 C or more | Any | Gluing the wiper pads |
+
+## Tubes and umbilical
+
+| Qty | Item | Specification | Source | Used for |
+|---|---|---|---|---|
+| 5 | PC4-M10 push-fit coupler | For 4 mm OD tube; threads into the block (tap M10 x 1 or let it cut) | Any (BIQU or similar) | One per coupler block |
+| 5 | PTFE tube, 4 mm OD x 2 mm ID | One continuous tube per tool; free lengths T0 793, T1 719, T2 651, T3 682, T4 752 mm, plus about 70 mm through the block, plus the run to the filament source | Any (Capricorn or similar) | Filament to each tool |
+| 4 m | Piano (music) wire, 1.0 mm | Cut to each tube's free length | Any | Stiffener taped along each free tube so parked tubes hold their arch and the active one swings clear |
+| 1 | PTFE or polyimide tape, or 6 mm heat-shrink | — | Any | Holding the piano wire to the tubes |
+| 1 | Umbilical: piano wire 1.2 mm + loom | Reuse the stock V-Core 4 umbilical; free length 687 mm from the back-middle mount to the saddle | Stock (Rat Rig) | INDX Link cable to the head |
+| 1 | M3 heat-set insert + M3 x 6 set screw | — | Any | Piano-wire clamp in the swivel |
+| 1 | M3 x 20 socket head screw + nyloc nut | Snug, not tight: the swivel must turn freely | Any | Swivel pin through the saddle's clevis |
+| a strip | VHB tape, 20 mm | — | Any | Saddle onto the INDX PCB cover |
+| 4 | Zip ties, 2.5 mm | — | Any | Umbilical into the saddle groove |
 
 ## INDX (Bondtech)
 
@@ -107,7 +129,7 @@ All of them are in the Tinman project `print/VC41_CoreXY12_INDX_PPSCF_QidiPlus4_
 
 | Qty | Item | Specification | Source | Used for |
 |---|---|---|---|---|
-| 1.1 kg | PPS-CF | 1,092 g in Tinman's slice | Any | All printed parts |
+| 1.25 kg | PPS-CF | 1,228 g in Tinman's slice | Any | All printed parts |
 
 ## Reused from the printer
 

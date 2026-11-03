@@ -104,7 +104,8 @@ def new_items():
     printed = ("joint_L", "joint_R", "carriage", "front_idler_L", "front_idler_R", "rear_corner_L_base",
                "rear_corner_L_top", "rear_corner_R_base", "rear_corner_R_top", "dock_bracket_L", "dock_bracket_R",
                "station_bracket_L", "station_bracket_R",
-               *(f"station_cradle_T{i}" for i in range(P.INDX_TOOLS)), *(f"purge_bucket_T{i}" for i in range(P.INDX_TOOLS)))
+               *(f"station_cradle_T{i}" for i in range(P.INDX_TOOLS)), *(f"purge_bucket_T{i}" for i in range(P.INDX_TOOLS)),
+               *(f"ptfe_coupler_block_T{i}" for i in range(P.INDX_TOOLS)), "umbilical_saddle", "umbilical_swivel")
     labels = {
         "F_L": "IDLER smooth F_L (front left, belt A)", "F_R": "IDLER smooth F_R (front right, belt B)",
         "R1_L": "IDLER smooth R1_L", "R2_L": "IDLER smooth R2_L", "C_LB": "IDLER smooth C_LB (belt B corner)",
@@ -134,6 +135,17 @@ def new_items():
             out[f"INDX tool {n[-2:]} (parked)"] = s
         else:
             out[labels.get(n, n)] = s
+    import vc12_tubes as T                                   # free tubes and the umbilical at this pose, T0 on the head
+    ny = YG + P.INDX_NOZZLE_DY
+    for i in range(P.INDX_TOOLS):
+        X, ok = T.tube_nodes(i, XC, ny) if i == 0 else T.parked_nodes(i)
+        out[f"PTFE tube T{i}" + (" (on head)" if i == 0 else " (parked)")] = T.pipe(X, P.TUBE["od"] / 2)
+    X, ok, angle = T.umb_nodes(XC, ny, with_angle=True)
+    out["UMBILICAL (stock V-Core 4, piano wire)"] = T.pipe(X, P.UMB["od"] / 2)
+    import vc12_build as BLD                                 # the swivel turned to this pose's angle
+    sw = BLD.umbilical_swivel(angle)
+    sw.translate(V(XC, YG, 0))
+    out["PPS-CF umbilical_swivel"] = sw
     for plane in ("A", "B"):
         out[f"BELT {plane} 12mm ({'lower' if plane == 'A' else 'upper'})"] = Part.makeCompound(
             [s for n, s in moving.items() if n.startswith(f"belt_{plane}_")])

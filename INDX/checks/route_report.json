@@ -1,0 +1,168 @@
+{
+ "note": "Route check for the PTFE tubes and the head umbilical (run with FreeCAD's Python after vc12_build.py).",
+ "tube_free_length_mm": {
+  "T0": 793,
+  "T1": 719,
+  "T2": 651,
+  "T3": 682,
+  "T4": 752
+ },
+ "umbilical_free_length_mm": 687,
+ "parked": {
+  "T0": {
+   "top": 1090.3,
+   "lowest": 903.3,
+   "back_to_y": -65.7,
+   "solved": true
+  },
+  "T1": {
+   "top": 1078.1,
+   "lowest": 895.3,
+   "back_to_y": -84.5,
+   "solved": true
+  },
+  "T2": {
+   "top": 1064.5,
+   "lowest": 887.8,
+   "back_to_y": -110.3,
+   "solved": true
+  },
+  "T3": {
+   "top": 1071.0,
+   "lowest": 891.3,
+   "back_to_y": -98.4,
+   "solved": true
+  },
+  "T4": {
+   "top": 1081.6,
+   "lowest": 898.8,
+   "back_to_y": -74.5,
+   "solved": true
+  }
+ },
+ "clashes": [
+  {
+   "line": "umbilical",
+   "tool": "T0",
+   "x": 0.0,
+   "y": 85.0,
+   "part": "indx_head",
+   "vol": 23.21
+  },
+  {
+   "line": "umbilical",
+   "tool": "T0",
+   "x": 0.0,
+   "y": 207.0,
+   "part": "indx_head",
+   "vol": 0.5
+  },
+  {
+   "line": "umbilical",
+   "tool": "T0",
+   "x": 0.0,
+   "y": 211.3,
+   "part": "indx_head",
+   "vol": 106.68
+  }
+ ],
+ "not_converged": [],
+ "umbilical_to_parked_min_gap": {
+  "mm": 9.1,
+  "worst": [
+   {
+    "gap": 9.1,
+    "parked": "T4",
+    "tool": "T0",
+    "x": 191.0,
+    "y": -250.0
+   },
+   {
+    "gap": 9.1,
+    "parked": "T4",
+    "tool": "T1",
+    "x": 191.0,
+    "y": -250.0
+   },
+   {
+    "gap": 9.1,
+    "parked": "T4",
+    "tool": "T2",
+    "x": 191.0,
+    "y": -250.0
+   },
+   {
+    "gap": 9.1,
+    "parked": "T4",
+    "tool": "T3",
+    "x": 191.0,
+    "y": -250.0
+   },
+   {
+    "gap": 10.6,
+    "parked": "T4",
+    "tool": "T3",
+    "x": 158.0,
+    "y": -317.5
+   },
+   {
+    "gap": 11.8,
+    "parked": "T4",
+    "tool": "T0",
+    "x": 191.0,
+    "y": -277.5
+   }
+  ]
+ },
+ "umbilical_to_active_min_gap": {
+  "mm": -6.8,
+  "worst": [
+   {
+    "gap": -6.8,
+    "tool": "T4",
+    "x": 128.0,
+    "y": -220.0
+   },
+   {
+    "gap": -6.4,
+    "tool": "T1",
+    "x": -128.0,
+    "y": -250.0
+   },
+   {
+    "gap": -6.2,
+    "tool": "T4",
+    "x": 64.0,
+    "y": -277.5
+   },
+   {
+    "gap": -6.1,
+    "tool": "T1",
+    "x": -64.0,
+    "y": -277.5
+   },
+   {
+    "gap": -5.3,
+    "tool": "T3",
+    "x": 191.0,
+    "y": -250.0
+   },
+   {
+    "gap": -5.1,
+    "tool": "T3",
+    "x": 64.0,
+    "y": -220.0
+   }
+  ]
+ },
+ "tube_contacts": 41,
+ "tube_min_gap": -4.3,
+ "extremes": {
+  "active_low": 828.8,
+  "active_top": 1088.8,
+  "umb_low": 783.6,
+  "umb_top": 1091.8
+ },
+ "head_top_z": 840.5,
+ "saddle_top_z": 864.5
+}

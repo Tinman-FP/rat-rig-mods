@@ -2,35 +2,35 @@
  "fixed_vs_context": [],
  "poses": [
   {
-   "xc": -216.0,
+   "xc": -228.0,
    "back": 15.0,
    "tag": "T0_approach",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": -216.0,
+   "xc": -228.0,
    "back": 0.0,
    "tag": "T0_purge",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": -216.0,
+   "xc": -228.0,
    "back": -1.0,
    "tag": "T0_front_stop",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": -212.0,
+   "xc": -224.0,
    "back": 0.0,
    "tag": "T0_wipe_left",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": -196.0,
+   "xc": -208.0,
    "back": 0.0,
    "tag": "T0_wipe_right",
    "hits": [],
@@ -39,56 +39,56 @@
    ]
   },
   {
-   "xc": -212.0,
+   "xc": -224.0,
    "back": 15.0,
    "tag": "T0_leave",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": -220.0,
+   "xc": -232.0,
    "back": 0.0,
    "tag": "T0_purge_-4mm",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": -192.0,
+   "xc": -204.0,
    "back": 0.0,
    "tag": "T0_wipe_right_+4mm",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": -100.0,
+   "xc": -106.0,
    "back": 15.0,
    "tag": "T1_approach",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": -100.0,
+   "xc": -106.0,
    "back": 0.0,
    "tag": "T1_purge",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": -100.0,
+   "xc": -106.0,
    "back": -1.0,
    "tag": "T1_front_stop",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": -96.0,
+   "xc": -102.0,
    "back": 0.0,
    "tag": "T1_wipe_left",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": -80.0,
+   "xc": -86.0,
    "back": 0.0,
    "tag": "T1_wipe_right",
    "hits": [],
@@ -97,21 +97,21 @@
    ]
   },
   {
-   "xc": -96.0,
+   "xc": -102.0,
    "back": 15.0,
    "tag": "T1_leave",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": -104.0,
+   "xc": -110.0,
    "back": 0.0,
    "tag": "T1_purge_-4mm",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": -76.0,
+   "xc": -82.0,
    "back": 0.0,
    "tag": "T1_wipe_right_+4mm",
    "hits": [],
@@ -176,35 +176,35 @@
    "nozzle_touches": []
   },
   {
-   "xc": 132.0,
+   "xc": 138.0,
    "back": 15.0,
    "tag": "T3_approach",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": 132.0,
+   "xc": 138.0,
    "back": 0.0,
    "tag": "T3_purge",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": 132.0,
+   "xc": 138.0,
    "back": -1.0,
    "tag": "T3_front_stop",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": 136.0,
+   "xc": 142.0,
    "back": 0.0,
    "tag": "T3_wipe_left",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": 152.0,
+   "xc": 158.0,
    "back": 0.0,
    "tag": "T3_wipe_right",
    "hits": [],
@@ -213,56 +213,56 @@
    ]
   },
   {
-   "xc": 136.0,
+   "xc": 142.0,
    "back": 15.0,
    "tag": "T3_leave",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": 128.0,
+   "xc": 134.0,
    "back": 0.0,
    "tag": "T3_purge_-4mm",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": 156.0,
+   "xc": 162.0,
    "back": 0.0,
    "tag": "T3_wipe_right_+4mm",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": 248.0,
+   "xc": 260.0,
    "back": 15.0,
    "tag": "T4_approach",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": 248.0,
+   "xc": 260.0,
    "back": 0.0,
    "tag": "T4_purge",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": 248.0,
+   "xc": 260.0,
    "back": -1.0,
    "tag": "T4_front_stop",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": 252.0,
+   "xc": 264.0,
    "back": 0.0,
    "tag": "T4_wipe_left",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": 268.0,
+   "xc": 280.0,
    "back": 0.0,
    "tag": "T4_wipe_right",
    "hits": [],
@@ -271,21 +271,21 @@
    ]
   },
   {
-   "xc": 252.0,
+   "xc": 264.0,
    "back": 15.0,
    "tag": "T4_leave",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": 244.0,
+   "xc": 256.0,
    "back": 0.0,
    "tag": "T4_purge_-4mm",
    "hits": [],
    "nozzle_touches": []
   },
   {
-   "xc": 272.0,
+   "xc": 284.0,
    "back": 0.0,
    "tag": "T4_wipe_right_+4mm",
    "hits": [],
@@ -401,17 +401,17 @@
   "station_cradle_T0": 2.0,
   "purge_bucket_T0": 4.0,
   "wiper_pad_T0": 2.0,
-  "station_cradle_T1": 3.63,
+  "station_cradle_T1": 2.01,
   "purge_bucket_T1": 10.0,
-  "wiper_pad_T1": 3.72,
+  "wiper_pad_T1": 2.02,
   "station_cradle_T2": 1.59,
   "purge_bucket_T2": 13.82,
   "wiper_pad_T2": 1.5,
   "station_cradle_T3": 2.0,
   "purge_bucket_T3": 10.0,
   "wiper_pad_T3": 2.0,
-  "station_cradle_T4": 2.0,
+  "station_cradle_T4": 3.54,
   "purge_bucket_T4": 4.0,
-  "wiper_pad_T4": 2.0
+  "wiper_pad_T4": 6.62
  }
 }

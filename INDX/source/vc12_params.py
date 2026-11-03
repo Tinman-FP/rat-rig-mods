@@ -44,8 +44,9 @@ INDX_NOZZLE_DY = INDX_FACE_DY - 33.7
 INDX_GRID_DZ = 40.0            # 20 x 20 grid centre above the tip
 INDX_PCB_DZ = 55.0             # PCB cover starts this far above the tip
 INDX_PCB_BACK = 28.3           # and reaches this far behind the block face
-INDX_DOCK_PITCH = 116.0        # owner's choice: tools well apart, each with its own purge bucket and wiper
-                               # between it and the next dock (see the station section below)
+INDX_DOCK_PITCH = 122.0        # owner's choice: tools as far apart as the X travel allows, each with its own purge
+                               # bucket and wiper between it and the next dock, every station inside |X| 288 where the
+                               # front bed arms are still at Y -319.5 (they come forward to -324.5 past X 292)
 HEAD_CLEAR_RIGHT = 41.4        # measured, Bondtech's real 4010 duct meshes: least nozzle X offset at which the
 HEAD_CLEAR_LEFT = 44.5         # head + tool clears a dock and its parked tool on the head's left / right,
                                # anywhere on the way in from the clearance line (Bondtech states 41). The
@@ -94,8 +95,8 @@ CLAMP_DX = 46.0                # belt ends enter the carriage this far from xc
 DOCK_NOZZLE_Y = -317.5         # docked nozzle Y: dock fronts 2 mm behind the closed door
 DOCK_BAR_Y = DOCK_NOZZLE_Y + INDX_BAR_DY     # -349.0
 DOCK_BAR_Z = TIP_Z + INDX_BAR_DZ
-DOCK_X0 = -263.0               # T0; the row is placed so the five stations sit symmetric about X 0
-DOCK_X = [DOCK_X0 + INDX_DOCK_PITCH * i for i in range(INDX_TOOLS)]   # -263, -147, -31, 85, 201
+DOCK_X0 = -275.0               # T0; the row is placed so the five stations sit symmetric about X 0
+DOCK_X = [DOCK_X0 + INDX_DOCK_PITCH * i for i in range(INDX_TOOLS)]   # -275, -153, -31, 91, 213
 YG_DOCK = DOCK_NOZZLE_Y - INDX_NOZZLE_DY                 # -265.8 at pickup
 YG_FRONT_STOP = YG_DOCK - 1.0  # crash stop just past pickup; Y homes to the rear
 YG_REAR_STOP = 263.0           # hard stop; nozzle reaches the PEI rear edge at 258.7
@@ -116,12 +117,12 @@ PAD_REAR_Y = -314.5            # 1.5 mm ahead of the PEI sheet; the nozzle wipes
 WIPER_TOP = TIP_Z + 1.2        # SV08 rule: wiper top 1.2 mm above the nozzle tip
 WIPE_X = (PAD_DX - 2.0, PAD_DX + 14.0)   # nozzle stroke across the pad, relative to the purge spot; it starts
                                          # and ends 2 mm off the pad's left end, so wipings drop in the bucket
-PURGE_X = [d + PURGE_DX for d in DOCK_X]             # -216, -100, 16, 132, 248 (Klipper X = CAD X + 255)
+PURGE_X = [d + PURGE_DX for d in DOCK_X]             # -228, -106, 16, 138, 260 (Klipper X = CAD X + 255)
 PAD_X = [p + PAD_DX for p in PURGE_X]                # pad left edges
-# right end of each stroke to the next dock: INDX_DOCK_PITCH - PURGE_DX - WIPE_X[1] = 49 (HEAD_CLEAR_LEFT + 4.5)
+# right end of each stroke to the next dock: INDX_DOCK_PITCH - PURGE_DX - WIPE_X[1] = 55 (HEAD_CLEAR_LEFT + 10.5)
 STATION_DX = -13.0             # station's left edge relative to its dock
 STATION_W = 88.0               # cradle outside width; the five cradles and five buckets are identical
-STATION_X0 = [d + STATION_DX for d in DOCK_X]        # -276 .. 276
+STATION_X0 = [d + STATION_DX for d in DOCK_X]        # -288 .. 288
 CRADLE_WALL = 3.0
 BUCKET_GAP = 0.4               # each side, bucket to cradle wall
 BUCKET_WALL = 2.4
@@ -135,6 +136,33 @@ BUCKET_LOW_REAR_Y = -323.5
 BUCKET_SLOPE_Z = 646.0         # the bucket's back slopes from (-323.5, 646) up to (-315, 669)
 BUCKET_PULL = 60.0             # slide-out travel through the open door; then it lifts out
 DETENT_Y = -340.0              # ridge on the cradle floor, groove under the bucket: holds it home, no fasteners
+
+# ---------------------------------------------------------------- PTFE tubes and the head umbilical
+# Each tool's PTFE tube comes into the chamber from the top hat through a coupler block on the front top 3030, directly
+# above its dock, and hangs free to its tool. The head's cables keep the stock V-Core 4 umbilical from the back-middle
+# mount; a saddle on the head sends it out backward and level, so it stays under the parked tubes' arches when the
+# head works near the front. Shapes are solved as elastic rods (vc12_tubes.py) and checked in vc12_routecheck.py.
+TOP_FRONT_Z = (951.14, 981.14) # front top 3030 (the top hat sits on the top 3030s)
+TOP_FRONT_IN_Y = -337.5        # its inner face; T-slot centre at Z 966.14
+HAT_LID_Z = 1122.0             # owner's modular top hat, about 141 mm tall (Rat Rig Top Hat Modular.step)
+TUBE_IN_Y = -326.0             # each tube comes down the block's channel here, from inside the top hat
+TUBE_BEND = (993.0, 40.0)      # channel bends from vertical at this Z, radius 40, to 30 deg below horizontal (backward)
+TUBE_TILT = 30.0               # coupler axis: 30 deg below horizontal, pointing back ...
+TUBE_CANT = {0: 20.0, 4: 15.0} # ... and, for the end tools only, turned toward the middle (deg). Straight back, their
+                               # long tubes bow out through the side frame when the head is on their side; turned more,
+                               # or the middle tools turned too, the parked arches lean into the umbilical's path
+TUBE_FREE_FROM = 9.0           # free tube starts this far past the coupler boss face (PC4-M10 collet)
+TOOL_INLET_Z = (803.6, 801.1)  # INDX tool push-fit top: parked, on the head
+TUBE = dict(od=4.0, ei=17200.0, g_per_m=30.0, spare=60.0)   # PTFE 4 x 2 + filament + 1.0 mm piano wire; EI in N mm2
+UMB_ANCHOR = (0.0, 345.0, 775.0)       # stock V-Core 4 umbilical frame on the rear 3030, back middle
+UMB_LEAVE = 55.0               # deg forward of vertical where it leaves the frame
+UMB_SADDLE_DY = 107.4          # hinge pin (along X) at the saddle's tail: this far behind the nozzle ...
+UMB_SADDLE_Z = 852.5           # ... at this height. The umbilical is clamped in a swivel on the pin, so its end
+UMB_SWIVEL = (0.0, 90.0)       # turns freely from level-backward (0 deg) to straight up (a stop): it lies back when the
+                               # head works near the front (under the parked tubes) and swings up near the back
+                               # (fits inside the frame). Any single fixed angle fails one or the other; past
+                               # vertical it would lean over the head and cross the active tube.
+UMB = dict(od=12.0, ei=25000.0, g_per_m=95.0, spare=60.0)   # INDX Link cable in loom on 1.2 mm piano wire (stock V-Core 4)
 DOOR_SPACER = 0.0              # owner chose no door change (option 1): docks and head reach Y -365.5
 FRONT_IDLER_SLOT = 3.5         # front idler axle travel either side of nominal
 JOINT_Y = (-31.0, 32.0)        # joint top plate front/rear faces, relative to Yg (the stop faces)

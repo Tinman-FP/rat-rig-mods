@@ -403,5 +403,110 @@
   "volume_cm3": 37.54,
   "solid": true,
   "non_manifold": false
+ },
+ {
+  "part": "ptfe_coupler_block_T0",
+  "down": "-Y",
+  "why": "mounting plate down; supports under the bend and the coupler boss",
+  "support": true,
+  "size_mm": [
+   38.0,
+   59.6,
+   44.7
+  ],
+  "bed_contact_mm2": 998,
+  "volume_cm3": 19.4,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "ptfe_coupler_block_T1",
+  "down": "-Y",
+  "why": "mounting plate down; supports under the bend and the coupler boss",
+  "support": true,
+  "size_mm": [
+   38.0,
+   59.6,
+   45.9
+  ],
+  "bed_contact_mm2": 998,
+  "volume_cm3": 18.8,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "ptfe_coupler_block_T2",
+  "down": "-Y",
+  "why": "mounting plate down; supports under the bend and the coupler boss",
+  "support": true,
+  "size_mm": [
+   38.0,
+   59.6,
+   45.9
+  ],
+  "bed_contact_mm2": 998,
+  "volume_cm3": 18.8,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "ptfe_coupler_block_T3",
+  "down": "-Y",
+  "why": "mounting plate down; supports under the bend and the coupler boss",
+  "support": true,
+  "size_mm": [
+   38.0,
+   59.6,
+   45.9
+  ],
+  "bed_contact_mm2": 998,
+  "volume_cm3": 18.8,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "ptfe_coupler_block_T4",
+  "down": "-Y",
+  "why": "mounting plate down; supports under the bend and the coupler boss",
+  "support": true,
+  "size_mm": [
+   38.0,
+   59.6,
+   45.2
+  ],
+  "bed_contact_mm2": 998,
+  "volume_cm3": 19.3,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "umbilical_saddle",
+  "down": "-Y",
+  "why": "front face down, arm standing up; no supports",
+  "support": false,
+  "size_mm": [
+   32.0,
+   70.2,
+   58.9
+  ],
+  "bed_contact_mm2": 893,
+  "volume_cm3": 11.32,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "umbilical_swivel",
+  "down": "-X",
+  "why": "flat side down",
+  "support": false,
+  "size_mm": [
+   12.0,
+   30.0,
+   10.4
+  ],
+  "bed_contact_mm2": 330,
+  "volume_cm3": 3.3,
+  "solid": true,
+  "non_manifold": false
  }
 ]
