@@ -8,6 +8,9 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+_route = json.loads((ROOT / "checks/route_report.json").read_text()) if (ROOT / "checks/route_report.json").exists() else {}
+TUBE_LENGTHS = ", ".join(f"T{i} {_route.get('tube_free_length_mm', {}).get(f'T{i}', '?')}" for i in range(5))
+UMB_LENGTH = str(_route.get("umbilical_free_length_mm", "?"))
 DENSITY = 1.30
 
 PRINTED = [  # (parts, qty, plate, what it is)
@@ -22,6 +25,11 @@ PRINTED = [  # (parts, qty, plate, what it is)
     (["station_bracket_L", "station_bracket_R"], 1, 3, "Station rail end brackets"),
     ([f"station_cradle_T{i}" for i in range(5)], 1, 3, "Purge station cradles, one per tool (identical, engraved T0-T4)"),
     ([f"purge_bucket_T{i}" for i in range(5)], 1, 4, "Purge buckets, one per tool (identical, engraved T0-T4)"),
+    ([f"ptfe_coupler_block_T{i}" for i in range(5)], 1, 5,
+     "PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg"),
+    (["umbilical_saddle"], 1, 5, "Umbilical saddle on the INDX PCB cover, with a clevis at its tail"),
+    (["umbilical_swivel"], 1, 5, "Umbilical swivel: turns on the saddle's pin, so the umbilical lies back near the front "
+     "and stands up near the back"),
 ]
 
 # (category, item, qty, specification, source, used for)
@@ -53,7 +61,7 @@ HARDWARE = [
     ("Fasteners", "M3 heat-set insert", 8, "For 4.0 mm holes, about 5.7 mm long", "Any",
      "Carriage INDX grid 4, front idler tension screws 4"),
     ("Fasteners", "1515 M3 T-nut", 14, "MakerBeam XL compatible", "MakerBeam", "Cradles 10, rail brackets 4"),
-    ("Fasteners", "3030 M6 drop-in T-nut", 26, "", "Any", "All M6 screws below"),
+    ("Fasteners", "3030 M6 drop-in T-nut", 36, "", "Any", "All M6 screws below"),
     ("Fasteners", "M6 x 18 socket head screw", 4, "", "Any", "Left rear corner base, up into the 3030s"),
     ("Fasteners", "M6 x 14 socket head screw", 4, "", "Any", "Right rear corner base, up into the 3030s"),
     ("Fasteners", "M6 x 10 socket head screw", 3, "", "Any", "Left rear corner top"),
@@ -61,10 +69,26 @@ HARDWARE = [
     ("Fasteners", "M6 x 12 socket head screw", 2, "", "Any", "Left front idler block"),
     ("Fasteners", "M6 x 16 socket head screw", 2, "", "Any", "Right front idler block"),
     ("Fasteners", "M6 x 14 socket head screw", 8, "", "Any", "Dock and station rail brackets"),
+    ("Fasteners", "M6 x 10 socket head screw", 10, "", "Any", "PTFE coupler blocks, into the front top 3030's inner slot"),
     ("Docks and stations", "1515 aluminium extrusion, 739 mm", 2, "MakerBeam XL compatible", "MakerBeam",
      "Dock rail and station rail"),
     ("Docks and stations", "Qidi nozzle wiper pad", 5, "15 x 27 x 4.7 mm", "Qidi (owner's part)", "One wiper per tool"),
     ("Docks and stations", "High-temperature RTV silicone", 1, "Rated 260 C or more", "Any", "Gluing the wiper pads"),
+    ("Tubes and umbilical", "PC4-M10 push-fit coupler", 5, "For 4 mm OD tube; threads into the block (tap M10 x 1 or let it cut)",
+     "Any (BIQU or similar)", "One per coupler block"),
+    ("Tubes and umbilical", "PTFE tube, 4 mm OD x 2 mm ID", 5, "One continuous tube per tool; free lengths " + TUBE_LENGTHS
+     + " mm, plus about 70 mm through the block, plus the run to the filament source", "Any (Capricorn or similar)",
+     "Filament to each tool"),
+    ("Tubes and umbilical", "Piano (music) wire, 1.0 mm", "4 m", "Cut to each tube's free length", "Any",
+     "Stiffener taped along each free tube so parked tubes hold their arch and the active one swings clear"),
+    ("Tubes and umbilical", "PTFE or polyimide tape, or 6 mm heat-shrink", 1, "", "Any", "Holding the piano wire to the tubes"),
+    ("Tubes and umbilical", "Umbilical: piano wire 1.2 mm + loom", 1, "Reuse the stock V-Core 4 umbilical; free length "
+     + UMB_LENGTH + " mm from the back-middle mount to the saddle", "Stock (Rat Rig)", "INDX Link cable to the head"),
+    ("Tubes and umbilical", "M3 heat-set insert + M3 x 6 set screw", 1, "", "Any", "Piano-wire clamp in the swivel"),
+    ("Tubes and umbilical", "M3 x 20 socket head screw + nyloc nut", 1, "Snug, not tight: the swivel must turn freely",
+     "Any", "Swivel pin through the saddle's clevis"),
+    ("Tubes and umbilical", "VHB tape, 20 mm", "a strip", "", "Any", "Saddle onto the INDX PCB cover"),
+    ("Tubes and umbilical", "Zip ties, 2.5 mm", 4, "", "Any", "Umbilical into the saddle groove"),
     ("INDX (Bondtech)", "INDX Smart Head with MGN-12 X-carriage", 1, "", "Bondtech", "Toolhead"),
     ("INDX (Bondtech)", "INDX nozzle tool, 0.6 mm Steel CHT", 5, "", "Bondtech", "Tools T0-T4"),
     ("INDX (Bondtech)", "INDX Tool Dock 1515 (MakerBeam)", 5, "With its M3 screw and square nut", "Bondtech",
@@ -78,7 +102,7 @@ HARDWARE = [
      "Replaces the two 6 mm spacers at each kinematic ball"),
     ("Bed", "Longer M5 for the threaded balls", "3 if needed", "Keep at least 6 mm of thread engaged", "Any",
      "Bed balls"),
-    ("Filament", "PPS-CF", "1.1 kg", "1,092 g in Tinman's slice", "Any", "All printed parts"),
+    ("Filament", "PPS-CF", "1.25 kg", "1,228 g in Tinman's slice", "Any", "All printed parts"),
 ]
 
 REUSED = ["Frame, panels, door and electronics", "Y rails and both Y-rail MGN12C blocks",

@@ -178,6 +178,7 @@ def fixed_parts(indx, pull=0.0, pulled=None):
         f[f"purge_bucket_T{k}"] = moved(bucket, dy=-pull) if pull and pulled in (None, k) else bucket
         f[f"wiper_pad_T{k}"] = box(P.PAD_X[k], P.PAD_X[k] + P.PAD[0], P.PAD_REAR_Y - P.PAD[1], P.PAD_REAR_Y,
                                    P.WIPER_TOP - P.PAD[2], P.WIPER_TOP)
+        f[f"ptfe_coupler_block_T{k}"] = load(f"ptfe_coupler_block_T{k}")
     f["dock_bar_1515"] = box(-369.5, 369.5, P.DOCK_BAR_Y - 7.5, P.DOCK_BAR_Y + 7.5, P.DOCK_BAR_Z - 7.5, P.DOCK_BAR_Z + 7.5)
     head, held, dock, parked = indx
     for i, x in enumerate(P.DOCK_X):
@@ -209,6 +210,8 @@ def moving_parts(xc, yg, indx):
     head, held, dock, parked = indx
     m["indx_head"] = place_indx(head, xc, yg)
     m["indx_held_tool"] = place_indx(held, xc, yg)
+    m["umbilical_saddle"] = moved(load("umbilical_saddle"), dx=xc, dy=yg)
+    m["umbilical_swivel"] = moved(load("umbilical_swivel"), dx=xc, dy=yg)
     m.update(belt_solids(xc, yg))
     return m
 
@@ -224,6 +227,7 @@ def ok_pair(a, b):
             if other in own or other in ("carriage",) or other.startswith("cap_"):
                 return True
     designed = [{"carriage", "x_block"}, {"x_block", "x_rail"}, {"x_rail", "beam"}, {"carriage", "indx_head"},
+                {"indx_head", "umbilical_saddle"}, {"umbilical_saddle", "umbilical_swivel"},
                 {"indx_head", "indx_held_tool"}, {"joint_L", "beam"}, {"joint_R", "beam"},
                 {"joint_L", "y_block_L"}, {"joint_R", "y_block_R"}, {"joint_L", "J_LF"}, {"joint_L", "J_LR"},
                 {"joint_R", "J_RF"}, {"joint_R", "J_RR"}, {"y_block_L", "y_rail_L"}, {"y_block_R", "y_rail_R"},

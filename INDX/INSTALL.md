@@ -11,7 +11,7 @@ Parts and hardware are in `BOM.md`. The printed parts are all in the Tinman proj
 - **Tools:** 2.5 / 3 / 4 / 5 mm hex keys, a soldering iron with an M3 insert tip, calipers, a long straightedge.
 
 ## 1. Print and prepare the parts
-1. Print the four plates in the Tinman project. Don't auto-arrange them: the tree supports need the gaps.
+1. Print the five plates in the Tinman project. Don't auto-arrange them: the tree supports need the gaps.
 
    | Plate | Parts | Time | PPS-CF |
    |---|---|---|---|
@@ -19,6 +19,7 @@ Parts and hardware are in `BOM.md`. The printed parts are all in the Tinman proj
    | 2 | rear corner bases and tops | 11.6 h | 225 g |
    | 3 | five cradles, dock and station rail brackets | 18.0 h | 344 g |
    | 4 | five buckets | 12.4 h | 225 g |
+   | 5 | five PTFE coupler blocks, umbilical saddle and swivel | 6.9 h | 136 g |
 
    Times and weights are from Tinman's slice.
 2. Remove the supports. On the left rear-corner top, clean up the feet before they sit on the 3030s.
@@ -121,8 +122,8 @@ Toothed idlers and pulleys run on the teeth; smooth idlers run on the back of th
 
    | Tool | T0 | T1 | T2 | T3 | T4 |
    |---|---|---|---|---|---|
-   | From the left upright (mm) | 107 | 223 | 339 | 455 | 571 |
-   | Klipper X | −8 | 108 | 224 | 340 | 456 |
+   | From the left upright (mm) | 95 | 217 | 339 | 461 | 583 |
+   | Klipper X | −20 | 102 | 224 | 346 | 468 |
 
    These are the tool centres, not the dock bodies: the dock body sits mostly to the left of its tool. Klipper's dock calibration fine-tunes them.
 3. **Station rail.** Bolt the station-rail brackets into the same slots, 129 mm lower than the dock-rail brackets. Fit the second 1515 × 739 bar the same way.
@@ -130,20 +131,52 @@ Toothed idlers and pulleys run on the teeth; smooth idlers run on the back of th
 
    | Cradle | T0 | T1 | T2 | T3 | T4 |
    |---|---|---|---|---|---|
-   | Left edge from the left upright (mm) | 94 | 210 | 326 | 442 | 558 |
+   | Left edge from the left upright (mm) | 82 | 204 | 326 | 448 | 570 |
 
    Each cradle sits under its own tool, with the wiper pad to the tool's right.
 5. **Buckets.** Slide each bucket in from the front until its flange meets the cradle. It drops onto the detent ridge. Use the matching T number.
    - To empty one: open the door, pull the flange, slide it out 60 mm and lift it out. No fasteners.
 6. Close the door. It should clear the bucket flanges by 3 mm and the dock fronts by 2 mm.
 
-## 10. Electronics and Klipper
+## 10. PTFE tubes and the umbilical
+The tubes come in at the top front, directly above the docks, and hang free to the tools. The head's cables stay on the stock umbilical at the back middle. Its end is clamped in a swivel on a saddle on the head. The swivel turns freely: near the front the umbilical lies back, under the parked tubes' arches, and near the back it stands up, inside the frame.
+
+1. **Coupler blocks.**
+   - Bolt one block to the inner T-slot of the front top 3030 over each dock, with 2 × M6 × 10 into drop-in T-nuts. Centre each block on its dock's tool position, the same distances from the left upright as in the dock table.
+   - The top of each block stands 24 mm above the frame top, inside the top hat, against its front wall.
+   - T1–T3's blocks send the tube straight back. T0's turns it 20° toward the middle and T4's 15°, so their long tubes don't bow out through the side frame. Fit each block over its own dock.
+   - Thread a PC4-M10 coupler into each block's boss. Tap it M10 × 1, or let the coupler cut its own thread.
+2. **Tubes.** Use one continuous 4 × 2 mm PTFE tube per tool.
+   - Run it from the filament source into the top hat, down the block's channel, through the coupler and into the tool's push-fit.
+   - Leave this much free between the coupler and the tool:
+
+   | Tool | T0 | T1 | T2 | T3 | T4 |
+   |---|---|---|---|---|---|
+   | Free length (mm) | 793 | 719 | 651 | 682 | 752 |
+
+   - Tape a 1.0 mm piano wire along each free length, from the coupler to about 20 mm above the tool.
+   - A parked tube then holds an arch above the front of the chamber, and the active tube swings clear above the head.
+3. **Umbilical saddle and swivel.**
+   - Clean the INDX PCB cover's top behind the cable strain relief, and stick the saddle on with VHB tape. Its arm points straight back.
+   - Fit an M3 heat-set insert in the swivel. Mount the swivel in the saddle's clevis with an M3 × 20 and a nyloc nut, snug but free to turn.
+   - The swivel turns from pointing straight back to pointing straight up. A stop on the saddle keeps it from leaning forward over the head.
+   - Lay the INDX Link cable from the strain relief along the saddle's groove and over the pin.
+4. **Umbilical.**
+   - Push the umbilical's 1.2 mm piano wire into the swivel's bore and lock it with an M3 set screw. Zip-tie the cable to the swivel and into the saddle's groove, with a little slack over the pin so the swivel can turn.
+   - At the back-middle mount, set the umbilical leaving about 55° forward of vertical.
+   - Leave 687 mm free between the mount and the swivel.
+5. **Hand check.** Move the head by hand to each front corner and each dock.
+   - The umbilical should pass under the parked tubes' arches.
+   - No tube should touch the head.
+   - Every tube top should stay below the top hat's lid.
+
+## 11. Electronics and Klipper
 1. **Motors.** Motor A goes to MOTOR0 (the old `stepper_x` socket) and motor B to MOTOR1 (the old `stepper_y` socket). MOTOR3 and MOTOR4 become free.
 2. **INDX electronics.** Fit the INDX Link board near the Pi. The Link cable (178 cm) plus the host USB must total 2 m or less. Route the five PTFE tubes through the top hat.
 3. **Firmware.** Install Bondtech's `indx_klipper` (mainline) or Kalico. The printer currently runs a custom Klipper line with modified Beacon and PLR files, so check compatibility first.
 4. **Config.** Add `klipper/motion_corexy12_indx.cfg` in place of the old motion files and the hybrid CoreXY kinematics, and add `klipper/purge_wipe.cfg`. Both are drafts. Set the INDX values listed at the end of the motion file.
 
-## 11. Commissioning
+## 12. Commissioning
 Keep a hand on the power switch for every first move.
 
 1. **Directions.** Run `STEPPER_BUZZ` on each motor. Check the CoreXY directions: motor A moves the head along X+Y, and motor B along X−Y.
@@ -152,9 +185,9 @@ Keep a hand on the power switch for every first move.
 4. **Z.** With the bed 20 mm higher, re-home Z, re-measure Z max, then level and mesh with the INDX probe.
 5. **Docks.** Calibrate them with Bondtech's procedure (`CAL_SET_DOCK_Y`, `CALIBRATE_DOCK_X TOOL=n`).
 6. **Purge stations.** Before the first purge, fit-check them with no filament, cold:
-   - On the clearance line, jog to each tool's purge X (39, 155, 271, 387, 503).
+   - On the clearance line, jog to each tool's purge X (27, 149, 271, 393, 515).
    - Step forward in Y to −40 a few millimetres at a time, watching the gaps to the docks on both sides.
    - Then jog right 20 mm across the pad. The head should clear the next dock with room to spare.
 7. **Wiper height.** Adjust the station-rail brackets so each pad's top is 1.2 mm above the nozzle tip.
 8. **Purge test.** With each tool heated, run `PURGE_AND_WIPE TOOL=n`. Check the strand drops into that tool's bucket and the wipe crosses the pad.
-9. **First print.** Run a small single-tool print, then a tool-change test across all five tools.
+9. **First print.** Run a small single-tool print, then a tool-change test across all five tools. Watch the tubes and the umbilical during the first tool changes and at the front corners.

@@ -1,7 +1,7 @@
 {
  "tinman_result": {
   "error_string": "Success.",
-  "export_time": 2,
+  "export_time": 3,
   "layer_height": 0.23999999463558197,
   "plate_index": 0,
   "prepare_time": 0,
@@ -9,21 +9,21 @@
   "sliced_plates": [
    {
     "id": 1,
-    "sliced_time": 4,
-    "sliced_time_with_cache": 2,
+    "sliced_time": 5,
+    "sliced_time_with_cache": 3,
     "triangle_count": 17300,
     "warning_message": ""
    },
    {
     "id": 2,
     "sliced_time": 4,
-    "sliced_time_with_cache": 2,
+    "sliced_time_with_cache": 3,
     "triangle_count": 14606,
     "warning_message": ""
    },
    {
     "id": 3,
-    "sliced_time": 3,
+    "sliced_time": 4,
     "sliced_time_with_cache": 3,
     "triangle_count": 9332,
     "warning_message": ""
@@ -34,6 +34,13 @@
     "sliced_time_with_cache": 0,
     "triangle_count": 2224,
     "warning_message": ""
+   },
+   {
+    "id": 5,
+    "sliced_time": 3,
+    "sliced_time_with_cache": 1,
+    "triangle_count": 17452,
+    "warning_message": "It seems object umbilical_saddle has floating regions. Please re-orient the object or enable support generation."
    }
   ],
   "sparse_infill_density": 45.0,
@@ -102,8 +109,24 @@
     "purge_bucket_T4_id_4_copy_0"
    ],
    "warnings": []
+  },
+  {
+   "plate": 5,
+   "name": "PTFE coupler blocks and umbilical saddle",
+   "hours": 6.9,
+   "grams": 135.7,
+   "objects": [
+    "ptfe_coupler_block_T0_id_0_copy_0",
+    "ptfe_coupler_block_T1_id_1_copy_0",
+    "ptfe_coupler_block_T2_id_2_copy_0",
+    "ptfe_coupler_block_T3_id_3_copy_0",
+    "ptfe_coupler_block_T4_id_4_copy_0",
+    "umbilical_saddle_id_5_copy_0",
+    "umbilical_swivel_id_6_copy_0"
+   ],
+   "warnings": []
   }
  ],
- "total_hours": 57.5,
- "total_grams": 1092.4
+ "total_hours": 64.4,
+ "total_grams": 1228.1
 }

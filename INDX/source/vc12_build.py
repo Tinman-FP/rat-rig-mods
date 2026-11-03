@@ -16,6 +16,7 @@ sys.path.insert(0, HERE)
 
 import FreeCAD as App  # noqa: E402
 import Part  # noqa: E402
+import numpy as np  # noqa: E402
 from FreeCAD import Vector as V  # noqa: E402
 
 import vc12_params as P  # noqa: E402
@@ -422,6 +423,77 @@ def purge_bucket(i):
     return minus(b, tools)
 
 
+# ------------------------------------------------------------------ PTFE coupler blocks and the umbilical saddle
+def rod(points, d):
+    """Round bar along a polyline (cylinders and ball joints)."""
+    out = []
+    for a, b in zip(points[:-1], points[1:]):
+        a, b = V(*a), V(*b)
+        if (b - a).Length > 1e-6:
+            out.append(Part.makeCylinder(d / 2, (b - a).Length, a, b - a))
+    out += [Part.makeSphere(d / 2, V(*p)) for p in points[1:-1]]
+    return union(out)
+
+
+def ptfe_coupler_block(i):
+    """On the front top 3030's inner T-slot (2 x M6), directly above dock i. The tube comes down from the top hat into
+    the channel, bends 60 deg (R 40) and leaves through a PC4-M10 coupler pointing 30 deg down and back."""
+    import vc12_tubes as T
+    x = P.DOCK_X[i]
+    path = T.channel_points(x)
+    face = P.TOP_FRONT_IN_Y
+    z_slot = sum(P.TOP_FRONT_Z) / 2
+    plate = box(x - 19.0, x + 19.0, face, face + 6.0, P.TOP_FRONT_Z[0] + 1.0, P.TOP_FRONT_Z[1] - 1.0)
+    housing = box(x - 8.0, x + 8.0, face + 5.9, P.TUBE_IN_Y + 7.0, P.TUBE_BEND[0] - 22.0, path[0][2])
+    web = box(min(x, path[-3][0]) - 4.0, max(x, path[-3][0]) + 4.0, face + 5.9, path[-3][1], path[-3][2] - 6.0,
+              P.TUBE_BEND[0] - 21.9)
+    body = union([plate, housing, web, rod(path[1:], 16.0)])
+    axis = V(*T.tube_dir(x))
+    end = V(*path[-1])
+    tools = [rod(np.vstack([path[0] + np.array([0.0, 0.0, 5.0]), path]), 5.0),       # tube channel
+             Part.makeCylinder(9.2 / 2, 11.0, end - axis * 10.0, axis)]               # PC4-M10 bore (self-threading)
+    for dx in (-13.0, 13.0):                                                         # M6 into the slot's T-nuts
+        tools += [cyl_y(x + dx, z_slot, M6, face - 1.0, face + 7.0), cyl_y(x + dx, z_slot, M6_CB, face + 3.0, face + 20.0)]
+    return minus(body, tools)
+
+
+def umbilical_saddle():
+    """Stuck (VHB) to the INDX PCB cover's top behind the cable strain relief, at the head pose xc 0, yg 0. Its arm runs
+    back 46 mm past the head's rear face to a clevis; the umbilical swivel turns on an M3 pin there."""
+    ny = P.INDX_NOZZLE_DY
+    top = 794.0                                     # PCB cover top, 55-62 mm behind the nozzle (measured)
+    yp, zp = ny + P.UMB_SADDLE_DY, P.UMB_SADDLE_Z
+    pad = box(-16.0, 16.0, ny + 55.5, ny + 61.5, top + 0.3, top + 4.0)
+    post = box(-7.0, 7.0, ny + 55.5, ny + 61.5, top + 3.9, zp + 5.5)
+    arm = box(-9.0, 9.0, ny + 55.5, yp - 7.0, zp - 7.5, zp + 5.5)
+    cheeks = [box(sx * 5.6, sx * 9.0, yp - 7.1, yp + 7.0, zp - 7.5, zp + 7.0) for sx in (-1, 1)]
+    stop = box(-9.0, 9.0, yp - 9.5, yp - 6.4, zp + 7.0, zp + 12.0)                  # swivel stops at vertical
+    s = union([pad, post, arm, stop] + cheeks)
+    tools = [box(-6.5, 6.5, ny + 50.0, yp - 6.0, zp - 3.5, zp + 6.0),                                 # cable groove
+             cyl_x(yp, zp, M3, -10.0, 10.0)]                                                         # pin
+    for yy in (ny + 70.0, ny + 90.0):                                                # zip-tie slots under the groove
+        tools.append(box(-9.5, 9.5, yy - 1.6, yy + 1.6, zp - 6.0, zp - 4.5))
+    return minus(s, tools)
+
+
+def umbilical_swivel(angle=0.0):
+    """Turns on the saddle's M3 pin. The umbilical's piano wire goes into its bore (M3 set screw in a heat-set insert);
+    the cable is zip-tied along its arm. Modelled at `angle` deg up from level-backward."""
+    ny = P.INDX_NOZZLE_DY
+    yp, zp = ny + P.UMB_SADDLE_DY, P.UMB_SADDLE_Z
+    hub = cyl_x(yp, zp, 12.0, -5.2, 5.2)
+    arm = box(-5.2, 5.2, yp, yp + 24.0, zp - 6.0, zp + 6.0)
+    sw = union([hub, arm])
+    tools = [cyl_x(yp, zp, M3 + 0.2, -6.0, 6.0),                                     # pin
+             cyl_y(0.0, zp + 2.5, 1.6, yp + 6.0, yp + 25.0),                         # piano wire bore (1.2 mm wire)
+             cyl_z(0.0, yp + 16.0, M3_INSERT, zp - 7.0, zp + 2.5),                   # set screw onto the wire
+             box(-5.6, 5.6, yp + 9.0, yp + 11.6, zp - 6.5, zp - 4.5)]                # zip-tie slot
+    sw = minus(sw, tools)
+    if angle:
+        sw.rotate(V(0, yp, zp), V(1, 0, 0), angle)
+    return sw
+
+
 def build_all():
     os.makedirs(OUT, exist_ok=True)
     out = {}
@@ -436,6 +508,9 @@ def build_all():
     for i in range(P.INDX_TOOLS):
         out[f"station_cradle_T{i}"] = station_cradle(i)
         out[f"purge_bucket_T{i}"] = purge_bucket(i)
+        out[f"ptfe_coupler_block_T{i}"] = ptfe_coupler_block(i)
+    out["umbilical_saddle"] = umbilical_saddle()
+    out["umbilical_swivel"] = umbilical_swivel()
     car, caps = carriage()
     out["carriage"] = car
     for i, cp in enumerate(caps):
