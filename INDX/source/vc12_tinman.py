@@ -5,7 +5,7 @@ open Tinman window are untouched. Presets are the owner's Qidi Plus 4 PPS-CF com
   machine  Qidi X-Plus 4 0.6 nozzle - TinMan Codex
   process  0.24mm Tank @Qidi X-Plus 4 0.6 nozzle - TinMan Codex - Copy
   filament PPS-CF Codex-Bambu - Qidi X-Plus 4
-Steps: Tinman imports the parts onto five plates (positions below, supports per part) -> object
+Steps: Tinman imports the parts onto six plates (positions below, supports per part) -> object
 and plate names -> Tinman re-saves the project -> Tinman slices a copy to check it. The delivered
 3MF is not sliced.
 Run with system python3 after vc12_print.py.
@@ -36,7 +36,7 @@ BED = "Textured PEI Plate"
 
 # 305 x 305 bed. Part centres (mm); at least 20 mm between parts so tree supports don't meet
 PLATES = ["Carriage, joints, front idlers", "Rear corners", "Purge cradles and rail brackets", "Purge buckets",
-          "PTFE coupler blocks and umbilical saddle"]
+          "PTFE coupler blocks and umbilical saddle", "Spool deck feet"]
 LAYOUT = {
     "joint_L": (1, 50, 80), "joint_R": (1, 140, 80), "carriage": (1, 240, 80),
     "front_idler_L": (1, 50, 195), "front_idler_R": (1, 140, 195),
@@ -53,6 +53,7 @@ LAYOUT = {
     "ptfe_coupler_block_T0": (5, 60, 65), "ptfe_coupler_block_T1": (5, 130, 65), "ptfe_coupler_block_T2": (5, 200, 65),
     "ptfe_coupler_block_T3": (5, 60, 170), "ptfe_coupler_block_T4": (5, 130, 170), "umbilical_saddle": (5, 200, 170),
     "umbilical_swivel": (5, 260, 65),
+    "deck_foot_FR": (6, 100, 100), "deck_foot_FL": (6, 205, 100), "deck_foot_RR": (6, 100, 205), "deck_foot_RL": (6, 205, 205),
 }
 
 

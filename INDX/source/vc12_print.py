@@ -43,6 +43,7 @@ ORIENT = {
        for i in range(5)},
     "umbilical_saddle": ("-Y", "front face down, arm standing up; no supports"),
     "umbilical_swivel": ("-X", "flat side down"),
+    **{f"deck_foot_{c}": ("+Z", "deck plate down; the legs and skirt stand up, no supports") for c in ("FR", "FL", "RR", "RL")},
 }
 SUPPORT = {"carriage", "joint_L", "joint_R", "front_idler_L", "front_idler_R", "rear_corner_L_base",
            "rear_corner_R_base", "rear_corner_L_top", "rear_corner_R_top",

@@ -1,7 +1,7 @@
 {
  "tinman_result": {
   "error_string": "Success.",
-  "export_time": 3,
+  "export_time": 2,
   "layer_height": 0.23999999463558197,
   "plate_index": 0,
   "prepare_time": 0,
@@ -9,38 +9,45 @@
   "sliced_plates": [
    {
     "id": 1,
-    "sliced_time": 5,
-    "sliced_time_with_cache": 3,
+    "sliced_time": 4,
+    "sliced_time_with_cache": 2,
     "triangle_count": 17300,
     "warning_message": ""
    },
    {
     "id": 2,
     "sliced_time": 4,
-    "sliced_time_with_cache": 3,
+    "sliced_time_with_cache": 2,
     "triangle_count": 14606,
     "warning_message": ""
    },
    {
     "id": 3,
     "sliced_time": 4,
-    "sliced_time_with_cache": 3,
+    "sliced_time_with_cache": 2,
     "triangle_count": 9332,
     "warning_message": ""
    },
    {
     "id": 4,
-    "sliced_time": 0,
-    "sliced_time_with_cache": 0,
+    "sliced_time": 1,
+    "sliced_time_with_cache": 1,
     "triangle_count": 2224,
     "warning_message": ""
    },
    {
     "id": 5,
-    "sliced_time": 3,
+    "sliced_time": 2,
     "sliced_time_with_cache": 1,
-    "triangle_count": 17452,
-    "warning_message": "It seems object umbilical_saddle has floating regions. Please re-orient the object or enable support generation."
+    "triangle_count": 17494,
+    "warning_message": ""
+   },
+   {
+    "id": 6,
+    "sliced_time": 1,
+    "sliced_time_with_cache": 0,
+    "triangle_count": 1936,
+    "warning_message": ""
    }
   ],
   "sparse_infill_density": 45.0,
@@ -50,8 +57,8 @@
   {
    "plate": 1,
    "name": "Carriage, joints, front idlers",
-   "hours": 15.5,
-   "grams": 298.5,
+   "hours": 15.2,
+   "grams": 295.4,
    "objects": [
     "carriage_id_0_copy_0",
     "carriage_clamp_cap_1_id_1_copy_0",
@@ -68,8 +75,8 @@
   {
    "plate": 2,
    "name": "Rear corners",
-   "hours": 11.6,
-   "grams": 225.0,
+   "hours": 11.3,
+   "grams": 222.3,
    "objects": [
     "rear_corner_L_base_id_0_copy_0",
     "rear_corner_R_base_id_1_copy_0",
@@ -81,8 +88,8 @@
   {
    "plate": 3,
    "name": "Purge cradles and rail brackets",
-   "hours": 18.0,
-   "grams": 344.4,
+   "hours": 16.3,
+   "grams": 320.6,
    "objects": [
     "dock_bracket_L_id_0_copy_0",
     "dock_bracket_R_id_1_copy_0",
@@ -99,8 +106,8 @@
   {
    "plate": 4,
    "name": "Purge buckets",
-   "hours": 12.4,
-   "grams": 224.5,
+   "hours": 13.7,
+   "grams": 240.8,
    "objects": [
     "purge_bucket_T0_id_0_copy_0",
     "purge_bucket_T1_id_1_copy_0",
@@ -113,8 +120,8 @@
   {
    "plate": 5,
    "name": "PTFE coupler blocks and umbilical saddle",
-   "hours": 6.9,
-   "grams": 135.7,
+   "hours": 7.0,
+   "grams": 135.4,
    "objects": [
     "ptfe_coupler_block_T0_id_0_copy_0",
     "ptfe_coupler_block_T1_id_1_copy_0",
@@ -125,8 +132,21 @@
     "umbilical_swivel_id_6_copy_0"
    ],
    "warnings": []
+  },
+  {
+   "plate": 6,
+   "name": "Spool deck feet",
+   "hours": 7.6,
+   "grams": 173.2,
+   "objects": [
+    "deck_foot_FR_id_0_copy_0",
+    "deck_foot_FL_id_1_copy_0",
+    "deck_foot_RR_id_2_copy_0",
+    "deck_foot_RL_id_3_copy_0"
+   ],
+   "warnings": []
   }
  ],
- "total_hours": 64.4,
- "total_grams": 1228.1
+ "total_hours": 71.1,
+ "total_grams": 1387.7
 }
