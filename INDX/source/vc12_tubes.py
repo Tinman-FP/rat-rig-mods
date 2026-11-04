@@ -44,6 +44,19 @@ def channel_points(x):
     return np.array(pts)
 
 
+FEED_R = 60.0
+
+
+def feed_points(x, y_end=-250.0):
+    """Upstream of the block: from the top of its channel straight up through the lid and the deck's notch to
+    P.FEED_TOP_Z, then over backward (R 60) and level to y_end (an outlet on the dryer's front)."""
+    top = np.array([x, P.TUBE_IN_Y, P.FEED_TOP_Z])
+    pts = [channel_points(x)[0] + np.array([0.0, 0.0, z]) for z in np.arange(0.0, P.FEED_TOP_Z - channel_points(x)[0][2], 15.0)]
+    pts += [top + FEED_R * np.array([0.0, 1.0 - math.cos(a), math.sin(a)]) for a in np.radians(np.arange(0.0, 90.1, 10.0))]
+    pts.append(np.array([x, y_end, P.FEED_TOP_Z + FEED_R]))
+    return np.array(pts)
+
+
 def tube_start(x):
     """Where the free tube leaves the coupler (A) and its direction."""
     return channel_points(x)[-1] + P.TUBE_FREE_FROM * tube_dir(x), tube_dir(x)

@@ -437,7 +437,8 @@ def rod(points, d):
 
 def ptfe_coupler_block(i):
     """On the front top 3030's inner T-slot (2 x M6), directly above dock i. The tube comes down from the top hat into
-    the channel, bends 60 deg (R 40) and leaves through a PC4-M10 coupler pointing 30 deg down and back."""
+    the channel, bends 60 deg (R 40) and leaves through a PC4-M10 coupler pointing 30 deg down and back. Above the
+    frame top its front is cut back to clear the hat's front wall by 2 mm."""
     import vc12_tubes as T
     x = P.DOCK_X[i]
     path = T.channel_points(x)
@@ -452,6 +453,8 @@ def ptfe_coupler_block(i):
     end = V(*path[-1])
     tools = [rod(np.vstack([path[0] + np.array([0.0, 0.0, 5.0]), path]), 5.0),       # tube channel
              Part.makeCylinder(9.2 / 2, 11.0, end - axis * 10.0, axis)]               # PC4-M10 bore (self-threading)
+    tools.append(box(x - 30.0, x + 30.0, P.HAT_FRONT_IN_Y - 30.0, P.HAT_FRONT_IN_Y + 2.0, P.TOP_FRONT_Z[1],
+                     P.TOP_FRONT_Z[1] + 60.0))                                    # 2 mm clear of the hat's front wall
     for dx in (-13.0, 13.0):                                                         # M6 into the slot's T-nuts
         tools += [cyl_y(x + dx, z_slot, M6, face - 1.0, face + 7.0), cyl_y(x + dx, z_slot, M6_CB, face + 3.0, face + 20.0)]
     return minus(body, tools)
@@ -494,6 +497,39 @@ def umbilical_swivel(angle=0.0):
     return sw
 
 
+def _rounded_l(x0, x1, y0, y1, cx, cy, r, z0, z1):
+    """Plan x0..x1 by y0..y1 (x1, y0 the outer corner), that corner rounded r about (cx, cy)."""
+    return union([box(x0, cx, y0, y1, z0, z1), box(x0, x1, cy, y1, z0, z1),
+                  Part.makeCylinder(r, z1 - z0, V(cx, cy, z0))]).common(box(x0, x1, y0, y1, z0, z1))
+
+
+def deck_foot(corner):
+    """Under each corner of the spool deck. Its legs stand on the hat's raised rim right over the frame's corner
+    upright, its skirt hugs the hat's rounded corner, and two wood screws hold the deck to its top plate. It clears
+    the lid (2 mm lower than the rim) and its handles. Symmetric about its corner's diagonal, so all four are the same
+    part, turned; built at the front right corner."""
+    ox, oy, r = P.HAT_OUTER
+    px, py = P.HAT_POCKET
+    gap, wall, depth = P.FOOT_SKIRT
+    cx, cy = ox - r, -(oy - r)                                   # centre of the hat corner's rounding
+    xi, yi = ox - P.FOOT_SPAN, -(oy - P.FOOT_SPAN)               # inner edges
+    zr, zt = P.HAT_RIM_Z, P.DECK_Z
+    plate = 6.0
+    body = _rounded_l(xi, ox + gap + wall, -(oy + gap + wall), yi, cx, cy, r + gap + wall, zr - depth, zt)
+    hat = _rounded_l(xi - 50.0, ox + gap, -(oy + gap), yi + 50.0, cx, cy, r + gap, zr - depth - 1.0, zr)
+    hollow = box(xi - 1.0, px + 0.5, -(py + 0.5), yi + 1.0, zr - depth - 1.0, zt - plate)     # over the lid: open
+    tools = [hat, hollow]
+    for a, b in ((16.0, 28.0), (28.0, 16.0)):                                            # 4 mm wood screws
+        tools.append(cyl_z(ox - a, -(oy - b), 4.5, zt - plate - 1.0, zt + 1.0))
+    f = minus(body, tools)
+    sx, sy = {"FR": (1, -1), "FL": (-1, -1), "RR": (1, 1), "RL": (-1, 1)}[corner]
+    if sx < 0:
+        f = f.mirror(V(0, 0, 0), V(1, 0, 0))
+    if sy > 0:
+        f = f.mirror(V(0, 0, 0), V(0, 1, 0))
+    return f
+
+
 def build_all():
     os.makedirs(OUT, exist_ok=True)
     out = {}
@@ -511,6 +547,8 @@ def build_all():
         out[f"ptfe_coupler_block_T{i}"] = ptfe_coupler_block(i)
     out["umbilical_saddle"] = umbilical_saddle()
     out["umbilical_swivel"] = umbilical_swivel()
+    for c in ("FR", "FL", "RR", "RL"):
+        out[f"deck_foot_{c}"] = deck_foot(c)
     car, caps = carriage()
     out["carriage"] = car
     for i, cp in enumerate(caps):

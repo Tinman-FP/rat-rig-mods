@@ -26,10 +26,13 @@ PRINTED = [  # (parts, qty, plate, what it is)
     ([f"station_cradle_T{i}" for i in range(5)], 1, 3, "Purge station cradles, one per tool (identical, engraved T0-T4)"),
     ([f"purge_bucket_T{i}" for i in range(5)], 1, 4, "Purge buckets, one per tool (identical, engraved T0-T4)"),
     ([f"ptfe_coupler_block_T{i}" for i in range(5)], 1, 5,
-     "PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg"),
+     "PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; "
+     "cut back 2 mm clear of the top hat's front wall"),
     (["umbilical_saddle"], 1, 5, "Umbilical saddle on the INDX PCB cover, with a clevis at its tail"),
     (["umbilical_swivel"], 1, 5, "Umbilical swivel: turns on the saddle's pin, so the umbilical lies back near the front "
      "and stands up near the back"),
+    (["deck_foot_FR", "deck_foot_FL", "deck_foot_RR", "deck_foot_RL"], 1, 6,
+     "Spool deck feet, one on each top-hat corner (all four the same part); the deck screws on"),
 ]
 
 # (category, item, qty, specification, source, used for)
@@ -76,8 +79,9 @@ HARDWARE = [
     ("Docks and stations", "High-temperature RTV silicone", 1, "Rated 260 C or more", "Any", "Gluing the wiper pads"),
     ("Tubes and umbilical", "PC4-M10 push-fit coupler", 5, "For 4 mm OD tube; threads into the block (tap M10 x 1 or let it cut)",
      "Any (BIQU or similar)", "One per coupler block"),
-    ("Tubes and umbilical", "PTFE tube, 4 mm OD x 2 mm ID", 5, "One continuous tube per tool; free lengths " + TUBE_LENGTHS
-     + " mm, plus about 70 mm through the block, plus the run to the filament source", "Any (Capricorn or similar)",
+    ("Tubes and umbilical", "PTFE tube, 4 mm OD x 2 mm ID", "8 m", "One continuous tube per tool, dryer to tool: free length "
+     + TUBE_LENGTHS + " mm, plus about 70 mm through the block, 185 mm up through the lid to 20 mm over the deck, and the "
+     "run over the deck to the dryer's outlet; about 1.0 m plus that run each", "Any (Capricorn or similar)",
      "Filament to each tool"),
     ("Tubes and umbilical", "Piano (music) wire, 1.0 mm", "4 m", "Cut to each tube's free length", "Any",
      "Stiffener taped along each free tube so parked tubes hold their arch and the active one swings clear"),
@@ -97,12 +101,14 @@ HARDWARE = [
      "Head electronics"),
     ("INDX (Bondtech)", "Radial part cooling, 4010 ducts and fans", 1, "Left and right", "Bondtech", "Part cooling"),
     ("INDX (Bondtech)", "USB cable, host to Link board", 1, "22 cm or shorter", "Any", "Link board"),
-    ("INDX (Bondtech)", "PTFE tube, 4 mm OD", 5, "Length to suit the top-hat routing", "Any", "Filament to each tool"),
+    ("Spool deck", "Birch plywood, 15 mm", 1, "820 x 756 mm; a 538 x 72 mm notch in the front edge, starting 110 mm "
+     "from the left end; seal or paint it", "Any", "Deck for the dryer on the top hat"),
+    ("Spool deck", "Wood screw 4 x 16 mm, pan head", 8, "", "Any", "Deck onto its four feet"),
     ("Bed", "Bed spacer, 32 mm", 3, "10 mm OD aluminium, M5 clearance", "Any or turned",
      "Replaces the two 6 mm spacers at each kinematic ball"),
     ("Bed", "Longer M5 for the threaded balls", "3 if needed", "Keep at least 6 mm of thread engaged", "Any",
      "Bed balls"),
-    ("Filament", "PPS-CF", "1.25 kg", "1,228 g in Tinman's slice", "Any", "All printed parts"),
+    ("Filament", "PPS-CF", "1.4 kg", "1,388 g in Tinman's slice", "Any", "All printed parts"),
 ]
 
 REUSED = ["Frame, panels, door and electronics", "Y rails and both Y-rail MGN12C blocks",

@@ -415,7 +415,7 @@
    44.7
   ],
   "bed_contact_mm2": 998,
-  "volume_cm3": 19.4,
+  "volume_cm3": 19.32,
   "solid": true,
   "non_manifold": false
  },
@@ -430,7 +430,7 @@
    45.9
   ],
   "bed_contact_mm2": 998,
-  "volume_cm3": 18.8,
+  "volume_cm3": 18.72,
   "solid": true,
   "non_manifold": false
  },
@@ -445,7 +445,7 @@
    45.9
   ],
   "bed_contact_mm2": 998,
-  "volume_cm3": 18.8,
+  "volume_cm3": 18.72,
   "solid": true,
   "non_manifold": false
  },
@@ -460,7 +460,7 @@
    45.9
   ],
   "bed_contact_mm2": 998,
-  "volume_cm3": 18.8,
+  "volume_cm3": 18.72,
   "solid": true,
   "non_manifold": false
  },
@@ -475,7 +475,7 @@
    45.2
   ],
   "bed_contact_mm2": 998,
-  "volume_cm3": 19.3,
+  "volume_cm3": 19.22,
   "solid": true,
   "non_manifold": false
  },
@@ -506,6 +506,66 @@
   ],
   "bed_contact_mm2": 330,
   "volume_cm3": 3.3,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "deck_foot_FR",
+  "down": "+Z",
+  "why": "deck plate down; the legs and skirt stand up, no supports",
+  "support": false,
+  "size_mm": [
+   44.0,
+   44.0,
+   45.9
+  ],
+  "bed_contact_mm2": 1862,
+  "volume_cm3": 44.17,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "deck_foot_FL",
+  "down": "+Z",
+  "why": "deck plate down; the legs and skirt stand up, no supports",
+  "support": false,
+  "size_mm": [
+   44.0,
+   44.0,
+   45.9
+  ],
+  "bed_contact_mm2": 1862,
+  "volume_cm3": 44.17,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "deck_foot_RR",
+  "down": "+Z",
+  "why": "deck plate down; the legs and skirt stand up, no supports",
+  "support": false,
+  "size_mm": [
+   44.0,
+   44.0,
+   45.9
+  ],
+  "bed_contact_mm2": 1862,
+  "volume_cm3": 44.17,
+  "solid": true,
+  "non_manifold": false
+ },
+ {
+  "part": "deck_foot_RL",
+  "down": "+Z",
+  "why": "deck plate down; the legs and skirt stand up, no supports",
+  "support": false,
+  "size_mm": [
+   44.0,
+   44.0,
+   45.9
+  ],
+  "bed_contact_mm2": 1862,
+  "volume_cm3": 44.17,
   "solid": true,
   "non_manifold": false
  }

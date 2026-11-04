@@ -2,7 +2,7 @@
 
 Nothing on this list has been ordered or fitted yet. `BOM.csv` holds the same list for a spreadsheet.
 
-## Printed parts (34 parts, PPS-CF, about 1,256 g modelled)
+## Printed parts (38 parts, PPS-CF, about 1,485 g modelled)
 
 All of them are in the Tinman project `print/VC41_CoreXY12_INDX_PPSCF_QidiPlus4_06.3mf`.
 
@@ -35,13 +35,17 @@ All of them are in the Tinman project `print/VC41_CoreXY12_INDX_PPSCF_QidiPlus4_
 | purge_bucket_T2 | 1 | 88 x 49.5 x 50.7 | 4 | Purge buckets, one per tool (identical, engraved T0-T4); 49 g |
 | purge_bucket_T3 | 1 | 88 x 49.5 x 50.7 | 4 | Purge buckets, one per tool (identical, engraved T0-T4); 49 g |
 | purge_bucket_T4 | 1 | 88 x 49.5 x 50.7 | 4 | Purge buckets, one per tool (identical, engraved T0-T4); 49 g |
-| ptfe_coupler_block_T0 | 1 | 38 x 59.6 x 44.7 | 5 | PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; 25 g; tree supports |
-| ptfe_coupler_block_T1 | 1 | 38 x 59.6 x 45.9 | 5 | PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; 24 g; tree supports |
-| ptfe_coupler_block_T2 | 1 | 38 x 59.6 x 45.9 | 5 | PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; 24 g; tree supports |
-| ptfe_coupler_block_T3 | 1 | 38 x 59.6 x 45.9 | 5 | PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; 24 g; tree supports |
-| ptfe_coupler_block_T4 | 1 | 38 x 59.6 x 45.2 | 5 | PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; 25 g; tree supports |
+| ptfe_coupler_block_T0 | 1 | 38 x 59.6 x 44.7 | 5 | PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; cut back 2 mm clear of the top hat's front wall; 25 g; tree supports |
+| ptfe_coupler_block_T1 | 1 | 38 x 59.6 x 45.9 | 5 | PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; cut back 2 mm clear of the top hat's front wall; 24 g; tree supports |
+| ptfe_coupler_block_T2 | 1 | 38 x 59.6 x 45.9 | 5 | PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; cut back 2 mm clear of the top hat's front wall; 24 g; tree supports |
+| ptfe_coupler_block_T3 | 1 | 38 x 59.6 x 45.9 | 5 | PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; cut back 2 mm clear of the top hat's front wall; 24 g; tree supports |
+| ptfe_coupler_block_T4 | 1 | 38 x 59.6 x 45.2 | 5 | PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; cut back 2 mm clear of the top hat's front wall; 25 g; tree supports |
 | umbilical_saddle | 1 | 32 x 70.2 x 58.9 | 5 | Umbilical saddle on the INDX PCB cover, with a clevis at its tail; 15 g |
 | umbilical_swivel | 1 | 12 x 30 x 10.4 | 5 | Umbilical swivel: turns on the saddle's pin, so the umbilical lies back near the front and stands up near the back; 4 g |
+| deck_foot_FR | 1 | 44 x 44 x 45.9 | 6 | Spool deck feet, one on each top-hat corner (all four the same part); the deck screws on; 57 g |
+| deck_foot_FL | 1 | 44 x 44 x 45.9 | 6 | Spool deck feet, one on each top-hat corner (all four the same part); the deck screws on; 57 g |
+| deck_foot_RR | 1 | 44 x 44 x 45.9 | 6 | Spool deck feet, one on each top-hat corner (all four the same part); the deck screws on; 57 g |
+| deck_foot_RL | 1 | 44 x 44 x 45.9 | 6 | Spool deck feet, one on each top-hat corner (all four the same part); the deck screws on; 57 g |
 
 ## Motion
 
@@ -97,7 +101,7 @@ All of them are in the Tinman project `print/VC41_CoreXY12_INDX_PPSCF_QidiPlus4_
 | Qty | Item | Specification | Source | Used for |
 |---|---|---|---|---|
 | 5 | PC4-M10 push-fit coupler | For 4 mm OD tube; threads into the block (tap M10 x 1 or let it cut) | Any (BIQU or similar) | One per coupler block |
-| 5 | PTFE tube, 4 mm OD x 2 mm ID | One continuous tube per tool; free lengths T0 793, T1 719, T2 651, T3 682, T4 752 mm, plus about 70 mm through the block, plus the run to the filament source | Any (Capricorn or similar) | Filament to each tool |
+| 8 m | PTFE tube, 4 mm OD x 2 mm ID | One continuous tube per tool, dryer to tool: free length T0 793, T1 719, T2 651, T3 682, T4 752 mm, plus about 70 mm through the block, 185 mm up through the lid to 20 mm over the deck, and the run over the deck to the dryer's outlet; about 1.0 m plus that run each | Any (Capricorn or similar) | Filament to each tool |
 | 4 m | Piano (music) wire, 1.0 mm | Cut to each tube's free length | Any | Stiffener taped along each free tube so parked tubes hold their arch and the active one swings clear |
 | 1 | PTFE or polyimide tape, or 6 mm heat-shrink | — | Any | Holding the piano wire to the tubes |
 | 1 | Umbilical: piano wire 1.2 mm + loom | Reuse the stock V-Core 4 umbilical; free length 687 mm from the back-middle mount to the saddle | Stock (Rat Rig) | INDX Link cable to the head |
@@ -116,7 +120,13 @@ All of them are in the Tinman project `print/VC41_CoreXY12_INDX_PPSCF_QidiPlus4_
 | 1 | INDX Link board and 178 cm cable | Link cable plus host USB 2 m or less | Bondtech | Head electronics |
 | 1 | Radial part cooling, 4010 ducts and fans | Left and right | Bondtech | Part cooling |
 | 1 | USB cable, host to Link board | 22 cm or shorter | Any | Link board |
-| 5 | PTFE tube, 4 mm OD | Length to suit the top-hat routing | Any | Filament to each tool |
+
+## Spool deck
+
+| Qty | Item | Specification | Source | Used for |
+|---|---|---|---|---|
+| 1 | Birch plywood, 15 mm | 820 x 756 mm; a 538 x 72 mm notch in the front edge, starting 110 mm from the left end; seal or paint it | Any | Deck for the dryer on the top hat |
+| 8 | Wood screw 4 x 16 mm, pan head | — | Any | Deck onto its four feet |
 
 ## Bed
 
@@ -129,7 +139,7 @@ All of them are in the Tinman project `print/VC41_CoreXY12_INDX_PPSCF_QidiPlus4_
 
 | Qty | Item | Specification | Source | Used for |
 |---|---|---|---|---|
-| 1.25 kg | PPS-CF | 1,228 g in Tinman's slice | Any | All printed parts |
+| 1.4 kg | PPS-CF | 1,388 g in Tinman's slice | Any | All printed parts |
 
 ## Reused from the printer
 
