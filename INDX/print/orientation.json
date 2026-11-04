@@ -412,10 +412,10 @@
   "size_mm": [
    38.0,
    59.6,
-   44.7
+   46.7
   ],
   "bed_contact_mm2": 998,
-  "volume_cm3": 19.32,
+  "volume_cm3": 19.92,
   "solid": true,
   "non_manifold": false
  },
@@ -427,10 +427,10 @@
   "size_mm": [
    38.0,
    59.6,
-   45.9
+   47.9
   ],
   "bed_contact_mm2": 998,
-  "volume_cm3": 18.72,
+  "volume_cm3": 19.16,
   "solid": true,
   "non_manifold": false
  },
@@ -442,10 +442,10 @@
   "size_mm": [
    38.0,
    59.6,
-   45.9
+   47.9
   ],
   "bed_contact_mm2": 998,
-  "volume_cm3": 18.72,
+  "volume_cm3": 19.16,
   "solid": true,
   "non_manifold": false
  },
@@ -457,10 +457,10 @@
   "size_mm": [
    38.0,
    59.6,
-   45.9
+   47.9
   ],
   "bed_contact_mm2": 998,
-  "volume_cm3": 18.72,
+  "volume_cm3": 19.16,
   "solid": true,
   "non_manifold": false
  },
@@ -472,10 +472,10 @@
   "size_mm": [
    38.0,
    59.6,
-   45.2
+   47.2
   ],
   "bed_contact_mm2": 998,
-  "volume_cm3": 19.22,
+  "volume_cm3": 19.79,
   "solid": true,
   "non_manifold": false
  },
@@ -517,10 +517,10 @@
   "size_mm": [
    44.0,
    44.0,
-   45.9
+   52.9
   ],
   "bed_contact_mm2": 1862,
-  "volume_cm3": 44.17,
+  "volume_cm3": 46.89,
   "solid": true,
   "non_manifold": false
  },
@@ -532,10 +532,10 @@
   "size_mm": [
    44.0,
    44.0,
-   45.9
+   52.9
   ],
   "bed_contact_mm2": 1862,
-  "volume_cm3": 44.17,
+  "volume_cm3": 46.89,
   "solid": true,
   "non_manifold": false
  },
@@ -547,10 +547,10 @@
   "size_mm": [
    44.0,
    44.0,
-   45.9
+   52.9
   ],
   "bed_contact_mm2": 1862,
-  "volume_cm3": 44.17,
+  "volume_cm3": 46.89,
   "solid": true,
   "non_manifold": false
  },
@@ -562,10 +562,10 @@
   "size_mm": [
    44.0,
    44.0,
-   45.9
+   52.9
   ],
   "bed_contact_mm2": 1862,
-  "volume_cm3": 44.17,
+  "volume_cm3": 46.89,
   "solid": true,
   "non_manifold": false
  }

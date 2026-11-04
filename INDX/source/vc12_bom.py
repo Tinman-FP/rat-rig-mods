@@ -27,7 +27,7 @@ PRINTED = [  # (parts, qty, plate, what it is)
     ([f"purge_bucket_T{i}" for i in range(5)], 1, 4, "Purge buckets, one per tool (identical, engraved T0-T4)"),
     ([f"ptfe_coupler_block_T{i}" for i in range(5)], 1, 5,
      "PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; "
-     "cut back 2 mm clear of the top hat's front wall"),
+     "cut back 2 mm clear of the top hat's front centre wall"),
     (["umbilical_saddle"], 1, 5, "Umbilical saddle on the INDX PCB cover, with a clevis at its tail"),
     (["umbilical_swivel"], 1, 5, "Umbilical swivel: turns on the saddle's pin, so the umbilical lies back near the front "
      "and stands up near the back"),
@@ -80,8 +80,8 @@ HARDWARE = [
     ("Tubes and umbilical", "PC4-M10 push-fit coupler", 5, "For 4 mm OD tube; threads into the block (tap M10 x 1 or let it cut)",
      "Any (BIQU or similar)", "One per coupler block"),
     ("Tubes and umbilical", "PTFE tube, 4 mm OD x 2 mm ID", "8 m", "One continuous tube per tool, dryer to tool: free length "
-     + TUBE_LENGTHS + " mm, plus about 70 mm through the block, 185 mm up through the lid to 20 mm over the deck, and the "
-     "run over the deck to the dryer's outlet; about 1.0 m plus that run each", "Any (Capricorn or similar)",
+     + TUBE_LENGTHS + " mm, plus about 70 mm through the block, 192 mm up through the lid to 20 mm over the deck, and the "
+     "run over the deck to its dryer's outlet; about 1.0 m plus that run each", "Any (Capricorn or similar)",
      "Filament to each tool"),
     ("Tubes and umbilical", "Piano (music) wire, 1.0 mm", "4 m", "Cut to each tube's free length", "Any",
      "Stiffener taped along each free tube so parked tubes hold their arch and the active one swings clear"),
@@ -102,13 +102,17 @@ HARDWARE = [
     ("INDX (Bondtech)", "Radial part cooling, 4010 ducts and fans", 1, "Left and right", "Bondtech", "Part cooling"),
     ("INDX (Bondtech)", "USB cable, host to Link board", 1, "22 cm or shorter", "Any", "Link board"),
     ("Spool deck", "Birch plywood, 15 mm", 1, "820 x 756 mm; a 538 x 72 mm notch in the front edge, starting 110 mm "
-     "from the left end; seal or paint it", "Any", "Deck for the dryer on the top hat"),
+     "from the left end; seal or paint it", "Any", "Deck for the dryers on the top hat"),
+    ("Spool deck", "Sunlu FilaDryer S4", 1, "Four 1 kg spools, 70 C max; about 516 x 278 x 350 mm, 4.8 kg", "Sunlu (owner's choice)",
+     "Dryer and feed for T0-T3"),
+    ("Spool deck", "Single-spool dryer, e.g. Sunlu FilaDryer S2", 1, "70 C max; S2 about 265 x 118 x 274 mm, 1.2 kg", "Sunlu or similar",
+     "Dryer and feed for T4"),
     ("Spool deck", "Wood screw 4 x 16 mm, pan head", 8, "", "Any", "Deck onto its four feet"),
     ("Bed", "Bed spacer, 32 mm", 3, "10 mm OD aluminium, M5 clearance", "Any or turned",
      "Replaces the two 6 mm spacers at each kinematic ball"),
     ("Bed", "Longer M5 for the threaded balls", "3 if needed", "Keep at least 6 mm of thread engaged", "Any",
      "Bed balls"),
-    ("Filament", "PPS-CF", "1.4 kg", "1,388 g in Tinman's slice", "Any", "All printed parts"),
+    ("Filament", "PPS-CF", "1.4 kg", "1,408 g in Tinman's slice", "Any", "All printed parts"),
 ]
 
 REUSED = ["Frame, panels, door and electronics", "Y rails and both Y-rail MGN12C blocks",

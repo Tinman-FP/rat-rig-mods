@@ -22,8 +22,11 @@ Status (2026-11-03): **development design, checked in CAD only.** Nothing is pri
 - Docks stay at the front (owner, 2026-11-03). The tools are now 122 mm apart, as far as the X travel allows with every station clear of the bed arms.
   - Rear docks, as on the Snapmaker U1, were considered. On this frame they would mean reversing the INDX head, which loses about 50 mm of print depth, and the buckets could no longer slide out of the front door.
 - PTFE tubes come in at the top front, above each dock, and are stiffened with 1.0 mm piano wire (owner, 2026-11-03). The head's umbilical stays at the back middle and must not interfere with the tubes.
-- Spools on top of the machine in a single dryer, rather than two dryers at the sides (owner, 2026-11-03: "Design top mount"). The tubes stay short and straight and all enter at the front, away from the umbilical.
-- The top hat is the owner's own design. Their file `Rat Rig Vcore 4 Idex 400 Top Hat.step` is the same hat scaled down for a friend's 400; `source/vc12_hat.py` rebuilds it at 500 size from that file.
+- Spools on top of the machine rather than in dryers at the sides (owner, 2026-11-03: "Design top mount"). The tubes stay short and straight and all enter at the front, away from the umbilical.
+  - Dryers: a Sunlu FilaDryer S4 for four spools, and a single-spool dryer beside it for the fifth (owner). A Sunlu S2 is suggested because it also reaches 70 °C.
+  - The owner places the dryers and routes each tube's last run to them. The design brings each tube up through the lid and the deck's notch to just behind the notch (owner: "Just put the PTFE inlets where they need to be and I will work around the dryer").
+- The top hat is the owner's own design, printed in PET-CF. `source/vc12_hat.py` places their file `Rat Rig Top Hat Modular.step` (exported 2026-11-03, "the complete top hat as it sits") on the frame.
+- Firmware: Kalico (owner, 2026-11-03). Bondtech recommends it, and the load-cell probing and the optional INDX bed scanner work fully only on Kalico. See open item 6.
 - Wipers: the owner's Qidi nozzle wiper pads, 15 × 27 × 4.7 mm, one per tool. The 15 mm side runs along X, so all five stations fit between the docks with clearance to spare (owner confirmed, 2026-10-31).
 
 ## What changes on the printer
@@ -53,7 +56,7 @@ Status (2026-11-03): **development design, checked in CAD only.** Nothing is pri
 | Bed | 20 mm higher (see below) |
 | Purge and wipe | a second 1515 rail and, for each tool, a cradle, a slide-out bucket and a Qidi wiper pad |
 | Tubes and umbilical | five PTFE coupler blocks on the front top 3030, piano wire on the tubes, and a saddle and swivel that carry the stock umbilical off the head |
-| Spool deck | a plywood deck for the dryer on four printed feet, one on each top-hat corner, and five tube holes in the lid |
+| Spool deck | a plywood deck for the dryers on four printed feet, one on each top-hat corner, and five tube holes in the lid |
 
 ### Changes outside the motion system
 - **Bed up 20 mm.**
@@ -80,7 +83,7 @@ Status (2026-11-03): **development design, checked in CAD only.** Nothing is pri
 - **Moved:**
   - The X-rail block now sits under the new carriage at X 0.
   - The bed is raised 20 mm on three new 32 mm spacers, which replace the six 6 mm ones. It is shown 50 mm below its top so the head and tools are visible.
-  - The top panel sits in the top hat's pocket, 130 mm above the frame top, with a 6 mm hole over each coupler block.
+  - The stock top panel is left out. It is 800 × 736 mm, too big for the hat's 799.4 × 733.4 mm pocket. The owner's own lid is shown in its place, 5 mm thick with its top 5 mm above the hat's rim, with a 6 mm hole over each coupler block. Its two handles are drawn as stock-size blocks (33 mm tall).
 - **Added:**
   - the PPS-CF parts;
   - idlers, pulleys, bearings and the two motors in their new places;
@@ -89,7 +92,7 @@ Status (2026-11-03): **development design, checked in CAD only.** Nothing is pri
   - the 1515 dock rail with five docks and parked tools;
   - the purge stations: the second 1515 rail, and for each tool a cradle, a bucket and a red Qidi wiper pad;
   - the PTFE coupler blocks and tubes (light grey), and the umbilical (black) with its saddle and swivel;
-  - the owner's top hat (dark grey, see-through), the spool deck (birch) on its four feet, each tube's run from its block up through the lid and the deck's notch, and a see-through outline of an example 600 × 330 × 330 mm dryer.
+  - the owner's top hat (dark grey, see-through) and lid, the spool deck (birch) on its four feet, each tube's run from its block up through the lid and the deck's notch, and see-through outlines of a Sunlu S4 and S2 on the deck (their placement is the owner's).
 - **Pose:** the carriage is centred and the gantry is where the stock model has it (beam centre Y −21.2).
 
 Colours: orange is new PPS-CF, yellow the new bed spacers, steel the idlers, pulleys and bearings, black the belts and motors, and blue the INDX head. The panels and the unchanged door are 15 % opaque so you can see inside. Twelve saved views go straight to the overview, the carriage, each rear corner, a joint, the dock rail, the five purge stations, a close-up of T2's dock, bucket and wiper, the tubes and umbilical, the spool deck, a deck foot on a hat corner, and the tubes rising through the lid and the deck's notch.
@@ -196,12 +199,12 @@ The closed door also holds the buckets in, 3 mm in front of the flanges. Each bu
 - **Coupler block.** The tube runs down the block's channel, bends 60° at a 40 mm radius, and leaves through a PC4-M10 coupler 30° below horizontal, pointing back into the chamber.
 - **Free tube.** From the coupler the tube hangs free to its tool, with a 1.0 mm piano wire taped along it.
 - **End tools.** T1–T3's blocks point straight back. T0's turns 20° toward the middle and T4's 15°. Straight back, those two longest tubes bow out through the side frame when the head is on their side.
-- **Parked tubes.** A parked tube holds an arch over the front of the chamber, from Z 888 to 1090. That is 23 mm or more above the head's highest point, and under the lid at Z 1111.
-- **Active tube.** It never comes lower than Z 829, away from its last 15 mm at the tool.
+- **Parked tubes.** A parked tube holds an arch over the front of the chamber, from Z 888 to 1091. That is 23 mm or more above the head's highest point, and under the lid's seat at Z 1111.
+- **Active tube.** It never comes lower than Z 828, away from its last 15 mm at the tool.
 
 | Tool | T0 | T1 | T2 | T3 | T4 |
 |---|---|---|---|---|---|
-| Free tube, coupler to tool (mm) | 793 | 719 | 651 | 682 | 752 |
+| Free tube, coupler to tool (mm) | 791 | 717 | 649 | 680 | 750 |
 
 **Umbilical.** The head's cables stay on the stock V-Core 4 umbilical: 1.2 mm piano wire from the back-middle mount, leaving it about 55° forward of vertical.
 - **Saddle and swivel.** Its end is clamped in a swivel that turns on an M3 pin at the tail of a saddle stuck to the INDX PCB cover, 60 mm behind the cable strain relief. A stop on the saddle keeps the swivel between level-backward and straight up.
@@ -212,37 +215,45 @@ The closed door also holds the buckets in, 3 mm in front of the flanges. Each bu
 
 **Checks** (`source/vc12_routecheck.py`, `checks/route_report.json`). Every tube and the umbilical are solved as elastic rods with the method from the SV08 INDX project. They are checked with each tool on the head in turn, at every point of a 9 × 9 bed grid, its purge stroke and its dock. The check runs against the head, saddle, carriage, beam and joints, and the docks, rails, coupler blocks, frame, top 3030s and top hat.
 - **No clashes for the tubes.** No tube, parked or active, touches the head, saddle, carriage, gantry, docks, rails, coupler blocks, frame, top 3030s or top hat at any position.
-- **Umbilical to parked tubes:** 9.1 mm at the closest. That is with the head near the front at X 191, beside T4's parked tube.
+- **Umbilical to parked tubes:** 10.2 mm at the closest. That is with the head near the front at X 191, beside T4's parked tube.
 - **What the check reports but doesn't count:**
-  - The umbilical and the active tube both ride on the head and touch at a few front positions (up to 6.8 mm).
-  - Active and parked tubes cross and rub in 41 of the checked cases (up to 4.3 mm), as on any multi-tool printer.
+  - The umbilical and the active tube both ride on the head and touch at a few front positions (up to 6.6 mm).
+  - Active and parked tubes cross and rub in 39 of the checked cases (up to 4.5 mm), as on any multi-tool printer.
   - With the head at the back centre, the umbilical's spare length rests on the top of the INDX head. The stock V-Core 4 umbilical has the same length and mount.
 - **Heights:** the umbilical stays between Z 784 and 1092, under the lid and inside the frame at the back. Every tube stays under the lid.
-- **The tubes' runs up to the lid** (each straight up from its block): the umbilical stays at least 184 mm from them, an active tube at least 33 mm from the other tools' runs, and a parked tube at least 125 mm.
+- **The tubes' runs up to the lid** (each straight up from its block): the umbilical stays at least 182 mm from them, an active tube at least 31 mm from the other tools' runs, and a parked tube at least 123 mm.
 
 ## Spool deck on the top hat
-The dryer sits on a deck above the top hat (owner's choice of a single dryer on top). Pictures: `images/spool_deck.png`, `images/deck_foot_on_hat.png`, `images/tubes_through_lid.png`.
+The dryers sit on a deck above the top hat. Pictures: `images/spool_deck.png`, `images/deck_foot_on_hat.png`, `images/tubes_through_lid.png`.
 
-**The top hat.** It is the owner's: a ring of solid printed modules, 50 mm thick, standing on the top 3030s with 5 mm tongues in their slots. The stock top panel sits in a 6 mm pocket 130 mm above the frame top, and a 10 mm raised rim runs round it just outside the frame. The owner's 400 model gives the sections; `source/vc12_hat.py` stretches it to the 500 frame. Its corners are solid right over the frame uprights.
+**The top hat.** It is the owner's, printed in PET-CF, from their file `Rat Rig Top Hat Modular.step` (`source/vc12_hat.py` places it on the frame).
+- **Modules:** eight printed modules, 141 mm tall, standing on the top 3030s with 5 mm tongues in their slots.
+- **Walls:** 40 mm thick at the four corners. The centre modules front and back are 50 mm thick and stand 5 mm proud of the corners. The side middles are hollow.
+- **Display:** the front right corner carries the display. Its window goes through the wall, and the display's cables run through the hollow at that corner's right end.
+- **Lid:** the pocket for the lid is 799.4 × 733.4 mm with its floor 130 mm above the frame top, and a 10 mm rim runs round it at 136 mm. The owner's lid sits in the pocket on a foam gasket, its top about 5 mm above the rim.
 
-**Why it stands on the hat's corners.** The deck needs to be carried by the frame, not the lid. The hat's corners already are solid columns on the corner uprights, so the deck's feet stand on them. A separate frame would mean cutting 30 mm holes through all four hat corners, or bolting posts through the side panels outside the hat.
+**Why it stands on the hat's corners.** The deck needs to be carried by the frame, not the lid. The hat's corners stand right on the corner uprights, so the deck's feet stand on them. A separate frame would mean cutting 30 mm holes through all four hat corners, or bolting posts through the side panels outside the hat.
 
-- **Feet** (`deck_foot_FR`/`FL`/`RR`/`RL`, all the same part, 57 g each). Each stands on the rim at one corner, with a skirt that drops 8 mm over the hat's rounded corner (1 mm gap) to locate it. Over the lid it is open, so it touches only the rim: the lid is 2 mm lower. Two 4 × 16 mm wood screws hold the deck to its top plate.
-- **Deck.** 15 mm birch plywood, 820 × 756 mm, flush with the hat's corners. Its underside is 40 mm above the lid, an air gap that keeps the chamber's heat (65 °C for PPS-CF) off the dryer. It clears the lid's two stock handles by 6.9 mm.
-- **Notch.** A 538 × 72 mm notch in the front edge lets the tubes rise past the deck. So the deck lifts off without unthreading them, and taking the lid off means lifting the dryer and deck, then the lid over the tube ends.
-- **Tubes.** Each one rises straight from its block's channel (Z 1005) through a 6 mm hole in the lid, 42 mm from the lid's front edge, to 20 mm above the deck. It then bends back over the notch's edge at 60 mm radius or more to its dryer outlet. That is one continuous tube from the dryer to the tool; the only bend below the deck is the block's own 60° turn.
-- **Dryer.** Not chosen yet. Anything up to about 820 × 640 mm fits behind the notch, with its outlets on top or at least 40 mm behind the notch's back edge. The model shows a see-through 600 × 330 × 330 mm outline.
+- **Feet** (`deck_foot_FR`/`FL`/`RR`/`RL`, all the same part, 61 g each).
+  - Each stands on the rim at one corner, with a skirt that drops 8 mm over the hat's rounded corner (1 mm gap) to locate it.
+  - Its legs stand 2 mm outside the lid's pocket and it is open over the lid, so it touches only the rim even though the lid stands above it.
+  - Two 4 × 16 mm wood screws hold the deck to its top plate.
+  - At the front right corner, the hat is hollow at the top for the display cables. The foot's legs stand right over that corner's 6 and 7.5 mm outer walls, which carry the load down to the solid part below.
+- **Deck.** 15 mm birch plywood, 820 × 756 mm, flush with the hat's corners. Its underside is 40 mm above the lid's top, an air gap that keeps the chamber's heat (65 °C for PPS-CF) off the dryers. It clears the lid's two handles by 6.9 mm if they are stock height (33 mm); taller handles would need taller feet.
+- **Notch.** A 538 × 72 mm notch in the front edge lets the tubes rise past the deck. So the deck lifts off without unthreading them, and taking the lid off means lifting the dryers and deck, then the lid over the tube ends.
+- **Tubes.** Each one rises straight from its block's channel (Z 1005) through a 6 mm hole in the lid, 42.7 mm behind the pocket's front edge, to 20 mm above the deck. It then bends back over the notch's edge at 60 mm radius or more and ends just behind the notch. That is one continuous tube from the tool to the dryer; the only bend below the deck is the block's own 60° turn.
+- **Dryers.** A Sunlu S4 (four spools) and a single-spool dryer beside it, shown as outlines of a Sunlu S4 lengthways for T0–T3 and an S2 side-on at the right end for T4. They use about 634 of the deck's 820 mm width. Where they stand and how each tube reaches its outlet is the owner's call; keep each bend at 60 mm radius or more.
 
 | Lid hole | T0 | T1 | T2 | T3 | T4 |
 |---|---|---|---|---|---|
 | From the lid's left edge (mm) | 125 | 247 | 369 | 491 | 613 |
 
-**Checks** (`source/vc12_topcheck.py`, `checks/top_report.json`), against the owner's hat at 500 size:
-- The feet sit on the rim with no overlap, 2.1 mm clear of the lid, about 740 mm² of bearing each.
-- The deck clears the handles by 6.9 mm, the lid by 39.9 mm and the hat by 37.9 mm.
-- Each tube's run clears the hat by 6.2 mm (T1–T3, the solid front centre) and 10.2 mm (T0, T4). It clears its lid hole by 1 mm all round, the deck's notch by 18 mm and the other blocks by 109 mm.
-- The coupler blocks needed a change. Their curved fronts came within 0.27 mm of the hat's 50 mm front wall, so each is now cut back above the frame top. The closest point is now the mounting plate, 1.0 mm under the hat's base (1.2 mm for T0 and T4).
-- **Load:** with a 12 kg dryer, the deck (5.9 kg) and feet put about 45 N on each corner, 0.06 MPa on the rim. A 15 mm birch deck on four corners sags about 2 mm in the middle.
+**Checks** (`source/vc12_topcheck.py`, `checks/top_report.json`), against the owner's hat file:
+- The feet sit on the rim with no overlap, 2.0 mm clear of the lid, 631 mm² of bearing each.
+- The deck clears the handles by 6.9 mm (stock height), the lid by 39.9 mm and the hat by 44.9 mm.
+- Each tube's run clears the hat by 5.7 mm (T2, T3, behind the front centre), 6.5 mm (T1) and 10.7 mm (T0, T4). It clears its lid hole by 1 mm all round, the deck's notch by 16 mm and the other blocks by 109 mm.
+- The coupler blocks are cut back above the frame top to clear the hat's front centre wall by 2 mm, and its lower inner edge where it overhangs the top 3030. The closest point is the mounting plate, 1.0 mm under that overhang.
+- **Load:** with the S4 and S2 and five full 1 kg spools (12.25 kg), the deck (5.9 kg) and feet put about 45 N on each corner, 0.07 MPa on the rim. A 15 mm birch deck on four corners sags about 2 mm in the middle.
 
 ## Printed parts (PPS-CF, density 1.30; STEP and STL in `parts/`)
 
@@ -264,17 +275,17 @@ The purge-station parts (two rail brackets, five cradles, five buckets) are list
   - process "0.24mm Tank @Qidi X-Plus 4 0.6 nozzle - TinMan Codex - Copy": 6 walls, 45 % gyroid, 8 top and bottom layers;
   - filament "PPS-CF Codex-Bambu - Qidi X-Plus 4": 320 °C nozzle, 110 °C bed, 65 °C chamber;
   - Textured PEI plate.
-- **Plates.** Times and weights come from Tinman's own test slice on 2026-11-03. The owner's process preset changed that day, so plates 1–4 come out a little differently from the earlier slice.
+- **Plates.** Times and weights come from Tinman's own test slice on 2026-11-03, after the coupler blocks and deck feet were refitted to the owner's real top hat.
 
 | Plate | Parts | Time | PPS-CF |
 |---|---|---|---|
 | 1 Carriage, joints, front idlers | carriage, 4 clamp caps, joint L/R, front idler L/R | 15.2 h | 295 g |
-| 2 Rear corners | base L/R, top L/R | 11.3 h | 222 g |
-| 3 Purge cradles and rail brackets | station cradles T0–T4, dock brackets L/R, station brackets L/R | 16.3 h | 321 g |
+| 2 Rear corners | base L/R, top L/R | 11.4 h | 223 g |
+| 3 Purge cradles and rail brackets | station cradles T0–T4, dock brackets L/R, station brackets L/R | 16.3 h | 322 g |
 | 4 Purge buckets | purge buckets T0–T4 | 13.7 h | 241 g |
-| 5 PTFE coupler blocks and umbilical saddle | coupler blocks T0–T4, saddle, swivel | 7.0 h | 135 g |
-| 6 Spool deck feet | deck feet ×4 | 7.6 h | 173 g |
-| **Total** | 38 parts | **71.1 h** | **1,388 g** |
+| 5 PTFE coupler blocks and umbilical saddle | coupler blocks T0–T4, saddle, swivel | 7.1 h | 138 g |
+| 6 Spool deck feet | deck feet ×4 | 8.3 h | 190 g |
+| **Total** | 38 parts | **72.0 h** | **1,408 g** |
 
 - **Test slice.** No warnings and no path conflicts. Every plate starts with `PRINT_START BED=110 HOTEND=320 CHAMBER=65`.
 - **Orientation.** Each part lies on the face listed in `print/orientation.json`.
@@ -318,9 +329,9 @@ The full purchase list, with screw lengths worked out from each part's clamping 
   - each bucket pulled 0, 20, 40 and 60 mm with the door open;
   - every station part against the stock frame, door, panels, the other stations, and the front bed arms, Z carriages and raised bed at the top of their travel.
 - Results, 2026-10-31, docks 116 mm apart with one station per tool:
-  - **FreeCAD motion check: no overlaps at any of the 31 poses, and none between the fixed parts and the stock frame, door, panels and electronics** (`checks/interference_report.json`).
+  - **FreeCAD motion check: no overlaps at any of the 31 poses, and none between the fixed parts and the stock frame, door, panels and electronics** (`checks/interference_report.json`; re-run 2026-11-03 with the coupler blocks refitted to the real top hat, same result).
   - **Station check: no overlaps at any of the 40 purge and wipe poses, the 4 mm shifted ones included.** Each nozzle touches only its own pad, and only during the wipe. All five buckets slide out clear. No station part touches the frame, door, bed arms or another station.
-  - **Tubes and umbilical** (`checks/route_report.json`): no tube clashes; the umbilical stays at least 9.1 mm from every parked tube. See "PTFE tubes and the umbilical".
+  - **Tubes and umbilical** (`checks/route_report.json`): no tube clashes; the umbilical stays at least 10.2 mm from every parked tube. See "PTFE tubes and the umbilical".
   - **Station clearances to the bed:** 4.0 mm to the front bed arms at the top of their travel. As the bed moves past, the pads and pad shelves are 1.5 mm from the PEI sheet's front edge and the buckets' back rims 2.0 mm. Nothing on the bed reaches further forward than the PEI sheet.
   - **SolidCraft** (2026-10-30 run, before the station change) at the rear-right and front-left stops:
     - no unexpected overlaps;
@@ -343,13 +354,29 @@ The full purchase list, with screw lengths worked out from each part's clamping 
 3. **Belt clamps.** These are a new design: a toothed rack plus a screw cap. Pull-test them before trusting them.
 4. **Head beside the docks.** At its purge spot the head is 5.6 mm further from its own dock than it needs to be, and at the end of the wipe it is 10.5 mm further from the next dock. Both figures come from Bondtech's duct model. Before the first purge, jog the real head slowly to each purge spot and the end of each wipe stroke and look at the gaps. The ducts must be mounted as in Bondtech's model.
 5. **Homing.** Y must home to the rear. The front stop is 1 mm past pickup, where the head already sits in the dock rail's slot.
-6. **Firmware.** INDX needs `indx_klipper` (mainline) or Kalico. The printer runs a custom Klipper line around 54c7b65d with modified Beacon and PLR files, so check compatibility before installing.
+6. **Firmware: Kalico** (owner, 2026-11-03).
+   - Bondtech calls Kalico its reference INDX firmware; `indx_klipper` follows it for mainline Klipper.
+   - The INDX head's load cell is the Z probe. Bondtech's load-cell settings use Kalico's pullback tap analysis, which mainline Klipper lacks. The optional INDX bed scanner needs Kalico from 2026-10-08 on.
+   - Kalico also has `gcode_shell_command` built in, which the printer's power-loss-recovery and heat-soak shell helpers wait on.
+   - The custom kinematics and dual-Beacon code in the owner's config (`Tinman-FP/rat-rig-dual-beacon-500-idex-config`) are for IDEX and are retired by this conversion.
+   - The chamber, heat-soak, precheck, counter, RGB and camera macros carry over.
+   - These need redoing for the INDX:
+     - the toolboard and extruder sections;
+     - the filament sensors and prechecks, for five tools;
+     - homing, using Bondtech's macro with sensorless XY;
+     - power-loss recovery.
+   - INDX's saved state goes in the existing `variables.cfg`, since Klipper allows only one `[save_variables]`.
+   - Take a fresh snapshot of the live printer before changing anything.
 7. **Electronics and filament.**
    - The INDX Link cable (178 cm) plus the host USB must total 2 m or less, so the USB can be at most 22 cm and the Link board has to sit near the Pi.
-   - The five PTFE tubes run up to a single dryer on the spool deck (see "Spool deck on the top hat"). The dryer isn't chosen yet; its outlets set each tube's last run over the deck.
+   - The five PTFE tubes run up to the dryers on the spool deck (see "Spool deck on the top hat"). The owner routes each tube's last run to its outlet.
 8. **Tension and current.** Belt tension targets and motor current (draft 1.4 A) still need setting against the motor rating. No FEA was done.
 9. **Wiper height and depth.** Set the pad top 1.2 mm above the nozzle tip with the station-rail brackets' ±5 mm slots. The nozzle wipes only 3 mm in from the pad's rear edge (see the stations section); if that proves too shallow, the pad can't move back without hitting the bed.
 10. **Tubes and umbilical.** Their shapes are modelled: a free tube settles where its stiffness and weight put it. Set them by hand on the machine as the stock umbilical is, and watch the first tool changes.
-    - The top hat is the owner's 400 model stretched to the 500 frame. Its module joints, display cut-out and fan openings may sit elsewhere on the real hat. On the machine, check the coupler blocks' 1–2 mm to the hat's front wall and base.
+    - The top hat is the owner's own file. On the machine, check the coupler blocks' 1–2 mm to the hat's front wall and its overhang on the top 3030. Also check that the back of the display doesn't reach more than about 10 mm into the chamber past the wall's inside face; T4's tube rises 12.7 mm behind that face.
     - The umbilical rests on the head when the head is at the back centre. If it rubs, trim its spare length a little.
-11. **Spool deck on the hat.** The printed hat corners carry the deck and dryer, about 45 N each. Their walls are solid in the model; check the real ones were printed with enough walls and infill to carry it, in a material that stays stiff at the chamber's 65 °C. The deck's top is about 1.16 m above whatever the printer stands on, so loading spools needs a step stool.
+11. **Spool deck on the hat.**
+    - **Load on the corners:** the printed hat corners carry the deck and dryers, about 45 N each. The hat is PET-CF, which stays stiff at the chamber's 65 °C.
+    - **Front right corner:** it is hollow at the top for the display cables. The foot's legs stand over its outer walls.
+    - **Handles:** the lid's handles are assumed to be stock height (33 mm). If they stand taller, the deck needs taller feet.
+    - **Loading spools:** the deck's top is about 1.17 m above whatever the printer stands on, so loading spools needs a step stool.

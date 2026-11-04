@@ -1,14 +1,15 @@
 """Write the full conversion assembly as two STEP files for SolidCraft.
 
-  VC12_STOCK=<owner's V-Core FCStd> VC12_INDX=<INDX FCStd> VC12_HAT400=<owner's 400 top hat STEP>
+  VC12_STOCK=<owner's V-Core FCStd> VC12_INDX=<INDX FCStd> VC12_HAT=<owner's top hat STEP>
   /Applications/FreeCAD.app/Contents/Resources/bin/python vc12_assembly.py <stock_out.step> <new_out.step>
 
 stock_out: the owner's V-Core 4.1 500 IDEX model with every part this conversion removes taken
 out, the bed raised 20 mm on new spacers and shown 50 mm below its top, and the door moved 13 mm
-forward when P.DOOR_SPACER is set (it is 0: the docks sit 5 mm further back instead), and the top panel lifted into the
-owner's top hat with a hole over each coupler block. new_out: the PPS-CF parts, purchased motion parts, belts and the
-INDX head, docks and rail, at carriage X 0 with the gantry where the stock model has it (beam centre Y -21.2); the
-owner's top hat (vc12_hat.py), the spool deck on its feet, each tube's feed up to the deck, and an example dryer outline.
+forward when P.DOOR_SPACER is set (it is 0: the docks sit 5 mm further back instead), and the stock top panel left out
+(the owner's lid is their own panel, cut to the hat's pocket). new_out: the PPS-CF parts, purchased motion parts, belts
+and the INDX head, docks and rail, at carriage X 0 with the gantry where the stock model has it (beam centre Y -21.2);
+the owner's top hat (vc12_hat.py) with their lid and its handles, the spool deck on its feet, each tube's feed up to the
+deck, and outlines of the two dryers.
 """
 import os
 import re
@@ -48,7 +49,7 @@ def path_of(o):
 def stock_groups(fc):
     doc = App.openDocument(fc)
     groups = {}
-    moved = {"bed spacers removed": 0}
+    moved = {"bed spacers removed": 0, "stock top panel left out (owner's lid)": 0}
     for o in doc.Objects:
         if o.TypeId != "Part::Feature":
             continue
@@ -81,11 +82,8 @@ def stock_groups(fc):
             s.translate(V(0, 0, -BED_DROP))
             top = "Bed arms and Z carriages (shown 50 mm down)"
         elif top.startswith("Panel Assembly - Top"):
-            s.translate(V(0, 0, P.HAT_LID_Z - P.TOP_FRONT_Z[1]))
-            if "panel_vc40_top" in pth:                   # a tube hole straight above each coupler block's channel
-                s = s.cut(Part.makeCompound([Part.makeCylinder(3.0, 10.0, V(x, P.TUBE_IN_Y, P.HAT_LID_Z - 3.0))
-                                             for x in P.DOCK_X]))
-            top = "Top panel (lid) in the top hat, 5 tube holes"
+            moved["stock top panel left out (owner's lid)"] += 1
+            continue                                      # 800 x 736: too big for the hat's pocket
         elif top.startswith("Panel Assembly - Door") and P.DOOR_SPACER > 0:
             s.translate(V(0, -P.DOOR_SPACER, 0))
             top = f"Door ({P.DOOR_SPACER:.0f} mm forward)"
@@ -160,12 +158,18 @@ def new_items():
         out[f"PPS-CF deck_foot_{c}"] = f
     import vc12_hat as HAT
     import vc12_topcheck as TOP
-    out["TOP HAT (owner's, from their 400 model at 500 size)"] = HAT.hat500()
+    out["TOP HAT (owner's, as it sits)"] = HAT.hat()
+    px, py = P.HAT_POCKET
+    lid = Part.makeBox(2 * px - 1.0, 2 * py - 1.0, 5.0, V(-px + 0.5, -py + 0.5, P.LID_TOP_Z - 5.0))
+    out["LID (owner's, in the pocket on its foam), 5 tube holes"] = lid.cut(Part.makeCompound(
+        [Part.makeCylinder(3.0, 7.0, V(x, P.TUBE_IN_Y, P.LID_TOP_Z - 6.0)) for x in P.DOCK_X]))
+    out["LID handles (as modelled, 33 mm)"] = TOP.handles()
     out["SPOOL DECK birch plywood 820 x 756 x 15"] = TOP.deck()
     for i, x in enumerate(P.DOCK_X):
         out[f"PTFE feed T{i} (block up to the dryer)"] = T.pipe(T.feed_points(x), P.TUBE["od"] / 2)
-    out["EXAMPLE dryer outline 600 x 330 x 330 (yours may differ)"] = Part.makeBox(
-        600.0, 330.0, 330.0, V(sum(P.DOCK_X) / len(P.DOCK_X) - 300.0, -250.0, P.DECK_Z + P.DECK_T))
+    z = P.DECK_Z + P.DECK_T                                   # dryer outlines: where they go is the owner's call
+    out["DRYER Sunlu S4 outline 516 x 278 x 350 (T0-T3)"] = Part.makeBox(516.0, 278.0, 350.0, V(-390.0, -240.0, z))
+    out["DRYER Sunlu S2 outline 118 x 265 x 274 (T4)"] = Part.makeBox(118.0, 265.0, 274.0, V(200.0, -240.0, z))
     for plane in ("A", "B"):
         out[f"BELT {plane} 12mm ({'lower' if plane == 'A' else 'upper'})"] = Part.makeCompound(
             [s for n, s in moving.items() if n.startswith(f"belt_{plane}_")])

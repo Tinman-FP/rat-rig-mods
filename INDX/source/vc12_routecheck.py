@@ -74,8 +74,8 @@ def gap(A, B, ra, rb):
 
 
 def frame_top_and_hat():
-    """Top 3030s from the frame drawing, and the owner's top hat as boxes: 50 mm walls (their inner faces 2-4 mm
-    inside the real hat's, vc12_hat.py) and the lid in its pocket."""
+    """Top 3030s from the frame drawing, and the owner's top hat as boxes: 50 mm walls (their inner faces on the real
+    hat's centre walls and 5 mm inside its 40 mm corner walls, vc12_hat.py) and the lid in its pocket."""
     z0, z1 = P.TOP_FRONT_Z
     f = {"frame top 3030 front": box(-370, 370, -367.5, -337.5, z0, z1),
          "frame top 3030 rear": box(-370, 370, 337.5, 367.5, z0, z1),

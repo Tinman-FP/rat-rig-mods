@@ -1,9 +1,9 @@
 """Spool deck check (run with FreeCAD's Python after vc12_build.py).
 
-  VC12_HAT400=<Rat Rig Vcore 4 Idex 400 Top Hat.step>
+  VC12_HAT=<Rat Rig Top Hat Modular.step>
   /Applications/FreeCAD.app/Contents/Resources/bin/python vc12_topcheck.py
 
-Against the owner's top hat at 500 size (vc12_hat.py), the stock top panel in its pocket with its two cast handles,
+Against the owner's top hat (vc12_hat.py), the lid filling its pocket up to P.LID_TOP_Z with two handles on it,
 the top 3030s and the coupler blocks: the four deck feet (seated on the rim, clear of the lid), the plywood deck, and
 each tube's feed from the top of its block's channel up through its lid hole and the deck's notch to the dryer. Also
 the coupler blocks against the hat, the lid hole positions, the load on each foot and the deck's sag. Writes
@@ -32,7 +32,7 @@ CORNERS = ("FR", "FL", "RR", "RL")
 LID_HOLE = 6.0
 PLY_DENSITY = 680.0            # kg/m3, birch plywood
 PLY_E = 8000.0                 # N/mm2, along the face grain (lower bound for birch ply)
-DRYER_KG = 12.0                # five spools plus a dryer; change for yours
+DRYER_KG = 12.25               # Sunlu S4 (4.8 kg) and S2 (1.2 kg) with five 1 kg spools (1.25 kg each)
 
 
 def load(name):
@@ -42,15 +42,16 @@ def load(name):
 
 
 def lid():
-    """Stock 800 x 736 x 4 top panel in the hat's pocket, with a hole straight above each block's channel."""
+    """The lid and its foam gasket filling the hat's pocket up to P.LID_TOP_Z, with a hole straight above each block's
+    channel."""
     px, py = P.HAT_POCKET
-    plate = box(-px, px, -py, py, P.HAT_LID_Z, P.HAT_LID_Z + 4.0)
-    return minus(plate, [cyl_z(x, P.TUBE_IN_Y, LID_HOLE, P.HAT_LID_Z - 1, P.HAT_LID_Z + 5) for x in P.DOCK_X])
+    plate = box(-px, px, -py, py, P.HAT_LID_Z, P.LID_TOP_Z)
+    return minus(plate, [cyl_z(x, P.TUBE_IN_Y, LID_HOLE, P.HAT_LID_Z - 1, P.LID_TOP_Z + 1) for x in P.DOCK_X])
 
 
 def handles():
-    """The stock cast handles (100 mm spacing), at the lid's left and right edges as Rat Rig fits them."""
-    z = P.HAT_LID_Z + 4.0
+    """The lid's two handles, at its left and right edges where Rat Rig fits the stock ones."""
+    z = P.LID_TOP_Z
     return Part.makeCompound([box(sx * 354.0, sx * 371.0, -59.0, 59.0, z, P.LID_HANDLE_TOP) if sx > 0 else
                               box(-371.0, -354.0, -59.0, 59.0, z, P.LID_HANDLE_TOP) for sx in (1, -1)])
 
@@ -82,11 +83,14 @@ def overlap(a, b):
 
 
 def main():
-    hat = H.hat500()
+    hat = H.hat()
     L, hd, dk, ft = lid(), handles(), deck(), frame_top()
     feet = {c: load(f"deck_foot_{c}") for c in CORNERS}
     blocks = [load(f"ptfe_coupler_block_T{i}") for i in range(P.INDX_TOOLS)]
-    rep = {"note": __doc__.split("\n")[0], "hat": "owner's 400 hat at 500 size (vc12_hat.py)", "feet": {}, "feeds": {},
+    rep = {"note": __doc__.split("\n")[0], "hat": "owner's hat as it sits (vc12_hat.py)",
+           "assumed_until_measured": {"lid_top_above_rim_mm": round(P.LID_TOP_Z - P.HAT_RIM_Z, 2),
+                                      "handle_height_mm": round(P.LID_HANDLE_TOP - P.LID_TOP_Z, 2)},
+           "feet": {}, "feeds": {},
            "blocks_to_hat_mm": {}}
 
     for c, f in feet.items():

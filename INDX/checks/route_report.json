@@ -1,42 +1,42 @@
 {
  "note": "Route check for the PTFE tubes and the head umbilical (run with FreeCAD's Python after vc12_build.py).",
  "tube_free_length_mm": {
-  "T0": 793,
-  "T1": 719,
-  "T2": 651,
-  "T3": 682,
-  "T4": 752
+  "T0": 791,
+  "T1": 717,
+  "T2": 649,
+  "T3": 680,
+  "T4": 750
  },
  "umbilical_free_length_mm": 687,
  "parked": {
   "T0": {
-   "top": 1090.3,
-   "lowest": 903.3,
-   "back_to_y": -65.7,
+   "top": 1091.1,
+   "lowest": 903.2,
+   "back_to_y": -66.1,
    "solved": true
   },
   "T1": {
-   "top": 1078.1,
-   "lowest": 895.3,
-   "back_to_y": -84.5,
+   "top": 1078.4,
+   "lowest": 895.1,
+   "back_to_y": -84.2,
    "solved": true
   },
   "T2": {
-   "top": 1064.5,
-   "lowest": 887.8,
-   "back_to_y": -110.3,
+   "top": 1064.6,
+   "lowest": 887.6,
+   "back_to_y": -109.8,
    "solved": true
   },
   "T3": {
-   "top": 1071.0,
-   "lowest": 891.3,
-   "back_to_y": -98.4,
+   "top": 1071.1,
+   "lowest": 891.1,
+   "back_to_y": -98.2,
    "solved": true
   },
   "T4": {
-   "top": 1081.6,
-   "lowest": 898.8,
-   "back_to_y": -74.5,
+   "top": 1082.3,
+   "lowest": 898.7,
+   "back_to_y": -74.6,
    "solved": true
   }
  },
@@ -68,45 +68,45 @@
  ],
  "not_converged": [],
  "umbilical_to_parked_min_gap": {
-  "mm": 9.1,
+  "mm": 10.2,
   "worst": [
    {
-    "gap": 9.1,
+    "gap": 10.2,
     "parked": "T4",
     "tool": "T0",
     "x": 191.0,
     "y": -250.0
    },
    {
-    "gap": 9.1,
+    "gap": 10.2,
     "parked": "T4",
     "tool": "T1",
     "x": 191.0,
     "y": -250.0
    },
    {
-    "gap": 9.1,
+    "gap": 10.2,
     "parked": "T4",
     "tool": "T2",
     "x": 191.0,
     "y": -250.0
    },
    {
-    "gap": 9.1,
+    "gap": 10.2,
     "parked": "T4",
     "tool": "T3",
     "x": 191.0,
     "y": -250.0
    },
    {
-    "gap": 10.6,
+    "gap": 10.4,
     "parked": "T4",
     "tool": "T3",
     "x": 158.0,
     "y": -317.5
    },
    {
-    "gap": 11.8,
+    "gap": 12.6,
     "parked": "T4",
     "tool": "T0",
     "x": 191.0,
@@ -115,142 +115,142 @@
   ]
  },
  "umbilical_to_active_min_gap": {
-  "mm": -6.8,
+  "mm": -6.6,
   "worst": [
    {
-    "gap": -6.8,
-    "tool": "T4",
-    "x": 128.0,
+    "gap": -6.6,
+    "tool": "T3",
+    "x": 64.0,
     "y": -220.0
    },
    {
-    "gap": -6.4,
-    "tool": "T1",
-    "x": -128.0,
-    "y": -250.0
-   },
-   {
-    "gap": -6.2,
-    "tool": "T4",
-    "x": 64.0,
-    "y": -277.5
-   },
-   {
-    "gap": -6.1,
-    "tool": "T1",
-    "x": -64.0,
-    "y": -277.5
-   },
-   {
-    "gap": -5.3,
+    "gap": -6.0,
     "tool": "T3",
     "x": 191.0,
     "y": -250.0
    },
    {
-    "gap": -5.1,
-    "tool": "T3",
-    "x": 64.0,
+    "gap": -5.9,
+    "tool": "T4",
+    "x": 128.0,
     "y": -220.0
+   },
+   {
+    "gap": -5.8,
+    "tool": "T4",
+    "x": 64.0,
+    "y": -277.5
+   },
+   {
+    "gap": -5.3,
+    "tool": "T1",
+    "x": -64.0,
+    "y": -277.5
+   },
+   {
+    "gap": -5.1,
+    "tool": "T0",
+    "x": -128.0,
+    "y": -250.0
    }
   ]
  },
- "tube_contacts": 41,
- "tube_min_gap": -4.3,
+ "tube_contacts": 39,
+ "tube_min_gap": -4.5,
  "extremes": {
-  "active_low": 828.8,
-  "active_top": 1088.8,
+  "active_low": 828.2,
+  "active_top": 1089.7,
   "umb_low": 783.6,
   "umb_top": 1091.8
  },
- "parked_to_other_feeds_min_gap": 124.8,
+ "parked_to_other_feeds_min_gap": 122.7,
  "umbilical_to_feeds_min_gap": {
-  "mm": 183.8,
+  "mm": 182.4,
   "worst": [
    {
-    "gap": 183.8,
+    "gap": 182.4,
     "feed": "T2",
     "tool": "T2",
     "x": -31.0,
     "y": -317.5
    },
    {
-    "gap": 183.9,
+    "gap": 182.5,
     "feed": "T3",
     "tool": "T3",
     "x": 91.0,
     "y": -317.5
    },
    {
-    "gap": 184.0,
+    "gap": 182.6,
     "feed": "T1",
     "tool": "T1",
     "x": -153.0,
     "y": -317.5
    },
    {
-    "gap": 188.8,
+    "gap": 187.4,
     "feed": "T4",
     "tool": "T4",
     "x": 213.0,
     "y": -317.5
    },
    {
-    "gap": 189.5,
+    "gap": 188.1,
     "feed": "T2",
     "tool": "T2",
     "x": 16.0,
     "y": -317.5
    },
    {
-    "gap": 189.6,
-    "feed": "T1",
-    "tool": "T1",
-    "x": -106.0,
+    "gap": 188.2,
+    "feed": "T3",
+    "tool": "T3",
+    "x": 138.0,
     "y": -317.5
    }
   ]
  },
  "active_to_other_feeds_min_gap": {
-  "mm": 33.3,
+  "mm": 31.2,
   "worst": [
    {
-    "gap": 33.3,
+    "gap": 31.2,
     "feed": "T1",
     "tool": "T0",
     "x": -228.0,
     "y": -317.5
    },
    {
-    "gap": 36.6,
+    "gap": 35.1,
     "feed": "T1",
     "tool": "T0",
     "x": -208.0,
     "y": -317.5
    },
    {
-    "gap": 55.9,
+    "gap": 54.4,
     "feed": "T2",
     "tool": "T1",
     "x": -106.0,
     "y": -317.5
    },
    {
-    "gap": 57.8,
+    "gap": 56.4,
     "feed": "T4",
     "tool": "T3",
     "x": 138.0,
     "y": -317.5
    },
    {
-    "gap": 58.4,
+    "gap": 57.0,
     "feed": "T2",
     "tool": "T1",
     "x": -86.0,
     "y": -317.5
    },
    {
-    "gap": 60.2,
+    "gap": 58.9,
     "feed": "T3",
     "tool": "T2",
     "x": 16.0,
