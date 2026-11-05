@@ -83,7 +83,7 @@ Status (2026-11-03): **development design, checked in CAD only.** Nothing is pri
 - **Moved:**
   - The X-rail block now sits under the new carriage at X 0.
   - The bed is raised 20 mm on three new 32 mm spacers, which replace the six 6 mm ones. It is shown 50 mm below its top so the head and tools are visible.
-  - The stock top panel is left out. It is 800 × 736 mm, too big for the hat's 799.4 × 733.4 mm pocket. The owner's own lid is shown in its place, 5 mm thick with its top 5 mm above the hat's rim, with a 6 mm hole over each coupler block. Its two handles are drawn as stock-size blocks (33 mm tall).
+  - The stock top panel is left out. It is 800 × 736 mm, too big for the hat's 799.4 × 733.4 mm pocket. The owner's own lid is shown in its place, 5 mm thick with its top 5 mm above the hat's rim, with a 6 mm hole over each coupler block. Its two handles are drawn as 22 mm blocks, the owner's measured height, where the stock handles go.
 - **Added:**
   - the PPS-CF parts;
   - idlers, pulleys, bearings and the two motors in their new places;
@@ -234,12 +234,12 @@ The dryers sit on a deck above the top hat. Pictures: `images/spool_deck.png`, `
 
 **Why it stands on the hat's corners.** The deck needs to be carried by the frame, not the lid. The hat's corners stand right on the corner uprights, so the deck's feet stand on them. A separate frame would mean cutting 30 mm holes through all four hat corners, or bolting posts through the side panels outside the hat.
 
-- **Feet** (`deck_foot_FR`/`FL`/`RR`/`RL`, all the same part, 61 g each).
+- **Feet** (`deck_foot_FR`/`FL`/`RR`/`RL`, all the same part, 48.5 g each).
   - Each stands on the rim at one corner, with a skirt that drops 8 mm over the hat's rounded corner (1 mm gap) to locate it.
   - Its legs stand 2 mm outside the lid's pocket and it is open over the lid, so it touches only the rim even though the lid stands above it.
   - Two 4 × 16 mm wood screws hold the deck to its top plate.
   - At the front right corner, the hat is hollow at the top for the display cables. The foot's legs stand right over that corner's 6 and 7.5 mm outer walls, which carry the load down to the solid part below.
-- **Deck.** 15 mm birch plywood, 820 × 756 mm, flush with the hat's corners. Its underside is 40 mm above the lid's top, an air gap that keeps the chamber's heat (65 °C for PPS-CF) off the dryers. It clears the lid's two handles by 6.9 mm if they are stock height (33 mm); taller handles would need taller feet.
+- **Deck.** 15 mm birch plywood, 820 × 756 mm, flush with the hat's corners. Its underside is 29 mm above the lid's top, an air gap that keeps the chamber's heat (65 °C for PPS-CF) off the dryers. It clears the lid's two 22 mm handles by 6.9 mm.
 - **Notch.** A 538 × 72 mm notch in the front edge lets the tubes rise past the deck. So the deck lifts off without unthreading them, and taking the lid off means lifting the dryers and deck, then the lid over the tube ends.
 - **Tubes.** Each one rises straight from its block's channel (Z 1005) through a 6 mm hole in the lid, 42.7 mm behind the pocket's front edge, to 20 mm above the deck. It then bends back over the notch's edge at 60 mm radius or more and ends just behind the notch. That is one continuous tube from the tool to the dryer; the only bend below the deck is the block's own 60° turn.
 - **Dryers.** A Sunlu S4 (four spools) and a single-spool dryer beside it, shown as outlines of a Sunlu S4 lengthways for T0–T3 and an S2 side-on at the right end for T4. They use about 634 of the deck's 820 mm width. Where they stand and how each tube reaches its outlet is the owner's call; keep each bend at 60 mm radius or more.
@@ -250,7 +250,7 @@ The dryers sit on a deck above the top hat. Pictures: `images/spool_deck.png`, `
 
 **Checks** (`source/vc12_topcheck.py`, `checks/top_report.json`), against the owner's hat file:
 - The feet sit on the rim with no overlap, 2.0 mm clear of the lid, 631 mm² of bearing each.
-- The deck clears the handles by 6.9 mm (stock height), the lid by 39.9 mm and the hat by 44.9 mm.
+- The deck clears the handles by 6.9 mm, the lid by 28.9 mm and the hat by 33.9 mm.
 - Each tube's run clears the hat by 5.7 mm (T2, T3, behind the front centre), 6.5 mm (T1) and 10.7 mm (T0, T4). It clears its lid hole by 1 mm all round, the deck's notch by 16 mm and the other blocks by 109 mm.
 - The coupler blocks are cut back above the frame top to clear the hat's front centre wall by 2 mm, and its lower inner edge where it overhangs the top 3030. The closest point is the mounting plate, 1.0 mm under that overhang.
 - **Load:** with the S4 and S2 and five full 1 kg spools (12.25 kg), the deck (5.9 kg) and feet put about 45 N on each corner, 0.07 MPa on the rim. A 15 mm birch deck on four corners sags about 2 mm in the middle.
@@ -279,13 +279,13 @@ The purge-station parts (two rail brackets, five cradles, five buckets) are list
 
 | Plate | Parts | Time | PPS-CF |
 |---|---|---|---|
-| 1 Carriage, joints, front idlers | carriage, 4 clamp caps, joint L/R, front idler L/R | 15.2 h | 295 g |
-| 2 Rear corners | base L/R, top L/R | 11.4 h | 223 g |
-| 3 Purge cradles and rail brackets | station cradles T0–T4, dock brackets L/R, station brackets L/R | 16.3 h | 322 g |
+| 1 Carriage, joints, front idlers | carriage, 4 clamp caps, joint L/R, front idler L/R | 15.2 h | 296 g |
+| 2 Rear corners | base L/R, top L/R | 11.3 h | 222 g |
+| 3 Purge cradles and rail brackets | station cradles T0–T4, dock brackets L/R, station brackets L/R | 16.3 h | 321 g |
 | 4 Purge buckets | purge buckets T0–T4 | 13.7 h | 241 g |
-| 5 PTFE coupler blocks and umbilical saddle | coupler blocks T0–T4, saddle, swivel | 7.1 h | 138 g |
-| 6 Spool deck feet | deck feet ×4 | 8.3 h | 190 g |
-| **Total** | 38 parts | **72.0 h** | **1,408 g** |
+| 5 PTFE coupler blocks and umbilical saddle | coupler blocks T0–T4, saddle, swivel | 7.1 h | 139 g |
+| 6 Spool deck feet | deck feet ×4 | 6.7 h | 152 g |
+| **Total** | 38 parts | **70.3 h** | **1,371 g** |
 
 - **Test slice.** No warnings and no path conflicts. Every plate starts with `PRINT_START BED=110 HOTEND=320 CHAMBER=65`.
 - **Orientation.** Each part lies on the face listed in `print/orientation.json`.
@@ -378,5 +378,4 @@ The full purchase list, with screw lengths worked out from each part's clamping 
 11. **Spool deck on the hat.**
     - **Load on the corners:** the printed hat corners carry the deck and dryers, about 45 N each. The hat is PET-CF, which stays stiff at the chamber's 65 °C.
     - **Front right corner:** it is hollow at the top for the display cables. The foot's legs stand over its outer walls.
-    - **Handles:** the lid's handles are assumed to be stock height (33 mm). If they stand taller, the deck needs taller feet.
-    - **Loading spools:** the deck's top is about 1.17 m above whatever the printer stands on, so loading spools needs a step stool.
+    - **Loading spools:** the deck's top is about 1.16 m above whatever the printer stands on, so loading spools needs a step stool.

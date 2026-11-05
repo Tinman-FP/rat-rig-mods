@@ -163,7 +163,7 @@ def new_items():
     lid = Part.makeBox(2 * px - 1.0, 2 * py - 1.0, 5.0, V(-px + 0.5, -py + 0.5, P.LID_TOP_Z - 5.0))
     out["LID (owner's, in the pocket on its foam), 5 tube holes"] = lid.cut(Part.makeCompound(
         [Part.makeCylinder(3.0, 7.0, V(x, P.TUBE_IN_Y, P.LID_TOP_Z - 6.0)) for x in P.DOCK_X]))
-    out["LID handles (as modelled, 33 mm)"] = TOP.handles()
+    out["LID handles (owner's, 22 mm)"] = TOP.handles()
     out["SPOOL DECK birch plywood 820 x 756 x 15"] = TOP.deck()
     for i, x in enumerate(P.DOCK_X):
         out[f"PTFE feed T{i} (block up to the dryer)"] = T.pipe(T.feed_points(x), P.TUBE["od"] / 2)

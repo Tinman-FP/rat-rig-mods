@@ -1,9 +1,9 @@
 {
  "note": "Spool deck check (run with FreeCAD's Python after vc12_build.py).",
  "hat": "owner's hat as it sits (vc12_hat.py)",
- "assumed_until_measured": {
+ "from_owner": {
   "lid_top_above_rim_mm": 5.0,
-  "handle_height_mm": 33.0
+  "handle_height_mm": 22.0
  },
  "feet": {
   "FR": {
@@ -51,7 +51,7 @@
    "to_own_block_mm": 15.01,
    "lid_hole_from_lid_left_edge_mm": 124.7,
    "lid_hole_from_lid_front_edge_mm": 42.7,
-   "straight_up_mm": 192.0
+   "straight_up_mm": 181.0
   },
   "T1": {
    "to_hat_mm": 6.45,
@@ -64,7 +64,7 @@
    "to_own_block_mm": 15.01,
    "lid_hole_from_lid_left_edge_mm": 246.7,
    "lid_hole_from_lid_front_edge_mm": 42.7,
-   "straight_up_mm": 192.0
+   "straight_up_mm": 181.0
   },
   "T2": {
    "to_hat_mm": 5.7,
@@ -77,7 +77,7 @@
    "to_own_block_mm": 15.01,
    "lid_hole_from_lid_left_edge_mm": 368.7,
    "lid_hole_from_lid_front_edge_mm": 42.7,
-   "straight_up_mm": 192.0
+   "straight_up_mm": 181.0
   },
   "T3": {
    "to_hat_mm": 5.7,
@@ -90,7 +90,7 @@
    "to_own_block_mm": 15.01,
    "lid_hole_from_lid_left_edge_mm": 490.7,
    "lid_hole_from_lid_front_edge_mm": 42.7,
-   "straight_up_mm": 192.0
+   "straight_up_mm": 181.0
   },
   "T4": {
    "to_hat_mm": 10.7,
@@ -103,7 +103,7 @@
    "to_own_block_mm": 15.01,
    "lid_hole_from_lid_left_edge_mm": 612.7,
    "lid_hole_from_lid_front_edge_mm": 42.7,
-   "straight_up_mm": 192.0
+   "straight_up_mm": 181.0
   }
  },
  "blocks_to_hat_mm": {
@@ -124,17 +124,17 @@
    72.0
   ],
   "to_handles_mm": 6.86,
-  "to_lid_mm": 39.86,
-  "to_hat_mm": 44.9,
+  "to_lid_mm": 28.86,
+  "to_hat_mm": 33.9,
   "overlap_with_feet_mm3": 0.0,
   "on_feet_gap_mm": 0.0
  },
  "load": {
   "deck_kg": 5.9,
-  "feet_kg": 0.24,
+  "feet_kg": 0.19,
   "dryer_allowance_kg": 12.25,
-  "per_foot_N": 45.2,
-  "foot_pressure_MPa": 0.072,
+  "per_foot_N": 45.1,
+  "foot_pressure_MPa": 0.071,
   "deck_sag_mm": 1.9
  }
 }

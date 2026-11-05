@@ -88,7 +88,7 @@ def main():
     feet = {c: load(f"deck_foot_{c}") for c in CORNERS}
     blocks = [load(f"ptfe_coupler_block_T{i}") for i in range(P.INDX_TOOLS)]
     rep = {"note": __doc__.split("\n")[0], "hat": "owner's hat as it sits (vc12_hat.py)",
-           "assumed_until_measured": {"lid_top_above_rim_mm": round(P.LID_TOP_Z - P.HAT_RIM_Z, 2),
+           "from_owner": {"lid_top_above_rim_mm": round(P.LID_TOP_Z - P.HAT_RIM_Z, 2),
                                       "handle_height_mm": round(P.LID_HANDLE_TOP - P.LID_TOP_Z, 2)},
            "feet": {}, "feeds": {},
            "blocks_to_hat_mm": {}}

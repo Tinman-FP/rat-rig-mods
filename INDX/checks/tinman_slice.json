@@ -58,7 +58,7 @@
    "plate": 1,
    "name": "Carriage, joints, front idlers",
    "hours": 15.2,
-   "grams": 295.2,
+   "grams": 295.5,
    "objects": [
     "carriage_id_0_copy_0",
     "carriage_clamp_cap_1_id_1_copy_0",
@@ -75,8 +75,8 @@
   {
    "plate": 2,
    "name": "Rear corners",
-   "hours": 11.4,
-   "grams": 222.7,
+   "hours": 11.3,
+   "grams": 222.3,
    "objects": [
     "rear_corner_L_base_id_0_copy_0",
     "rear_corner_R_base_id_1_copy_0",
@@ -89,7 +89,7 @@
    "plate": 3,
    "name": "Purge cradles and rail brackets",
    "hours": 16.3,
-   "grams": 321.5,
+   "grams": 320.8,
    "objects": [
     "dock_bracket_L_id_0_copy_0",
     "dock_bracket_R_id_1_copy_0",
@@ -107,7 +107,7 @@
    "plate": 4,
    "name": "Purge buckets",
    "hours": 13.7,
-   "grams": 240.9,
+   "grams": 241.1,
    "objects": [
     "purge_bucket_T0_id_0_copy_0",
     "purge_bucket_T1_id_1_copy_0",
@@ -121,7 +121,7 @@
    "plate": 5,
    "name": "PTFE coupler blocks and umbilical saddle",
    "hours": 7.1,
-   "grams": 138.4,
+   "grams": 138.6,
    "objects": [
     "ptfe_coupler_block_T0_id_0_copy_0",
     "ptfe_coupler_block_T1_id_1_copy_0",
@@ -136,8 +136,8 @@
   {
    "plate": 6,
    "name": "Spool deck feet",
-   "hours": 8.3,
-   "grams": 189.5,
+   "hours": 6.7,
+   "grams": 152.4,
    "objects": [
     "deck_foot_FR_id_0_copy_0",
     "deck_foot_FL_id_1_copy_0",
@@ -147,6 +147,6 @@
    "warnings": []
   }
  ],
- "total_hours": 72.0,
- "total_grams": 1408.2
+ "total_hours": 70.3,
+ "total_grams": 1370.7
 }

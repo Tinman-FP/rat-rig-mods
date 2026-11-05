@@ -80,7 +80,7 @@ HARDWARE = [
     ("Tubes and umbilical", "PC4-M10 push-fit coupler", 5, "For 4 mm OD tube; threads into the block (tap M10 x 1 or let it cut)",
      "Any (BIQU or similar)", "One per coupler block"),
     ("Tubes and umbilical", "PTFE tube, 4 mm OD x 2 mm ID", "8 m", "One continuous tube per tool, dryer to tool: free length "
-     + TUBE_LENGTHS + " mm, plus about 70 mm through the block, 192 mm up through the lid to 20 mm over the deck, and the "
+     + TUBE_LENGTHS + " mm, plus about 70 mm through the block, 181 mm up through the lid to 20 mm over the deck, and the "
      "run over the deck to its dryer's outlet; about 1.0 m plus that run each", "Any (Capricorn or similar)",
      "Filament to each tool"),
     ("Tubes and umbilical", "Piano (music) wire, 1.0 mm", "4 m", "Cut to each tube's free length", "Any",
@@ -112,7 +112,7 @@ HARDWARE = [
      "Replaces the two 6 mm spacers at each kinematic ball"),
     ("Bed", "Longer M5 for the threaded balls", "3 if needed", "Keep at least 6 mm of thread engaged", "Any",
      "Bed balls"),
-    ("Filament", "PPS-CF", "1.4 kg", "1,408 g in Tinman's slice", "Any", "All printed parts"),
+    ("Filament", "PPS-CF", "1.4 kg", "1,371 g in Tinman's slice", "Any", "All printed parts"),
 ]
 
 REUSED = ["Frame, panels, door and electronics", "Y rails and both Y-rail MGN12C blocks",
