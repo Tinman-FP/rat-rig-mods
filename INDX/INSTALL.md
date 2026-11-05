@@ -16,11 +16,11 @@ Parts and hardware are in `BOM.md`. The printed parts are all in the Tinman proj
    | Plate | Parts | Time | PPS-CF |
    |---|---|---|---|
    | 1 | carriage, 4 clamp caps, joints, front idlers | 15.2 h | 295 g |
-   | 2 | rear corner bases and tops | 11.3 h | 222 g |
-   | 3 | five cradles, dock and station rail brackets | 16.3 h | 321 g |
+   | 2 | rear corner bases and tops | 11.4 h | 223 g |
+   | 3 | five cradles, dock and station rail brackets | 16.3 h | 322 g |
    | 4 | five buckets | 13.7 h | 241 g |
-   | 5 | five PTFE coupler blocks, umbilical saddle and swivel | 7.0 h | 135 g |
-   | 6 | four spool deck feet | 7.6 h | 173 g |
+   | 5 | five PTFE coupler blocks, umbilical saddle and swivel | 7.1 h | 138 g |
+   | 6 | four spool deck feet | 8.3 h | 190 g |
 
    Times and weights are from Tinman's slice.
 2. Remove the supports. On the left rear-corner top, clean up the feet before they sit on the 3030s.
@@ -144,16 +144,16 @@ The tubes come in at the top front, directly above the docks, and hang free to t
 
 1. **Coupler blocks.**
    - Bolt one block to the inner T-slot of the front top 3030 over each dock, with 2 × M6 × 10 into drop-in T-nuts. Centre each block on its dock's tool position, the same distances from the left upright as in the dock table.
-   - The top of each block stands 24 mm above the frame top, inside the top hat. Its front is cut back to clear the hat's front wall by 1–2 mm.
+   - The top of each block stands 24 mm above the frame top, inside the top hat. Its front is cut back to clear the hat's front wall, and the wall's edge where it overhangs the 3030, by 1–2 mm.
    - T1–T3's blocks send the tube straight back. T0's turns it 20° toward the middle and T4's 15°, so their long tubes don't bow out through the side frame. Fit each block over its own dock.
    - Thread a PC4-M10 coupler into each block's boss. Tap it M10 × 1, or let the coupler cut its own thread.
 2. **Tubes.** Use one continuous 4 × 2 mm PTFE tube per tool.
-   - Run it from the dryer on the deck down through its hole in the lid (section 11), down the block's channel, through the coupler and into the tool's push-fit.
+   - Run it from its dryer on the deck down through its hole in the lid (section 11), down the block's channel, through the coupler and into the tool's push-fit.
    - Leave this much free between the coupler and the tool:
 
    | Tool | T0 | T1 | T2 | T3 | T4 |
    |---|---|---|---|---|---|
-   | Free length (mm) | 793 | 719 | 651 | 682 | 752 |
+   | Free length (mm) | 791 | 717 | 649 | 680 | 750 |
 
    - Tape a 1.0 mm piano wire along each free length, from the coupler to about 20 mm above the tool.
    - A parked tube then holds an arch above the front of the chamber, and the active tube swings clear above the head.
@@ -171,32 +171,36 @@ The tubes come in at the top front, directly above the docks, and hang free to t
    - No tube should touch the head.
    - Every tube top should stay below the top hat's lid.
 
-## 11. Spool deck and dryer
-The dryer sits on a plywood deck above the top hat, on four printed feet. Each foot stands on one of the hat's raised corners, straight over a frame upright, so the weight goes into the frame and nothing rests on the lid. The deck sits 40 mm above the lid, which keeps the chamber's heat off the dryer and clears the lid's handles by 7 mm. The tubes rise straight out of their blocks, through five holes in the lid and up through a notch in the deck's front edge to the dryer.
+## 11. Spool deck and dryers
+The dryers sit on a plywood deck above the top hat, on four printed feet. Each foot stands on the hat's rim at one corner, straight over a frame upright, so the weight goes into the frame and nothing rests on the lid. The deck's underside sits 40 mm above the lid's top. That keeps the chamber's heat off the dryers and clears stock-height (33 mm) handles by 7 mm. The tubes rise straight out of their blocks, through five holes in the lid and up through a notch in the deck's front edge.
 
-1. **Lid holes.** Take the lid (the stock top panel) out of the hat.
-   - Mark five holes 42 mm from its front edge, at 125, 247, 369, 491 and 613 mm from its left edge (seen from the front).
+1. **Lid holes.** Take the lid out of the hat.
+   - Mark five holes 43 mm from its front edge, at 125, 247, 369, 491 and 613 mm from its left edge (seen from the front).
    - Drill them 3 mm first. Put the lid back in its pocket and look down through each hole: it should sit straight above its block's channel. Then open the holes to 6 mm and deburr them. Use a bit suited to the panel and back it with scrap.
+   - Check the handles: with the lid in place, they should stand no more than 33 mm above it. If they are taller, the deck needs taller feet, or the handles need moving off the deck's corners.
 2. **Deck.** Cut 820 × 756 mm from 15 mm birch plywood.
    - Cut a notch in one long edge, which becomes the front: 538 mm wide and 72 mm deep, starting 110 mm from the left end (so 172 mm from the right end).
    - Round the notch's back edge, where the tubes bend over it. Seal or paint the deck.
 3. **Feet.** All four are the same part.
-   - Set one on each corner of the hat. Its skirt drops over the hat's corner.
+   - Set one on each corner of the hat. Its skirt drops over the hat's corner and its legs stand on the rim, just outside the lid.
    - Put a strip of double-sided tape on top of each foot. Lower the deck onto them, notch at the front, its edges in line with the hat's corners. Press down.
    - Lift the deck off with the feet stuck to it and turn it over. Drill 2.5 mm pilots through each foot's two holes and fix it with two 4 × 16 mm pan-head wood screws.
-4. **Deck on.** Lower the deck onto the hat so the feet's skirts drop over the corners. With a 12 kg dryer each foot carries about 45 N, and the deck sags about 2 mm in the middle.
-5. **Dryer.** Stand it on the deck behind the notch, centred about 31 mm left of the deck's centre (over T2's tube).
-   - Each tube needs to bend at a 60 mm radius or more. Keep the dryer's outlets on its top, or at least 40 mm behind the notch's back edge.
-   - Any dryer up to about 820 × 640 mm fits behind the notch.
+4. **Deck on.** Lower the deck onto the hat so the feet's skirts drop over the corners. With the S4 and S2 and five full spools, each foot carries about 45 N, and the deck sags about 2 mm in the middle.
+5. **Dryers.** Stand the Sunlu S4 (T0–T3) and the single-spool dryer (T4) on the deck behind the notch, wherever suits their outlets. The S4 lengthways and an S2 side-on use about 634 of the deck's 820 mm width.
+   - Each tube needs to bend at a 60 mm radius or more on its way from the notch to its outlet.
 6. **Tubes.** Take each tube from its block straight up through its lid hole and the notch, over the notch's back edge and to its outlet. Label each outlet with its tool. Cut each tube to length once its free length below the block is set (section 10).
-7. **Taking the lid off.** Unplug the five tubes at the dryer and lift the dryer off. Lift the deck off with its feet; it comes away from the tubes through the notch. Then lift the lid straight up over the tube ends. The tubes stay in their blocks.
+7. **Taking the lid off.** Unplug the five tubes at the dryers and lift the dryers off. Lift the deck off with its feet; it comes away from the tubes through the notch. Then lift the lid straight up over the tube ends. The tubes stay in their blocks.
 
 The stock side spool holders are no longer needed. You can leave them on or take them off.
 
 ## 12. Electronics and Klipper
 1. **Motors.** Motor A goes to MOTOR0 (the old `stepper_x` socket) and motor B to MOTOR1 (the old `stepper_y` socket). MOTOR3 and MOTOR4 become free.
 2. **INDX electronics.** Fit the INDX Link board near the Pi. The Link cable (178 cm) plus the host USB must total 2 m or less.
-3. **Firmware.** Install Bondtech's `indx_klipper` (mainline) or Kalico. The printer currently runs a custom Klipper line with modified Beacon and PLR files, so check compatibility first.
+3. **Firmware: Kalico.** Its INDX support and toolboard firmware are built in.
+   - Take a full snapshot of the live printer's config, `variables.cfg` and Klipper version first.
+   - Switch the Klipper folder to Kalico, then flash the INDX toolboard from it (Bondtech's guide).
+   - Keep the chamber, heat-soak, precheck, counter, RGB and camera macros. Retire the IDEX kinematics files and the dual-Beacon setup.
+   - Point INDX's saved state at the existing `variables.cfg`; Klipper allows only one `[save_variables]`.
 4. **Config.** Add `klipper/motion_corexy12_indx.cfg` in place of the old motion files and the hybrid CoreXY kinematics, and add `klipper/purge_wipe.cfg`. Both are drafts. Set the INDX values listed at the end of the motion file.
 
 ## 13. Commissioning

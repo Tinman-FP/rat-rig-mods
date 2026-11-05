@@ -145,7 +145,8 @@ DETENT_Y = -340.0              # ridge on the cradle floor, groove under the buc
 TOP_FRONT_Z = (951.14, 981.14) # front top 3030 (the top hat sits on the top 3030s)
 TOP_FRONT_IN_Y = -337.5        # its inner face; T-slot centre at Z 966.14
 HAT_LID_Z = 1111.14            # lid seat in the owner's top hat, 130 mm above the frame top (vc12_hat.py)
-TUBE_IN_Y = -326.0             # each tube comes down the block's channel here, from inside the top hat
+TUBE_IN_Y = -324.0             # each tube comes down the block's channel here, from inside the top hat (7.7 mm behind
+                               # the hat's front centre wall)
 TUBE_BEND = (993.0, 40.0)      # channel bends from vertical at this Z, radius 40, to 30 deg below horizontal (backward)
 TUBE_TILT = 30.0               # coupler axis: 30 deg below horizontal, pointing back ...
 TUBE_CANT = {0: 20.0, 4: 15.0} # ... and, for the end tools only, turned toward the middle (deg). Straight back, their
@@ -164,23 +165,26 @@ UMB_SWIVEL = (0.0, 90.0)       # turns freely from level-backward (0 deg) to str
                                # vertical it would lean over the head and cross the active tube.
 UMB = dict(od=12.0, ei=25000.0, g_per_m=95.0, spare=60.0)   # INDX Link cable in loom on 1.2 mm piano wire (stock V-Core 4)
 # ---------------------------------------------------------------- Spool deck on the top hat
-# The dryer sits on a plywood deck carried by four printed feet, one on each corner of the owner's top hat (their 400
-# model's sections at 500 size, vc12_hat.py). The hat's corners are solid and stand on the frame's corner uprights, so
-# the load goes straight down into the frame; nothing rests on the lid. Each tube rises straight up out of its coupler
-# block's channel, through a 6 mm hole in the lid and up through a notch in the deck's front edge to the dryer.
-HAT_RIM_Z = 1117.14            # raised rim round the lid pocket: 136 above the frame top, 2 mm above the lid's top
-HAT_OUTER = (410.2, 378.2, 10.0)       # hat corners' outer faces |X|, |Y|, and their corner radius
-HAT_POCKET = (400.0, 368.0)    # lid pocket |X|, |Y|: the stock 800 x 736 x 4 top panel
-HAT_FRONT_IN_Y = -334.2        # inner face of the hat's solid front wall (front centre); the coupler blocks stop 2 mm short
-LID_HANDLE_TOP = HAT_LID_Z + 4.0 + 33.0   # the stock cast handles stay on the lid
-DECK_Z = 1155.0                # deck underside: 6.9 mm over the handles, 40 mm of air over the lid
+# The dryers sit on a plywood deck carried by four printed feet, one on each corner of the owner's top hat
+# (vc12_hat.py). The hat's corners are solid and stand on the frame's corner uprights, so the load goes straight down
+# into the frame; nothing rests on the lid. Each tube rises straight up out of its coupler block's channel, through a
+# 6 mm hole in the lid and up through a notch in the deck's front edge to the dryer.
+HAT_RIM_Z = 1117.14            # rim round the lid pocket: 136 above the frame top; the pocket is 6 mm deep
+HAT_OUTER = (409.7, 376.7, 10.0)       # hat corners' outer faces |X|, |Y|, and their corner radius
+HAT_POCKET = (399.7, 366.7)    # lid pocket |X|, |Y| (799.4 x 733.4); its corners are square
+HAT_FRONT_IN_Y = -331.7        # inner face of the hat's front centre wall (the front corners' is at -336.7); the coupler
+                               # blocks stop 2 mm short
+LID_TOP_Z = HAT_RIM_Z + 5.0    # the owner's lid sits on a foam gasket in the pocket, its top about 5 mm above the rim
+LID_HANDLE_TOP = LID_TOP_Z + 33.0      # TO MEASURE: the owner's printed handles, assumed as tall as the stock 33 mm
+DECK_Z = 1162.0                # deck underside: 7 mm over the handles
 DECK_T = 15.0                  # birch plywood
-DECK_HALF = (410.0, 378.0)     # deck 820 x 756, flush with the hat's corners
+DECK_HALF = (410.0, 378.0)     # deck 820 x 756, flush with the hat's corners; its centre modules stand 4-5 mm proud
 DECK_NOTCH = (-300.0, 238.0, -306.0)   # front notch X from, to, and its back edge Y: the tubes rise through it, so
                                        # the deck lifts off without unthreading them
 FOOT_SKIRT = (1.0, 3.0, 8.0)   # foot skirt: gap to the hat's outer faces (room to place the feet by hand), wall, depth below the rim
 FOOT_SPAN = 40.0               # each foot reaches this far in from the hat's outer faces
-FEED_TOP_Z = 1190.0            # tubes run straight up to here (20 mm over the deck), then turn back to the dryer
+FOOT_LID_GAP = 2.0             # its legs stand on the rim this far outside the lid's pocket
+FEED_TOP_Z = 1197.0           # tubes run straight up to here (20 mm over the deck), then turn back to the dryer
 DOOR_SPACER = 0.0              # owner chose no door change (option 1): docks and head reach Y -365.5
 FRONT_IDLER_SLOT = 3.5         # front idler axle travel either side of nominal
 JOINT_Y = (-31.0, 32.0)        # joint top plate front/rear faces, relative to Yg (the stop faces)

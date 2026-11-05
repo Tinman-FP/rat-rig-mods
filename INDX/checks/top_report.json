@@ -1,113 +1,117 @@
 {
  "note": "Spool deck check (run with FreeCAD's Python after vc12_build.py).",
- "hat": "owner's 400 hat at 500 size (vc12_hat.py)",
+ "hat": "owner's hat as it sits (vc12_hat.py)",
+ "assumed_until_measured": {
+  "lid_top_above_rim_mm": 5.0,
+  "handle_height_mm": 33.0
+ },
  "feet": {
   "FR": {
    "overlap_with_hat_mm3": 0.0,
-   "seated_on_rim_gap_mm": 0.0,
-   "bearing_area_mm2": 737,
-   "to_lid_mm": 2.06,
-   "to_handles_mm": 279.2,
-   "to_frame_mm": 128.49
+   "seated_on_rim_gap_mm": 0.04,
+   "bearing_area_mm2": 631,
+   "to_lid_mm": 2.0,
+   "to_handles_mm": 277.7,
+   "to_frame_mm": 128.4
   },
   "FL": {
    "overlap_with_hat_mm3": 0.0,
-   "seated_on_rim_gap_mm": 0.0,
-   "bearing_area_mm2": 737,
-   "to_lid_mm": 2.06,
-   "to_handles_mm": 279.2,
-   "to_frame_mm": 128.49
+   "seated_on_rim_gap_mm": 0.04,
+   "bearing_area_mm2": 631,
+   "to_lid_mm": 2.0,
+   "to_handles_mm": 277.7,
+   "to_frame_mm": 128.4
   },
   "RR": {
    "overlap_with_hat_mm3": 0.0,
-   "seated_on_rim_gap_mm": 0.0,
-   "bearing_area_mm2": 737,
-   "to_lid_mm": 2.06,
-   "to_handles_mm": 279.2,
-   "to_frame_mm": 128.49
+   "seated_on_rim_gap_mm": 0.04,
+   "bearing_area_mm2": 631,
+   "to_lid_mm": 2.0,
+   "to_handles_mm": 277.7,
+   "to_frame_mm": 128.4
   },
   "RL": {
    "overlap_with_hat_mm3": 0.0,
-   "seated_on_rim_gap_mm": 0.0,
-   "bearing_area_mm2": 737,
-   "to_lid_mm": 2.06,
-   "to_handles_mm": 279.2,
-   "to_frame_mm": 128.49
+   "seated_on_rim_gap_mm": 0.04,
+   "bearing_area_mm2": 631,
+   "to_lid_mm": 2.0,
+   "to_handles_mm": 277.7,
+   "to_frame_mm": 128.4
   }
  },
  "feeds": {
   "T0": {
-   "to_hat_mm": 10.2,
+   "to_hat_mm": 10.7,
    "to_lid_mm": 1.0,
-   "to_deck_mm": 18.0,
-   "to_feet_mm": 93.98,
+   "to_deck_mm": 16.0,
+   "to_feet_mm": 93.55,
    "to_handles_mm": 229.32,
-   "to_frame_top_mm": 40.0,
-   "to_other_blocks_mm": 108.72,
+   "to_frame_top_mm": 40.53,
+   "to_other_blocks_mm": 108.85,
    "to_own_block_mm": 15.01,
-   "lid_hole_from_lid_left_edge_mm": 125.0,
-   "lid_hole_from_lid_front_edge_mm": 42.0,
-   "straight_up_mm": 185.0
+   "lid_hole_from_lid_left_edge_mm": 124.7,
+   "lid_hole_from_lid_front_edge_mm": 42.7,
+   "straight_up_mm": 192.0
   },
   "T1": {
-   "to_hat_mm": 6.24,
+   "to_hat_mm": 6.45,
    "to_lid_mm": 1.0,
-   "to_deck_mm": 18.0,
-   "to_feet_mm": 215.54,
+   "to_deck_mm": 16.0,
+   "to_feet_mm": 215.07,
    "to_handles_mm": 293.87,
-   "to_frame_top_mm": 40.0,
-   "to_other_blocks_mm": 108.72,
+   "to_frame_top_mm": 40.53,
+   "to_other_blocks_mm": 108.85,
    "to_own_block_mm": 15.01,
-   "lid_hole_from_lid_left_edge_mm": 247.0,
-   "lid_hole_from_lid_front_edge_mm": 42.0,
-   "straight_up_mm": 185.0
+   "lid_hole_from_lid_left_edge_mm": 246.7,
+   "lid_hole_from_lid_front_edge_mm": 42.7,
+   "straight_up_mm": 192.0
   },
   "T2": {
-   "to_hat_mm": 6.24,
+   "to_hat_mm": 5.7,
    "to_lid_mm": 1.0,
-   "to_deck_mm": 18.0,
-   "to_feet_mm": 337.42,
+   "to_deck_mm": 16.0,
+   "to_feet_mm": 336.94,
    "to_handles_mm": 387.08,
-   "to_frame_top_mm": 40.0,
-   "to_other_blocks_mm": 108.72,
+   "to_frame_top_mm": 40.53,
+   "to_other_blocks_mm": 108.85,
    "to_own_block_mm": 15.01,
-   "lid_hole_from_lid_left_edge_mm": 369.0,
-   "lid_hole_from_lid_front_edge_mm": 42.0,
-   "straight_up_mm": 185.0
+   "lid_hole_from_lid_left_edge_mm": 368.7,
+   "lid_hole_from_lid_front_edge_mm": 42.7,
+   "straight_up_mm": 192.0
   },
   "T3": {
-   "to_hat_mm": 6.24,
+   "to_hat_mm": 5.7,
    "to_lid_mm": 1.0,
-   "to_deck_mm": 18.0,
-   "to_feet_mm": 277.47,
+   "to_deck_mm": 16.0,
+   "to_feet_mm": 276.99,
    "to_handles_mm": 338.97,
-   "to_frame_top_mm": 40.0,
-   "to_other_blocks_mm": 108.72,
+   "to_frame_top_mm": 40.53,
+   "to_other_blocks_mm": 108.85,
    "to_own_block_mm": 15.01,
-   "lid_hole_from_lid_left_edge_mm": 491.0,
-   "lid_hole_from_lid_front_edge_mm": 42.0,
-   "straight_up_mm": 185.0
+   "lid_hole_from_lid_left_edge_mm": 490.7,
+   "lid_hole_from_lid_front_edge_mm": 42.7,
+   "straight_up_mm": 192.0
   },
   "T4": {
-   "to_hat_mm": 10.2,
+   "to_hat_mm": 10.7,
    "to_lid_mm": 1.0,
-   "to_deck_mm": 18.0,
-   "to_feet_mm": 155.67,
+   "to_deck_mm": 16.0,
+   "to_feet_mm": 155.21,
    "to_handles_mm": 256.99,
-   "to_frame_top_mm": 40.0,
-   "to_other_blocks_mm": 108.72,
+   "to_frame_top_mm": 40.53,
+   "to_other_blocks_mm": 108.85,
    "to_own_block_mm": 15.01,
-   "lid_hole_from_lid_left_edge_mm": 613.0,
-   "lid_hole_from_lid_front_edge_mm": 42.0,
-   "straight_up_mm": 185.0
+   "lid_hole_from_lid_left_edge_mm": 612.7,
+   "lid_hole_from_lid_front_edge_mm": 42.7,
+   "straight_up_mm": 192.0
   }
  },
  "blocks_to_hat_mm": {
-  "T0": 1.22,
-  "T1": 1.0,
-  "T2": 1.0,
-  "T3": 1.0,
-  "T4": 1.22
+  "T0": 0.96,
+  "T1": 0.96,
+  "T2": 0.96,
+  "T3": 0.96,
+  "T4": 0.96
  },
  "deck": {
   "size_mm": [
@@ -121,16 +125,16 @@
   ],
   "to_handles_mm": 6.86,
   "to_lid_mm": 39.86,
-  "to_hat_mm": 37.86,
+  "to_hat_mm": 44.9,
   "overlap_with_feet_mm3": 0.0,
   "on_feet_gap_mm": 0.0
  },
  "load": {
   "deck_kg": 5.9,
-  "feet_kg": 0.23,
-  "dryer_allowance_kg": 12.0,
-  "per_foot_N": 44.5,
-  "foot_pressure_MPa": 0.06,
+  "feet_kg": 0.24,
+  "dryer_allowance_kg": 12.25,
+  "per_foot_N": 45.2,
+  "foot_pressure_MPa": 0.072,
   "deck_sag_mm": 1.9
  }
 }
