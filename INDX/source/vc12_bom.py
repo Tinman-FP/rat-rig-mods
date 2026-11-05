@@ -112,7 +112,7 @@ HARDWARE = [
      "Replaces the two 6 mm spacers at each kinematic ball"),
     ("Bed", "Longer M5 for the threaded balls", "3 if needed", "Keep at least 6 mm of thread engaged", "Any",
      "Bed balls"),
-    ("Filament", "PPS-CF", "1.4 kg", "1,371 g in Tinman's slice", "Any", "All printed parts"),
+    ("Filament", "PPS-CF", "1.4 kg", "1,340 g in Tinman's slice", "Any", "All printed parts"),
 ]
 
 REUSED = ["Frame, panels, door and electronics", "Y rails and both Y-rail MGN12C blocks",

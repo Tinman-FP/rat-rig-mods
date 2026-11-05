@@ -62,12 +62,13 @@ def main():
         s.read(os.path.join(PARTS, name + ".brep"))
         if TURN[down]:
             s.rotate(V(0, 0, 0), *TURN[down])
-        bb = s.BoundBox
+        # place by the meshed surface: a rounded part's BoundBox can be loose by millimetres
+        bb = MeshPart.meshFromShape(Shape=s, LinearDeflection=0.05, AngularDeflection=0.3, Relative=False).BoundBox
         s.translate(V(-bb.XMin, -bb.YMin, -bb.ZMin))
-        bb = s.BoundBox
-        contact = sum(f.Area for f in s.Faces if f.Surface.TypeId == "Part::GeomPlane"
-                      and f.BoundBox.ZMax < 1e-3 and f.normalAt(0, 0).z < -0.999)
         m = MeshPart.meshFromShape(Shape=s, LinearDeflection=0.05, AngularDeflection=0.3, Relative=False)
+        bb = m.BoundBox
+        contact = sum(f.Area for f in s.Faces if f.Surface.TypeId == "Part::GeomPlane"
+                      and abs(f.CenterOfMass.z) < 1e-3 and f.normalAt(0, 0).z < -0.999)
         m.write(os.path.join(OUT, name + ".stl"))
         rec = {"part": name, "down": down, "why": why, "support": name in SUPPORT,
                "size_mm": [round(bb.XLength, 1), round(bb.YLength, 1), round(bb.ZLength, 1)],
@@ -80,4 +81,5 @@ def main():
         json.dump(report, f, indent=1)
 
 
-main()
+if __name__ == "__main__":
+    main()

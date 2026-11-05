@@ -1,7 +1,7 @@
 {
  "tinman_result": {
   "error_string": "Success.",
-  "export_time": 2,
+  "export_time": 4,
   "layer_height": 0.23999999463558197,
   "plate_index": 0,
   "prepare_time": 0,
@@ -9,44 +9,44 @@
   "sliced_plates": [
    {
     "id": 1,
-    "sliced_time": 4,
-    "sliced_time_with_cache": 2,
-    "triangle_count": 17300,
+    "sliced_time": 10,
+    "sliced_time_with_cache": 5,
+    "triangle_count": 34236,
     "warning_message": ""
    },
    {
     "id": 2,
-    "sliced_time": 5,
-    "sliced_time_with_cache": 2,
-    "triangle_count": 14606,
+    "sliced_time": 10,
+    "sliced_time_with_cache": 4,
+    "triangle_count": 19890,
     "warning_message": ""
    },
    {
     "id": 3,
-    "sliced_time": 4,
-    "sliced_time_with_cache": 2,
-    "triangle_count": 9332,
+    "sliced_time": 9,
+    "sliced_time_with_cache": 4,
+    "triangle_count": 16404,
     "warning_message": ""
    },
    {
     "id": 4,
-    "sliced_time": 1,
-    "sliced_time_with_cache": 0,
-    "triangle_count": 2224,
+    "sliced_time": 3,
+    "sliced_time_with_cache": 2,
+    "triangle_count": 14192,
     "warning_message": ""
    },
    {
     "id": 5,
-    "sliced_time": 3,
-    "sliced_time_with_cache": 2,
-    "triangle_count": 16582,
+    "sliced_time": 6,
+    "sliced_time_with_cache": 3,
+    "triangle_count": 24428,
     "warning_message": ""
    },
    {
     "id": 6,
-    "sliced_time": 1,
-    "sliced_time_with_cache": 1,
-    "triangle_count": 1936,
+    "sliced_time": 3,
+    "sliced_time_with_cache": 2,
+    "triangle_count": 6864,
     "warning_message": ""
    }
   ],
@@ -57,8 +57,8 @@
   {
    "plate": 1,
    "name": "Carriage, joints, front idlers",
-   "hours": 15.2,
-   "grams": 295.5,
+   "hours": 14.6,
+   "grams": 286.1,
    "objects": [
     "carriage_id_0_copy_0",
     "carriage_clamp_cap_1_id_1_copy_0",
@@ -75,8 +75,8 @@
   {
    "plate": 2,
    "name": "Rear corners",
-   "hours": 11.3,
-   "grams": 222.3,
+   "hours": 11.1,
+   "grams": 218.6,
    "objects": [
     "rear_corner_L_base_id_0_copy_0",
     "rear_corner_R_base_id_1_copy_0",
@@ -88,8 +88,8 @@
   {
    "plate": 3,
    "name": "Purge cradles and rail brackets",
-   "hours": 16.3,
-   "grams": 320.8,
+   "hours": 16.0,
+   "grams": 312.6,
    "objects": [
     "dock_bracket_L_id_0_copy_0",
     "dock_bracket_R_id_1_copy_0",
@@ -106,8 +106,8 @@
   {
    "plate": 4,
    "name": "Purge buckets",
-   "hours": 13.7,
-   "grams": 241.1,
+   "hours": 13.5,
+   "grams": 234.9,
    "objects": [
     "purge_bucket_T0_id_0_copy_0",
     "purge_bucket_T1_id_1_copy_0",
@@ -120,8 +120,8 @@
   {
    "plate": 5,
    "name": "PTFE coupler blocks and umbilical saddle",
-   "hours": 7.1,
-   "grams": 138.6,
+   "hours": 7.0,
+   "grams": 137.1,
    "objects": [
     "ptfe_coupler_block_T0_id_0_copy_0",
     "ptfe_coupler_block_T1_id_1_copy_0",
@@ -136,8 +136,8 @@
   {
    "plate": 6,
    "name": "Spool deck feet",
-   "hours": 6.7,
-   "grams": 152.4,
+   "hours": 6.6,
+   "grams": 150.4,
    "objects": [
     "deck_foot_FR_id_0_copy_0",
     "deck_foot_FL_id_1_copy_0",
@@ -147,6 +147,6 @@
    "warnings": []
   }
  ],
- "total_hours": 70.3,
- "total_grams": 1370.7
+ "total_hours": 68.8,
+ "total_grams": 1339.7
 }

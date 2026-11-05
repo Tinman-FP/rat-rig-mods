@@ -2,50 +2,50 @@
 
 Nothing on this list has been ordered or fitted yet. `BOM.csv` holds the same list for a spreadsheet.
 
-## Printed parts (38 parts, PPS-CF, about 1,453 g modelled)
+## Printed parts (38 parts, PPS-CF, about 1,425 g modelled)
 
 All of them are in the Tinman project `print/VC41_CoreXY12_INDX_PPSCF_QidiPlus4_06.3mf`.
 
 | Part | Qty | Size as printed (mm) | Plate | What it is |
 |---|---|---|---|---|
-| carriage | 1 | 92 x 46 x 49 | 1 | Carries the INDX head on the X-rail block; four 12 mm belt clamps; 83 g; tree supports |
-| carriage_clamp_cap_1 | 1 | 19.8 x 20.1 x 5 | 1 | Belt clamp caps, one of each; 2 g |
-| carriage_clamp_cap_2 | 1 | 19.8 x 19.1 x 7.5 | 1 | Belt clamp caps, one of each; 3 g |
-| carriage_clamp_cap_3 | 1 | 19.8 x 19.1 x 5 | 1 | Belt clamp caps, one of each; 2 g |
-| carriage_clamp_cap_4 | 1 | 19.8 x 20.1 x 7.5 | 1 | Belt clamp caps, one of each; 4 g |
+| carriage | 1 | 92 x 46 x 49 | 1 | Carries the INDX head on the X-rail block; four 12 mm belt clamps; 79 g; tree supports |
+| carriage_clamp_cap_1 | 1 | 19.8 x 20.1 x 4.9 | 1 | Belt clamp caps, one of each; 2 g |
+| carriage_clamp_cap_2 | 1 | 19.8 x 19.1 x 7.4 | 1 | Belt clamp caps, one of each; 3 g |
+| carriage_clamp_cap_3 | 1 | 19.8 x 19.1 x 4.9 | 1 | Belt clamp caps, one of each; 2 g |
+| carriage_clamp_cap_4 | 1 | 19.8 x 20.1 x 7.4 | 1 | Belt clamp caps, one of each; 3 g |
 | joint_L | 1 | 61.5 x 63 x 61.6 | 1 | XY joints: Y-rail block to beam end, two idlers each; 80 g; tree supports |
 | joint_R | 1 | 61.5 x 63 x 61.6 | 1 | XY joints: Y-rail block to beam end, two idlers each; 80 g; tree supports |
-| front_idler_L | 1 | 53.5 x 67.1 x 41 | 1 | Front idler blocks with belt tensioners and front Y stops; 30 g; tree supports |
-| front_idler_R | 1 | 53.5 x 48.1 x 41 | 1 | Front idler blocks with belt tensioners and front Y stops; 29 g; tree supports |
-| rear_corner_L_base | 1 | 88.5 x 70.5 x 36.5 | 2 | Rear corner bases, under the 3030s; 83 g; tree supports |
-| rear_corner_R_base | 1 | 88.5 x 70.5 x 27 | 2 | Rear corner bases, under the 3030s; 62 g; tree supports |
-| rear_corner_L_top | 1 | 59.5 x 72 x 40.1 | 2 | Rear corner tops, on the 3030s; rear Y stops; 33 g; tree supports |
-| rear_corner_R_top | 1 | 88.5 x 72 x 23 | 2 | Rear corner tops, on the 3030s; rear Y stops; 65 g; tree supports |
+| front_idler_L | 1 | 53.5 x 67.1 x 41 | 1 | Front idler blocks with belt tensioners and front Y stops; 29 g; tree supports |
+| front_idler_R | 1 | 53.5 x 48.1 x 41 | 1 | Front idler blocks with belt tensioners and front Y stops; 28 g; tree supports |
+| rear_corner_L_base | 1 | 88.5 x 70.5 x 36.5 | 2 | Rear corner bases, under the 3030s; 82 g; tree supports |
+| rear_corner_R_base | 1 | 88.5 x 70.5 x 27 | 2 | Rear corner bases, under the 3030s; 61 g; tree supports |
+| rear_corner_L_top | 1 | 59.5 x 72 x 40.1 | 2 | Rear corner tops, on the 3030s; rear Y stops; 32 g; tree supports |
+| rear_corner_R_top | 1 | 88.5 x 72 x 23 | 2 | Rear corner tops, on the 3030s; rear Y stops; 64 g; tree supports |
 | dock_bracket_L | 1 | 50 x 25.3 x 30.8 | 3 | Dock rail end brackets; 14 g |
 | dock_bracket_R | 1 | 50 x 25.3 x 30.8 | 3 | Dock rail end brackets; 14 g |
 | station_bracket_L | 1 | 50 x 21.8 x 30.8 | 3 | Station rail end brackets; 12 g |
 | station_bracket_R | 1 | 50 x 21.8 x 30.8 | 3 | Station rail end brackets; 12 g |
-| station_cradle_T0 | 1 | 88 x 47.5 x 74 | 3 | Purge station cradles, one per tool (identical, engraved T0-T4); 52 g; tree supports |
-| station_cradle_T1 | 1 | 88 x 47.5 x 74 | 3 | Purge station cradles, one per tool (identical, engraved T0-T4); 52 g; tree supports |
-| station_cradle_T2 | 1 | 88 x 47.5 x 74 | 3 | Purge station cradles, one per tool (identical, engraved T0-T4); 52 g; tree supports |
-| station_cradle_T3 | 1 | 88 x 47.5 x 74 | 3 | Purge station cradles, one per tool (identical, engraved T0-T4); 52 g; tree supports |
-| station_cradle_T4 | 1 | 88 x 47.5 x 74 | 3 | Purge station cradles, one per tool (identical, engraved T0-T4); 52 g; tree supports |
-| purge_bucket_T0 | 1 | 88 x 49.5 x 50.7 | 4 | Purge buckets, one per tool (identical, engraved T0-T4); 49 g |
-| purge_bucket_T1 | 1 | 88 x 49.5 x 50.7 | 4 | Purge buckets, one per tool (identical, engraved T0-T4); 49 g |
-| purge_bucket_T2 | 1 | 88 x 49.5 x 50.7 | 4 | Purge buckets, one per tool (identical, engraved T0-T4); 49 g |
-| purge_bucket_T3 | 1 | 88 x 49.5 x 50.7 | 4 | Purge buckets, one per tool (identical, engraved T0-T4); 49 g |
-| purge_bucket_T4 | 1 | 88 x 49.5 x 50.7 | 4 | Purge buckets, one per tool (identical, engraved T0-T4); 49 g |
+| station_cradle_T0 | 1 | 88 x 47.5 x 74 | 3 | Purge station cradles, one per tool (identical, engraved T0-T4); 50 g; tree supports |
+| station_cradle_T1 | 1 | 88 x 47.5 x 74 | 3 | Purge station cradles, one per tool (identical, engraved T0-T4); 50 g; tree supports |
+| station_cradle_T2 | 1 | 88 x 47.5 x 74 | 3 | Purge station cradles, one per tool (identical, engraved T0-T4); 50 g; tree supports |
+| station_cradle_T3 | 1 | 88 x 47.5 x 74 | 3 | Purge station cradles, one per tool (identical, engraved T0-T4); 50 g; tree supports |
+| station_cradle_T4 | 1 | 88 x 47.5 x 74 | 3 | Purge station cradles, one per tool (identical, engraved T0-T4); 50 g; tree supports |
+| purge_bucket_T0 | 1 | 88 x 48.6 x 50.7 | 4 | Purge buckets, one per tool (identical, engraved T0-T4); 48 g |
+| purge_bucket_T1 | 1 | 88 x 48.6 x 50.7 | 4 | Purge buckets, one per tool (identical, engraved T0-T4); 48 g |
+| purge_bucket_T2 | 1 | 88 x 48.6 x 50.7 | 4 | Purge buckets, one per tool (identical, engraved T0-T4); 48 g |
+| purge_bucket_T3 | 1 | 88 x 48.6 x 50.7 | 4 | Purge buckets, one per tool (identical, engraved T0-T4); 48 g |
+| purge_bucket_T4 | 1 | 88 x 48.6 x 50.7 | 4 | Purge buckets, one per tool (identical, engraved T0-T4); 48 g |
 | ptfe_coupler_block_T0 | 1 | 38 x 59.6 x 46.7 | 5 | PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; cut back 2 mm clear of the top hat's front centre wall; 26 g; tree supports |
 | ptfe_coupler_block_T1 | 1 | 38 x 59.6 x 47.9 | 5 | PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; cut back 2 mm clear of the top hat's front centre wall; 25 g; tree supports |
 | ptfe_coupler_block_T2 | 1 | 38 x 59.6 x 47.9 | 5 | PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; cut back 2 mm clear of the top hat's front centre wall; 25 g; tree supports |
 | ptfe_coupler_block_T3 | 1 | 38 x 59.6 x 47.9 | 5 | PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; cut back 2 mm clear of the top hat's front centre wall; 25 g; tree supports |
 | ptfe_coupler_block_T4 | 1 | 38 x 59.6 x 47.2 | 5 | PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; cut back 2 mm clear of the top hat's front centre wall; 26 g; tree supports |
-| umbilical_saddle | 1 | 32 x 70.2 x 58.9 | 5 | Umbilical saddle on the INDX PCB cover, with a clevis at its tail; 15 g |
+| umbilical_saddle | 1 | 32 x 70.2 x 58.9 | 5 | Umbilical saddle on the INDX PCB cover, with a clevis at its tail; 14 g |
 | umbilical_swivel | 1 | 12 x 30 x 10.4 | 5 | Umbilical swivel: turns on the saddle's pin, so the umbilical lies back near the front and stands up near the back; 4 g |
-| deck_foot_FR | 1 | 44 x 44 x 41.9 | 6 | Spool deck feet, one on each top-hat corner (all four the same part); the deck screws on; 49 g |
-| deck_foot_FL | 1 | 44 x 44 x 41.9 | 6 | Spool deck feet, one on each top-hat corner (all four the same part); the deck screws on; 49 g |
-| deck_foot_RR | 1 | 44 x 44 x 41.9 | 6 | Spool deck feet, one on each top-hat corner (all four the same part); the deck screws on; 49 g |
-| deck_foot_RL | 1 | 44 x 44 x 41.9 | 6 | Spool deck feet, one on each top-hat corner (all four the same part); the deck screws on; 49 g |
+| deck_foot_FR | 1 | 44 x 44 x 41.9 | 6 | Spool deck feet, one on each top-hat corner (all four the same part); the deck screws on; 48 g |
+| deck_foot_FL | 1 | 44 x 44 x 41.9 | 6 | Spool deck feet, one on each top-hat corner (all four the same part); the deck screws on; 48 g |
+| deck_foot_RR | 1 | 44 x 44 x 41.9 | 6 | Spool deck feet, one on each top-hat corner (all four the same part); the deck screws on; 48 g |
+| deck_foot_RL | 1 | 44 x 44 x 41.9 | 6 | Spool deck feet, one on each top-hat corner (all four the same part); the deck screws on; 48 g |
 
 ## Motion
 
@@ -141,7 +141,7 @@ All of them are in the Tinman project `print/VC41_CoreXY12_INDX_PPSCF_QidiPlus4_
 
 | Qty | Item | Specification | Source | Used for |
 |---|---|---|---|---|
-| 1.4 kg | PPS-CF | 1,371 g in Tinman's slice | Any | All printed parts |
+| 1.4 kg | PPS-CF | 1,340 g in Tinman's slice | Any | All printed parts |
 
 ## Reused from the printer
 

@@ -4,7 +4,8 @@ Run with FreeCAD's own Python (not freecadcmd, whose exec breaks __file__):
   /Applications/FreeCAD.app/Contents/Resources/bin/python vc12_build.py
 
 Every part is built in the printer frame (see vc12_params) at Yg = 0, xc = 0 and
-written to ../parts as <name>.brep (for the checks) and <name>.step.
+written to ../parts as <name>.brep (for the checks) and <name>.step. Each body's edges are rounded
+(soften) before its holes are cut; ../checks/rounding_report.json lists what was rounded per part.
 """
 import math
 import os
@@ -81,6 +82,176 @@ def minus(shape, tools):
     return shape.cut(Part.makeCompound(tools)).removeSplitter()
 
 
+# ------------------------------------------------------------------ rounded edges
+# Owner, 2026-11-05: round the parts like Bondtech's. Each body is rounded before its holes, slots and pockets are cut,
+# so those keep their exact sizes. Vertical corners first (R_CORNER), then the other edges (R_EDGE); the face that goes
+# on the print bed gets a BED_CHAMFER 45 deg chamfer instead, so nothing overhangs at the first layer.
+R_CORNER, R_EDGE, BED_CHAMFER = 5.0, 2.5, 1.0
+
+
+def _usable(f):
+    """A valid single solid that booleans still work on (a bad round can pass isValid and then cut to nothing)."""
+    if not f.isValid() or len(f.Solids) != 1 or f.Volume <= 0:
+        return False
+    bb = f.BoundBox
+    probes = Part.makeCompound([Part.makeCylinder(0.6, bb.ZLength + 2.0, V(bb.XMin + bb.XLength * (i + 0.5) / 3,
+                                                                          bb.YMin + bb.YLength * (j + 0.5) / 3,
+                                                                          bb.ZMin - 1.0))
+                                for i in range(3) for j in range(3)])
+    try:
+        cut, common = f.cut(probes), f.common(probes)
+        return len(cut.Solids) >= 1 and abs(cut.Volume + common.Volume - f.Volume) < 1e-4 * f.Volume
+    except Exception:
+        return False
+
+
+def _fillet(s, r, edges, chamfer=False):
+    try:
+        f = s.makeChamfer(r, edges) if chamfer else s.makeFillet(r, edges)
+    except Exception:
+        return None
+    return f if _usable(f) else None
+
+
+def _greedy(s, r, cand, chamfer=False):
+    """Round (or chamfer) as many of cand as will take r: all at once if they can, otherwise one by one."""
+    if not cand:
+        return s, 0, 0
+    f = _fillet(s, r, cand, chamfer)
+    if f is not None:
+        return f, len(cand), 0
+    good = []
+    for e in cand:
+        if _fillet(s, r, good + [e], chamfer) is not None:
+            good.append(e)
+    if not good:
+        return s, 0, len(cand)
+    return _fillet(s, r, good, chamfer), len(good), len(cand) - len(good)
+
+
+STATS = {}
+FALLBACK = {}       # part name -> 1: no vertical-corner pass, 2: not rounded (set by build_all when a part's cuts fail)
+
+
+def _concave(s, e):
+    """True for an inside corner (a fillet there adds material), or when it can't tell."""
+    try:
+        faces = s.ancestorsOfType(e, Part.Face)
+    except Exception:
+        return True
+    if len(faces) != 2:
+        return True
+    u = (e.FirstParameter + e.LastParameter) / 2
+    p, t = e.valueAt(u), e.tangentAt(u)
+    pts = []
+    for f in faces:
+        try:
+            n = f.normalAt(*f.Surface.parameter(p))
+        except Exception:
+            return True
+        d = n.cross(t)
+        if d.Length < 1e-9:
+            return True
+        d.normalize()
+        for sgn in (1.0, -1.0):
+            q = p + d * (0.4 * sgn)
+            if f.isInside(q, 0.05, True):
+                pts.append(q)
+                break
+        else:
+            return True
+    return not s.isInside((pts[0] + pts[1]) * 0.5, 1e-4, False)
+
+
+def soften(s, name=None, r_v=R_CORNER, r_h=R_EDGE, planes=(), boxes=(), hold=()):
+    """Round a body made of boxes before its holes are cut: vertical corners with r_v, then the other straight edges
+    and the arcs that pass made with r_h. Edges stay square where they lie in one of `planes` ((axis 0/1/2, value):
+    a face against an extrusion, rail, block, motor or the swivel). Inside corners stay square where they reach into
+    one of `boxes` (a mating part's space, grown by r_v + 0.5): a fillet there would add material into it; outside
+    corners can only lose material, so they are rounded anyway. Every edge stays square in a `hold` box. The body's
+    own bosses and posts (cylinders up to 8 mm radius) keep their edges and the edges near them. With `name`, the part's print-bed face (vc12_print.ORIENT)
+    gets a BED_CHAMFER chamfer instead of rounds."""
+    level = FALLBACK.get(name, 0)
+    if level >= 2:
+        STATS[name] = {"rounded": 0, "chamfered": 0, "left_square": "all (its cuts failed on the rounded body)"}
+        return s
+    planes = list(planes)
+    bed = None
+    if name is not None:
+        from vc12_print import ORIENT
+        d = ORIENT[name][0]
+        i = "XYZ".index(d[1])
+        bb = s.BoundBox
+        bed = (i, (bb.XMax, bb.YMax, bb.ZMax)[i] if d[0] == "+" else (bb.XMin, bb.YMin, bb.ZMin)[i])
+    g = r_v + 0.5
+    grow = lambda b: App.BoundBox(b.XMin - g, b.YMin - g, b.ZMin - g, b.XMax + g, b.YMax + g, b.ZMax + g)  # noqa: E731
+    near, held = [grow(b) for b in boxes], [grow(b) for b in hold]
+    # the body's own bosses and posts: a round running into one breaks the later cuts, so edges near them stay square
+    held += [grow(f.BoundBox) for f in s.Faces if f.Surface.__class__.__name__ == "Cylinder" and f.Surface.Radius <= 8.0]
+
+    def in_plane(e, pl):
+        a, b = e.Vertexes[0].Point, e.Vertexes[-1].Point
+        bb = e.BoundBox
+        lo, hi = (bb.XMin, bb.YMin, bb.ZMin), (bb.XMax, bb.YMax, bb.ZMax)
+        return any(abs(a[i] - v) < 1e-6 and abs(b[i] - v) < 1e-6 and hi[i] - lo[i] < 1e-6 for i, v in pl)
+
+    def kept(sh, e, with_bed=True):
+        if in_plane(e, planes + ([bed] if bed and with_bed else [])):
+            return True
+        if any(e.BoundBox.intersect(k) for k in held):
+            return True
+        return any(e.BoundBox.intersect(k) for k in near) and _concave(sh, e)
+
+    def line(e):                                         # a straight edge between two flat faces (no seams)
+        if e.Curve.TypeId != "Part::GeomLine":
+            return False
+        try:
+            fs = current[0].ancestorsOfType(e, Part.Face)
+        except Exception:
+            return False
+        return len(fs) == 2 and all(f.Surface.__class__.__name__ == "Plane" for f in fs)
+
+    def vertical(e):
+        d = e.Vertexes[-1].Point - e.Vertexes[0].Point
+        return line(e) and abs(d.x) < 1e-6 and abs(d.y) < 1e-6
+
+    def key(e):
+        c = e.Curve
+        return (round(c.Center.x, 3), round(c.Center.y, 3), round(c.Center.z, 3), round(c.Radius, 3))
+
+    def new_arc(e):
+        return (e.Curve.TypeId == "Part::GeomCircle" and abs(abs(e.Curve.Axis.z) - 1.0) < 1e-6
+                and key(e) not in own)
+
+    own = {key(e) for e in s.Edges if e.Curve.TypeId == "Part::GeomCircle"}
+    current = [s]
+    s1, n1, k1 = (s, 0, 0) if level >= 1 else _greedy(s, r_v, [e for e in s.Edges if vertical(e) and not kept(s, e)])
+    current[0] = s1
+    s2, n2, k2 = _greedy(s1, r_h, [e for e in s1.Edges if ((line(e) and not vertical(e)) or new_arc(e))
+                                   and not kept(s1, e)])
+    current[0] = s2
+    n3 = k3 = 0
+    if bed:
+        on_bed = [e for e in s2.Edges if in_plane(e, [bed]) and not kept(s2, e, with_bed=False)
+                  and (line(e) or (e.Curve.TypeId == "Part::GeomCircle" and key(e) not in own))]
+        s2, n3, k3 = _greedy(s2, BED_CHAMFER, on_bed, chamfer=True)
+    if name is not None:
+        STATS[name] = {"rounded": n1 + n2, "chamfered": n3, "left_square": k1 + k2 + k3,
+                       "volume_change_mm3": round(s2.Volume - s.Volume, 1)}
+    return s2
+
+
+def bbox(x0, x1, y0, y1, z0, z1):
+    """A mating part's space, for soften(boxes=...)."""
+    return App.BoundBox(min(x0, x1), min(y0, y1), min(z0, z1), max(x0, x1), max(y0, y1), max(z0, z1))
+
+
+def idler_box(x, y, z, idler):
+    r = idler.get("od_flange", idler.get("od")) / 2
+    h = idler["length"] / 2
+    return bbox(x - r, x + r, y - r, y + r, z - h, z + h)
+
+
 def lower_upper(side):
     """(front-going plane, rear-going plane) at this joint: left A/B, right B/A."""
     return (P.PLANE_A, P.PLANE_B) if side < 0 else (P.PLANE_B, P.PLANE_A)
@@ -108,6 +279,11 @@ def joint(side):
             body.append(cyl_z(x, y, 11.0, deck1, lo))
         body.append(cyl_z(x, y, 11.0, hi, top0))
     j = union(body)
+    # square: the top plate over the Y block, and the column round the beam end
+    j = soften(j, f"joint_{'L' if side < 0 else 'R'}",
+               boxes=[idler_box(*jf, zF, P.TOOTHED_IDLER), idler_box(*jr, zR, P.SMOOTH_IDLER)],
+               hold=[bbox(X(P.Y_RAIL_X) - 13.5, X(P.Y_RAIL_X) + 13.5, -17.25, 17.25, *P.Y_BLOCK_Z),
+                     bbox(X(338.9), X(362.7), -P.BEAM_HALF_W, P.BEAM_HALF_W, *P.BEAM_Z)])
     tools = [
         box(X(338.9), X(362.7), -P.BEAM_HALF_W - 0.15, P.BEAM_HALF_W + 0.15, P.BEAM_Z[0] - 0.1, P.BEAM_Z[1] + 0.15),
         box(X(330.0), X(339.0), -15, 15, deck0 - 1, top0),                         # keep the inner face clean
@@ -133,14 +309,18 @@ def carriage():
     leg_bot = 692.5
     body = [
         box(-46, 46, -22, 24, top0, top1),                                  # top plate
-        box(-25.5, 25.5, face, -10.6, 704.0, 723.5),                        # INDX mount wall, below the block
-        box(-25.5, 25.5, face, -14.0, 723.5, top0),                         # beside the block
+        box(-26.0, 26.0, face, -10.6, 704.0, 723.5),                        # INDX mount wall, below the block,
+        box(-26.0, 26.0, face, -14.0, 723.5, top0),                         # beside the block (meets the front legs)
         box(-25.5, 25.5, face, -14.0, top1, lip_top),                       # lip up to the INDX grid's top row
     ]
     for e in (-1, 1):
         body += [box(e * 26, e * 46, -22, -10.5, leg_bot, top0),            # front leg
                  box(e * 26, e * 46, 10.5, 24, leg_bot, top0)]              # rear leg
     c = union(body)
+    # square: the INDX X-carriage face, and the inside corners round the MGN12 block under the top plate
+    c = soften(c, "carriage", planes=[(1, face)],
+               boxes=[bbox(-17.35, 17.35, -P.X_BLOCK_HALF_W, P.X_BLOCK_HALF_W, *P.X_BLOCK_Z)])
+    env = c
     tools = []
     for dx, dy in P.X_BLOCK_HOLES:                                          # countersunk: the PCB cover is above
         tools.append(csk_z(dx, dy, top1))
@@ -172,7 +352,8 @@ def carriage():
         tools.append(box(x_in + e * 0.01, x_out + e * 0.1, cap_y[0], cap_y[1], win_z[0], win_z[1]))  # cap window
         for sx in (e * 30.0, e * 42.0):
             tools.append(cyl_y(sx, screw_z, M3, screw_from - 1, screw_to + 1))
-        cap = box(x_in + e * 0.2, x_out, cap_y[0] + (0.0 if lane == "F" else 0.0), cap_y[1], win_z[0] + 0.2, win_z[1] - 0.2)
+        cap = box(x_in + e * 0.2, x_out, cap_y[0], cap_y[1], win_z[0] + 0.2, win_z[1] - 0.2)
+        cap = cap.common(env).removeSplitter()                             # follows the leg's rounded edges
         cap_tools = [cyl_y(sx, screw_z, M3, cap_y[0] - 1, cap_y[1] + 1) for sx in (e * 30.0, e * 42.0)]
         if lane == "F":                       # nuts in the cap's beam-side face
             cap_tools += [hex_y(sx, screw_z, M3_NUT, nut_y[0], nut_y[1]) for sx in (e * 30.0, e * 42.0)]
@@ -225,9 +406,15 @@ def front_idler(side):
     body.append(box(X(372.0), X(397.0), rear - 1.0, rail_front, arm_top - 0.1, P.Y_BLOCK_Z[1] + 10.0))
     body.append(box(X(372.0), X(397.0), rail_front - 0.1, stop_face, P.Y_RAIL_Z[1] + 0.6, P.Y_BLOCK_Z[1] + 10.0))
     f = union(body)
+    # square: the arm on the side 3030's top, and its face against the front upright
+    idl = idler_box(ax, y0, z, P.SMOOTH_IDLER)
+    f = soften(f, f"front_idler_{'L' if side < 0 else 'R'}",
+               planes=[(2, ext_top), (1, P.FRONT_VERT_Y[1] + 0.1)],
+               boxes=[bbox(idl.XMin, idl.XMax, idl.YMin - P.FRONT_IDLER_SLOT, idl.YMax + P.FRONT_IDLER_SLOT,
+                           idl.ZMin, idl.ZMax),
+                      bbox(X(P.Y_RAIL_X) - 6.0, X(P.Y_RAIL_X) + 6.0, P.Y_RAIL_Y[0], P.Y_RAIL_Y[1], *P.Y_RAIL_Z),
+                      bbox(X(369.6), X(399.6), -400.0, 400.0, *P.SIDE_Z)])
     tools = []
-    for d in (0.0,):
-        pass
     # axle slot in both decks, push screws from the rear into the axle
     for zz in ((lo_top - deck_t - 1, lo_top + 1), (hi_bot - 1, hi_bot + deck_t + 1)):
         tools.append(cyl_z(ax, y0 - P.FRONT_IDLER_SLOT, M5, *zz).fuse(cyl_z(ax, y0 + P.FRONT_IDLER_SLOT, M5, *zz)).fuse(
@@ -284,6 +471,14 @@ def rear_corner(side):
     else:
         base.append(cyl_z(*r1, 11.0, base1, zB - half - 0.5))   # R1_R is on the upper plane
     b = union(base)
+    tag = "L" if side < 0 else "R"
+    idlers = [idler_box(*r1, zA if side < 0 else zB, P.SMOOTH_IDLER), idler_box(*r2, zA, P.SMOOTH_IDLER),
+              idler_box(*r2, zB, P.SMOOTH_IDLER), bbox(mx - 8, mx + 8, my - 8, my + 8, zA - 10, zB + 10)]  # + pulley
+    motor = bbox(mx - 21, mx + 21, my - 21, my + 21, base0 - 48, base0) if side < 0 else \
+        bbox(mx - 21, mx + 21, my - 21, my + 21, top1, top1 + 48)
+    frame = [bbox(X(369.6), X(399.6), 296.0, 368.0, *P.SIDE_Z), bbox(X(300.0), X(399.6), 337.5, 367.5, *P.SIDE_Z)]
+    b = soften(b, f"rear_corner_{tag}_base", boxes=idlers + [motor] + frame,
+               hold=[bbox(x - 5.0, x + 5.0, y - 5.0, y + 5.0, base1, bridge[1]) for x, y in posts])  # bridge on its posts
     tools = []
     for x, y in bolt_pts_bottom:
         tools += [cyl_z(x, y, M6, base0 - 1, ext_bot + 1), cyl_z(x, y, M6_CB, base0 - 1, base0 + 5.0)]
@@ -309,6 +504,9 @@ def rear_corner(side):
     if side < 0:
         top.append(cyl_z(*r1, 11.0, zA + half + 0.5, top0 + 0.1))   # spacer over R1_L down to its idler
     t = union(top)
+    # square: the right one's motor face on top, the joint's stop face
+    t = soften(t, f"rear_corner_{tag}_top", planes=([(2, top1)] if side > 0 else []) + [(1, stop_face)],
+               boxes=idlers + [motor] + frame)
     tools = []
     for x, y in bolt_pts_top:
         tools += [cyl_z(x, y, M6, ext_top - 1, top1 + 1), cyl_z(x, y, M6_CB, top1 - 5.0, top1 + 1)]
@@ -324,7 +522,7 @@ def rear_corner(side):
 
 
 # ------------------------------------------------------------------ dock bar brackets
-def dock_bracket(side, yb=None, zb=None):
+def dock_bracket(side, yb=None, zb=None, name=None):
     s = side
     X = lambda a: s * a  # noqa: E731
     yb = P.DOCK_BAR_Y if yb is None else yb
@@ -335,6 +533,9 @@ def dock_bracket(side, yb=None, zb=None):
     cheek = box(X(339.0), X(361.0), yb - half - 4.0, yb - half, zb - half - 5.0, zb + half)   # ahead of the bar end:
     # the docks cover the bar's front face only where they hang, and the front idler block sits behind
     b = union([plate, shelf, cheek])
+    # square: the plate's face on the upright; every edge round the bar end
+    b = soften(b, name or f"dock_bracket_{'L' if side < 0 else 'R'}", planes=[(0, X(369.8))],
+               hold=[bbox(X(338.0), X(369.9), yb - half, yb + half, zb - half, zb + half)])
     tools = [box(X(338.0), X(369.9), yb - half - 0.15, yb + half + 0.15, zb - half - 0.15, zb + half + 0.15)]
     # vertical slots into the upright's inner T-slot (Y -352.5): +/-5 mm height adjustment, per Bondtech
     for dz in (-17.0, 17.0):
@@ -387,6 +588,11 @@ def station_cradle(i):
             yz_prism([(P.DETENT_Y - 1.5, FLOOR_Z[1] - 0.1), (P.DETENT_Y + 1.5, FLOOR_Z[1] - 0.1),     # detent ridge
                       (P.DETENT_Y + 0.7, FLOOR_Z[1] + 0.8), (P.DETENT_Y - 0.7, FLOOR_Z[1] + 0.8)], x0 + w, x1 - w)]
     c = union(body)
+    # square: the floor's top and the walls' inner faces (the bucket slides on them), the pad pocket, the detent
+    c = soften(c, f"station_cradle_T{i}", planes=[(2, FLOOR_Z[1]), (0, x0 + w), (0, x1 - w)],
+               boxes=[bbox(x0 + w, x1 - w, y0, y1, FLOOR_Z[1], P.BUCKET_RIM_Z)],
+               hold=[bbox(pad, pad + P.PAD[0], P.PAD_REAR_Y - P.PAD[1], P.PAD_REAR_Y, P.WIPER_TOP - P.PAD[2], P.WIPER_TOP),
+                     bbox(x0 + w, x1 - w, P.DETENT_Y - 1.5, P.DETENT_Y + 1.5, FLOOR_Z[1], FLOOR_Z[1] + 0.8)])
     tools = [csk_z(bx, P.STATION_RAIL_Y, FLOOR_Z[1]) for bx in (x0 + 18.0, x1 - 18.0)]   # into the rail's T-nuts
     tools.append(engrave_front(f"T{i}", (x0 + pad) / 2 + 2, CROSSBAR_Y[0], sum(CROSSBAR_Z) / 2, 5.5))
     return minus(c, tools)
@@ -411,8 +617,13 @@ def purge_bucket(i):
     zc = a[1] + (yi - a[0]) / k                                 # inner back corner
     inner = yz_prism([(yf + t, z0 + t), (yi, z0 + t), (yi, zc), (y_at(z1 + 5), z1 + 5), (yf + t, z1 + 5)],
                      x0 + t, x1 - t)
+    # outside and inside rounded to match, so the walls keep their thickness; the low back's inside corner stays
+    # square (a fillet there would reach toward the bed arms)
+    outer = soften(outer, f"purge_bucket_T{i}", r_v=4.0, r_h=2.0, planes=[(1, ylo)])
+    inner = soften(inner, r_v=4.0 - t, r_h=1.5)
     b = minus(outer, [inner])
-    flange = box(P.STATION_X0[i], P.STATION_X0[i] + P.STATION_W, yf - P.BUCKET_FLANGE, yf, z1 - 14.0, z1)
+    flange = soften(box(P.STATION_X0[i], P.STATION_X0[i] + P.STATION_W, yf - P.BUCKET_FLANGE, yf, z1 - 14.0, z1),
+                    r_v=1.2, r_h=1.0)
     b = union([b, flange])
     h = (yr - 0.6) - (y_at(z1) - 1.0)                           # back rim: 45 deg chamfer down into the bucket,
     tools = [yz_prism([(yr - 0.6, z1 + 0.1), (yr - 0.6 - h, z1 + 0.1), (yr - 0.6 - h, z1 + 0.1 - h)],   # 0.6 mm land
@@ -449,6 +660,8 @@ def ptfe_coupler_block(i):
     web = box(min(x, path[-3][0]) - 4.0, max(x, path[-3][0]) + 4.0, face + 5.9, path[-3][1], path[-3][2] - 6.0,
               P.TUBE_BEND[0] - 21.9)
     body = union([plate, housing, web, rod(path[1:], 16.0)])
+    # square: the plate's face on the 3030, and its top, which sits 1 mm under the hat's front wall
+    body = soften(body, f"ptfe_coupler_block_T{i}", r_v=3.0, r_h=2.0, planes=[(1, face), (2, P.TOP_FRONT_Z[1] - 1.0)])
     axis = V(*T.tube_dir(x))
     end = V(*path[-1])
     tools = [rod(np.vstack([path[0] + np.array([0.0, 0.0, 5.0]), path]), 5.0),       # tube channel
@@ -474,6 +687,9 @@ def umbilical_saddle():
     cheeks = [box(sx * 5.6, sx * 9.0, yp - 7.1, yp + 7.0, zp - 7.5, zp + 7.0) for sx in (-1, 1)]
     stop = box(-9.0, 9.0, yp - 9.5, yp - 6.4, zp + 7.0, zp + 12.0)                  # swivel stops at vertical
     s = union([pad, post, arm, stop] + cheeks)
+    # square: the taped face, the clevis faces and everything the swivel sweeps
+    s = soften(s, "umbilical_saddle", r_v=3.0, r_h=1.5, planes=[(2, top + 0.3), (0, 5.6), (0, -5.6)],
+               hold=[bbox(-5.6, 5.6, yp - 9.5, yp + 30.0, zp - 7.0, zp + 30.0)])
     tools = [box(-6.5, 6.5, ny + 50.0, yp - 6.0, zp - 3.5, zp + 6.0),                                 # cable groove
              cyl_x(yp, zp, M3, -10.0, 10.0)]                                                         # pin
     for yy in (ny + 70.0, ny + 90.0):                                                # zip-tie slots under the groove
@@ -488,7 +704,7 @@ def umbilical_swivel(angle=0.0):
     yp, zp = ny + P.UMB_SADDLE_DY, P.UMB_SADDLE_Z
     hub = cyl_x(yp, zp, 12.0, -5.2, 5.2)
     arm = box(-5.2, 5.2, yp, yp + 24.0, zp - 6.0, zp + 6.0)
-    sw = union([hub, arm])
+    sw = soften(union([hub, arm]), "umbilical_swivel", r_v=2.0, r_h=1.5)
     tools = [cyl_x(yp, zp, M3 + 0.2, -6.0, 6.0),                                     # pin
              cyl_y(0.0, zp + 2.5, 1.6, yp + 6.0, yp + 25.0),                         # piano wire bore (1.2 mm wire)
              cyl_z(0.0, yp + 16.0, M3_INSERT, zp - 7.0, zp + 2.5),                   # set screw onto the wire
@@ -518,6 +734,7 @@ def deck_foot(corner):
     zr, zt = P.HAT_RIM_Z, P.DECK_Z
     plate = 6.0
     body = _rounded_l(xi, ox + gap + wall, -(oy + gap + wall), yi, cx, cy, r + gap + wall, zr - depth, zt)
+    body = soften(body, "deck_foot_FR", r_v=4.0, r_h=1.5)                 # all four are this part, turned
     hat = _rounded_l(xi - 50.0, ox + gap, -(oy + gap), yi + 50.0, cx, cy, r + gap, zr - depth - 1.0, zr)
     g = P.FOOT_LID_GAP
     hollow = box(xi - 1.0, px + g, -(py + g), yi + 1.0, zr - depth - 1.0, zt - plate)         # over the lid: open
@@ -535,6 +752,21 @@ def deck_foot(corner):
 
 def build_all():
     os.makedirs(OUT, exist_ok=True)
+    while True:
+        out = _build_parts()
+        bad = [n for n, shp in out.items() if len(shp.Solids) != 1]
+        if not bad:
+            break
+        for n in bad:
+            if FALLBACK.get(n, 0) >= 2:
+                raise RuntimeError(f"{n}: {len(out[n].Solids)} solids even unrounded")
+            FALLBACK[n] = FALLBACK.get(n, 0) + 1
+            print(f"{n}: its cuts failed on the rounded body; rebuilding at fallback level {FALLBACK[n]}", flush=True)
+    _write(out)
+    return out
+
+
+def _build_parts():
     out = {}
     for side, tag in ((-1, "L"), (1, "R")):
         out[f"joint_{tag}"] = joint(side)
@@ -543,7 +775,7 @@ def build_all():
         out[f"rear_corner_{tag}_base"] = rc["base"]
         out[f"rear_corner_{tag}_top"] = rc["top"]
         out[f"dock_bracket_{tag}"] = dock_bracket(side)
-        out[f"station_bracket_{tag}"] = dock_bracket(side, P.STATION_RAIL_Y, P.STATION_RAIL_Z)
+        out[f"station_bracket_{tag}"] = dock_bracket(side, P.STATION_RAIL_Y, P.STATION_RAIL_Z, f"station_bracket_{tag}")
     for i in range(P.INDX_TOOLS):
         out[f"station_cradle_T{i}"] = station_cradle(i)
         out[f"purge_bucket_T{i}"] = purge_bucket(i)
@@ -556,14 +788,21 @@ def build_all():
     out["carriage"] = car
     for i, cp in enumerate(caps):
         out[f"carriage_clamp_cap_{i + 1}"] = cp
+    return out
+
+
+def _write(out):
     for name, shp in out.items():
         if not shp.isValid():
             shp.fix(1e-6, 1e-6, 1e-6)
         shp.exportBrep(os.path.join(OUT, name + ".brep"))
         shp.exportStep(os.path.join(OUT, name + ".step"))
         print(f"{name:26s} solids {len(shp.Solids)} valid {shp.isValid()} volume {shp.Volume / 1000:8.2f} cm3 "
-              f"mass {shp.Volume * 1.30e-3:6.1f} g (PPS-CF 1.30)")
-    return out
+              f"mass {shp.Volume * 1.30e-3:6.1f} g (PPS-CF 1.30)  {STATS.get(name, '')}")
+    import json
+    rep = {n: dict(STATS.get(n, {}), fallback=FALLBACK.get(n, 0), valid=out[n].isValid(), solids=len(out[n].Solids),
+                   mass_g=round(out[n].Volume * 1.30e-3, 1)) for n in out}
+    json.dump(rep, open(os.path.join(HERE, "..", "checks", "rounding_report.json"), "w"), indent=1)
 
 
 if __name__ == "__main__":
