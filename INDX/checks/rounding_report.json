@@ -1,0 +1,354 @@
+{
+ "joint_L": {
+  "rounded": 12,
+  "chamfered": 7,
+  "left_square": 4,
+  "volume_change_mm3": -475.7,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 79.7
+ },
+ "front_idler_L": {
+  "rounded": 45,
+  "chamfered": 14,
+  "left_square": 23,
+  "volume_change_mm3": -900.0,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 28.8
+ },
+ "rear_corner_L_base": {
+  "rounded": 4,
+  "chamfered": 4,
+  "left_square": 0,
+  "volume_change_mm3": -441.9,
+  "fallback": 1,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 82.1
+ },
+ "rear_corner_L_top": {
+  "rounded": 16,
+  "chamfered": 0,
+  "left_square": 19,
+  "volume_change_mm3": -679.7,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 32.4
+ },
+ "dock_bracket_L": {
+  "rounded": 6,
+  "chamfered": 0,
+  "left_square": 1,
+  "volume_change_mm3": -109.1,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 13.8
+ },
+ "station_bracket_L": {
+  "rounded": 6,
+  "chamfered": 0,
+  "left_square": 0,
+  "volume_change_mm3": -99.7,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 11.8
+ },
+ "joint_R": {
+  "rounded": 15,
+  "chamfered": 7,
+  "left_square": 7,
+  "volume_change_mm3": -537.5,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 79.6
+ },
+ "front_idler_R": {
+  "rounded": 34,
+  "chamfered": 7,
+  "left_square": 24,
+  "volume_change_mm3": -557.9,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 27.9
+ },
+ "rear_corner_R_base": {
+  "rounded": 11,
+  "chamfered": 7,
+  "left_square": 3,
+  "volume_change_mm3": -569.0,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 61.0
+ },
+ "rear_corner_R_top": {
+  "rounded": 17,
+  "chamfered": 0,
+  "left_square": 6,
+  "volume_change_mm3": -789.7,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 64.4
+ },
+ "dock_bracket_R": {
+  "rounded": 6,
+  "chamfered": 0,
+  "left_square": 1,
+  "volume_change_mm3": -109.1,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 13.8
+ },
+ "station_bracket_R": {
+  "rounded": 6,
+  "chamfered": 0,
+  "left_square": 0,
+  "volume_change_mm3": -99.7,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 11.8
+ },
+ "station_cradle_T0": {
+  "rounded": 11,
+  "chamfered": 5,
+  "left_square": 1,
+  "volume_change_mm3": -1691.5,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 50.1
+ },
+ "purge_bucket_T0": {
+  "rounded": 10,
+  "chamfered": 5,
+  "left_square": 0,
+  "volume_change_mm3": -760.3,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 48.1
+ },
+ "ptfe_coupler_block_T0": {
+  "rounded": 19,
+  "chamfered": 0,
+  "left_square": 7,
+  "volume_change_mm3": -106.8,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 25.8
+ },
+ "station_cradle_T1": {
+  "rounded": 11,
+  "chamfered": 5,
+  "left_square": 1,
+  "volume_change_mm3": -1691.5,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 50.1
+ },
+ "purge_bucket_T1": {
+  "rounded": 10,
+  "chamfered": 5,
+  "left_square": 0,
+  "volume_change_mm3": -760.3,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 48.1
+ },
+ "ptfe_coupler_block_T1": {
+  "rounded": 20,
+  "chamfered": 0,
+  "left_square": 6,
+  "volume_change_mm3": -86.8,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 24.8
+ },
+ "station_cradle_T2": {
+  "rounded": 11,
+  "chamfered": 5,
+  "left_square": 1,
+  "volume_change_mm3": -1691.5,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 50.1
+ },
+ "purge_bucket_T2": {
+  "rounded": 10,
+  "chamfered": 5,
+  "left_square": 0,
+  "volume_change_mm3": -760.3,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 48.1
+ },
+ "ptfe_coupler_block_T2": {
+  "rounded": 20,
+  "chamfered": 0,
+  "left_square": 6,
+  "volume_change_mm3": -86.8,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 24.8
+ },
+ "station_cradle_T3": {
+  "rounded": 11,
+  "chamfered": 5,
+  "left_square": 1,
+  "volume_change_mm3": -1691.5,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 50.1
+ },
+ "purge_bucket_T3": {
+  "rounded": 10,
+  "chamfered": 5,
+  "left_square": 0,
+  "volume_change_mm3": -760.3,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 48.1
+ },
+ "ptfe_coupler_block_T3": {
+  "rounded": 20,
+  "chamfered": 0,
+  "left_square": 6,
+  "volume_change_mm3": -86.8,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 24.8
+ },
+ "station_cradle_T4": {
+  "rounded": 11,
+  "chamfered": 5,
+  "left_square": 1,
+  "volume_change_mm3": -1691.5,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 50.1
+ },
+ "purge_bucket_T4": {
+  "rounded": 10,
+  "chamfered": 5,
+  "left_square": 0,
+  "volume_change_mm3": -760.3,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 48.1
+ },
+ "ptfe_coupler_block_T4": {
+  "rounded": 17,
+  "chamfered": 0,
+  "left_square": 7,
+  "volume_change_mm3": -98.3,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 25.6
+ },
+ "umbilical_saddle": {
+  "rounded": 17,
+  "chamfered": 13,
+  "left_square": 6,
+  "volume_change_mm3": -268.6,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 14.4
+ },
+ "umbilical_swivel": {
+  "rounded": 5,
+  "chamfered": 3,
+  "left_square": 0,
+  "volume_change_mm3": -88.5,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 4.2
+ },
+ "deck_foot_FR": {
+  "rounded": 10,
+  "chamfered": 7,
+  "left_square": 0,
+  "volume_change_mm3": -591.1,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 48.0
+ },
+ "deck_foot_FL": {
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 48.0
+ },
+ "deck_foot_RR": {
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 48.0
+ },
+ "deck_foot_RL": {
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 48.0
+ },
+ "carriage": {
+  "rounded": 70,
+  "chamfered": 3,
+  "left_square": 27,
+  "volume_change_mm3": -3937.0,
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 79.2
+ },
+ "carriage_clamp_cap_1": {
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 2.2
+ },
+ "carriage_clamp_cap_2": {
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 3.2
+ },
+ "carriage_clamp_cap_3": {
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 2.0
+ },
+ "carriage_clamp_cap_4": {
+  "fallback": 0,
+  "valid": true,
+  "solids": 1,
+  "mass_g": 3.4
+ }
+}

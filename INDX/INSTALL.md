@@ -15,12 +15,12 @@ Parts and hardware are in `BOM.md`. The printed parts are all in the Tinman proj
 
    | Plate | Parts | Time | PPS-CF |
    |---|---|---|---|
-   | 1 | carriage, 4 clamp caps, joints, front idlers | 15.2 h | 296 g |
-   | 2 | rear corner bases and tops | 11.3 h | 222 g |
-   | 3 | five cradles, dock and station rail brackets | 16.3 h | 321 g |
-   | 4 | five buckets | 13.7 h | 241 g |
-   | 5 | five PTFE coupler blocks, umbilical saddle and swivel | 7.1 h | 139 g |
-   | 6 | four spool deck feet | 6.7 h | 152 g |
+   | 1 | carriage, 4 clamp caps, joints, front idlers | 14.6 h | 286 g |
+   | 2 | rear corner bases and tops | 11.1 h | 219 g |
+   | 3 | five cradles, dock and station rail brackets | 16.0 h | 313 g |
+   | 4 | five buckets | 13.5 h | 235 g |
+   | 5 | five PTFE coupler blocks, umbilical saddle and swivel | 7.0 h | 137 g |
+   | 6 | four spool deck feet | 6.6 h | 150 g |
 
    Times and weights are from Tinman's slice.
 2. Remove the supports. On the left rear-corner top, clean up the feet before they sit on the 3030s.

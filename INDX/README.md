@@ -174,8 +174,8 @@ Positions are CAD X / printer X, all at Y −317.5 (printer Y −40.0). Wipe str
 | Part | Size (mm) | Mass | What it does |
 |---|---|---|---|
 | station_rail brackets L/R | 31 × 22 × 50 | 12 g each | Same design as the dock-rail brackets, 129 mm lower. They hold a second 1515 rail on the front uprights' inner T-slots at Y −352.5, Z 605.5. |
-| station_cradle_T0–T4 | 88 × 47.5 × 74 | 52 g each | Sits on that rail (2 × M3 countersunk into T-nuts). A floor the bucket slides on, two side walls, and a crossbar carrying the wiper pad on a shelf. A low ridge on the floor is the bucket's detent. "T0"–"T4" on the crossbar. |
-| purge_bucket_T0–T4 | 88 × 49.5 × 51 | 49 g each | Same width, height and top opening as the earlier bucket: body 81 × 47 × 51. Below the rim the back slopes forward to clear the bed arms, so each holds about 132 cm³ (the earlier one held 159). Purge strands and drips that land at the back slide in off the slope and a 45° chamfer on the back rim. The front flange is the finger pull and the stop. A groove underneath takes the detent ridge. "T0"–"T4" on the flange. |
+| station_cradle_T0–T4 | 88 × 47.5 × 74 | 50 g each | Sits on that rail (2 × M3 countersunk into T-nuts). A floor the bucket slides on, two side walls, and a crossbar carrying the wiper pad on a shelf. A low ridge on the floor is the bucket's detent. "T0"–"T4" on the crossbar. |
+| purge_bucket_T0–T4 | 88 × 49.5 × 51 | 48 g each | Same width, height and top opening as the earlier bucket: body 81 × 47 × 51. Below the rim the back slopes forward to clear the bed arms, so each holds about 132 cm³ (the earlier one held 159). Purge strands and drips that land at the back slide in off the slope and a 45° chamfer on the back rim. The front flange is the finger pull and the stop. A groove underneath takes the detent ridge. "T0"–"T4" on the flange. |
 | Qidi wiper pad (owner's) | 15 × 27 × 4.7 | — | Glued with high-temperature RTV into the shelf behind the crossbar, against its front lip and right wall. The rear edge is 1.5 mm ahead of the PEI sheet. |
 
 **Emptying a bucket, no tools or fasteners.**
@@ -234,7 +234,7 @@ The dryers sit on a deck above the top hat. Pictures: `images/spool_deck.png`, `
 
 **Why it stands on the hat's corners.** The deck needs to be carried by the frame, not the lid. The hat's corners stand right on the corner uprights, so the deck's feet stand on them. A separate frame would mean cutting 30 mm holes through all four hat corners, or bolting posts through the side panels outside the hat.
 
-- **Feet** (`deck_foot_FR`/`FL`/`RR`/`RL`, all the same part, 48.5 g each).
+- **Feet** (`deck_foot_FR`/`FL`/`RR`/`RL`, all the same part, 48 g each).
   - Each stands on the rim at one corner, with a skirt that drops 8 mm over the hat's rounded corner (1 mm gap) to locate it.
   - Its legs stand 2 mm outside the lid's pocket and it is open over the lid, so it touches only the rim even though the lid stands above it.
   - Two 4 × 16 mm wood screws hold the deck to its top plate.
@@ -260,11 +260,11 @@ The dryers sit on a deck above the top hat. Pictures: `images/spool_deck.png`, `
 | Part | Size (mm) | Mass | Notes |
 |---|---|---|---|
 | joint_L / joint_R | 61.5 × 63 × 61.6 | 80 g each | Sit on the Y-rail MGN12C (4 × M3) and grip the beam end with the stock M5 screws and T-nuts. One toothed and one smooth idler each. Each carries a hard-stop face front and rear. |
-| carriage | 92 × 46 × 49 | 83 g | Sits on the X-rail MGN12C (4 × M3, countersunk under the INDX PCB cover). The INDX X-carriage bolts to its front on the 20 × 20 grid (4 × M3 heat-set inserts). Four 12 mm belt clamps with toothed racks. |
+| carriage | 92 × 46 × 49 | 79 g | Sits on the X-rail MGN12C (4 × M3, countersunk under the INDX PCB cover). The INDX X-carriage bolts to its front on the 20 × 20 grid (4 × M3 heat-set inserts). Four 12 mm belt clamps with toothed racks. |
 | carriage_clamp_cap_1–4 | — | 2–4 g | Each held by 2 × M3 + nut. |
-| front_idler_L / front_idler_R | 53.5 × 43 × 67 / 48 | 30 g | Sit on the side 3030 top (2 × M6). Slotted axle with two M3 push screws; lock after tensioning. Front Y hard stop for the joint. |
-| rear_corner_L_base / _top | 88.5 × 70.5 × 36.5 / 59.5 × 72 × 40 | 83 / 33 g | Motor A underneath. The base bolts under the side and rear 3030s; the top sits on them. 625 bearing bridge over the pulley. Rear Y hard stop. |
-| rear_corner_R_base / _top | 88.5 × 70.5 × 27 / 88.5 × 72 × 23 | 62 / 65 g | Motor B on top; 625 bearing bridge under the pulley. |
+| front_idler_L / front_idler_R | 53.5 × 43 × 67 / 48 | 29 / 28 g | Sit on the side 3030 top (2 × M6). Slotted axle with two M3 push screws; lock after tensioning. Front Y hard stop for the joint. |
+| rear_corner_L_base / _top | 88.5 × 70.5 × 36.5 / 59.5 × 72 × 40 | 82 / 32 g | Motor A underneath. The base bolts under the side and rear 3030s; the top sits on them. 625 bearing bridge over the pulley. Rear Y hard stop. |
+| rear_corner_R_base / _top | 88.5 × 70.5 × 27 / 88.5 × 72 × 23 | 61 / 64 g | Motor B on top; 625 bearing bridge under the pulley. |
 | dock_bracket_L / _R | 31 × 25 × 50 | 14 g | 1515 rail ends; slotted M6 into the front uprights. |
 
 The purge-station parts (two rail brackets, five cradles, five buckets) are listed under the stations above.
@@ -279,13 +279,13 @@ The purge-station parts (two rail brackets, five cradles, five buckets) are list
 
 | Plate | Parts | Time | PPS-CF |
 |---|---|---|---|
-| 1 Carriage, joints, front idlers | carriage, 4 clamp caps, joint L/R, front idler L/R | 15.2 h | 296 g |
-| 2 Rear corners | base L/R, top L/R | 11.3 h | 222 g |
-| 3 Purge cradles and rail brackets | station cradles T0–T4, dock brackets L/R, station brackets L/R | 16.3 h | 321 g |
-| 4 Purge buckets | purge buckets T0–T4 | 13.7 h | 241 g |
-| 5 PTFE coupler blocks and umbilical saddle | coupler blocks T0–T4, saddle, swivel | 7.1 h | 139 g |
-| 6 Spool deck feet | deck feet ×4 | 6.7 h | 152 g |
-| **Total** | 38 parts | **70.3 h** | **1,371 g** |
+| 1 Carriage, joints, front idlers | carriage, 4 clamp caps, joint L/R, front idler L/R | 14.6 h | 286 g |
+| 2 Rear corners | base L/R, top L/R | 11.1 h | 219 g |
+| 3 Purge cradles and rail brackets | station cradles T0–T4, dock brackets L/R, station brackets L/R | 16.0 h | 313 g |
+| 4 Purge buckets | purge buckets T0–T4 | 13.5 h | 235 g |
+| 5 PTFE coupler blocks and umbilical saddle | coupler blocks T0–T4, saddle, swivel | 7.0 h | 137 g |
+| 6 Spool deck feet | deck feet ×4 | 6.6 h | 150 g |
+| **Total** | 38 parts | **68.8 h** | **1,340 g** |
 
 - **Test slice.** No warnings and no path conflicts. Every plate starts with `PRINT_START BED=110 HOTEND=320 CHAMBER=65`.
 - **Orientation.** Each part lies on the face listed in `print/orientation.json`.
@@ -310,6 +310,17 @@ The purge-station parts (two rail brackets, five cradles, five buckets) are list
 
 Bosses are sized for M3 heat-set inserts (Ø4.0) and M5/M6 clearance.
 
+**Rounded edges** (owner, 2026-11-05: "round them like Bondtech's").
+- Every printed part's body is rounded before its holes, slots and pockets are cut, so those keep their sizes.
+- Radii: 5 mm on vertical corners and 2.5 mm on the other edges of the large parts; 2–4 mm on the small ones (coupler blocks, saddle, swivel, deck feet, bucket flange). Each bucket's inside is rounded to match its outside, so the walls stay 2.4 mm.
+- Square where a part seats or something must fit:
+  - faces against a 3030, rail or block, the motor faces, the INDX X-carriage face;
+  - the bucket's floor and side walls in its cradle, the wiper pad's pocket, the detent;
+  - the swivel's clevis, the dock and station rail ends, the coupler blocks' face and top;
+  - edges next to bosses and posts, and inside corners next to idlers, belts and the MGN12 blocks, where a fillet would add material.
+- The face that goes on the print bed gets a 1 mm 45° chamfer instead of a round, so nothing overhangs at the first layer.
+- `checks/rounding_report.json` lists what was rounded on each part. On `rear_corner_L_base` the corner rounds broke the later hole cuts, so its vertical corners stay square; its other edges are rounded.
+
 ## Hardware
 The full purchase list, with screw lengths worked out from each part's clamping thickness, is in [BOM.md](BOM.md). Nothing has been ordered.
 
@@ -333,6 +344,10 @@ The full purchase list, with screw lengths worked out from each part's clamping 
   - **FreeCAD motion check: no overlaps at any of the 31 poses, and none between the fixed parts and the stock frame, door, panels and electronics** (`checks/interference_report.json`; re-run 2026-11-03 with the coupler blocks refitted to the real top hat, same result).
   - **Station check: no overlaps at any of the 40 purge and wipe poses, the 4 mm shifted ones included.** Each nozzle touches only its own pad, and only during the wipe. All five buckets slide out clear. No station part touches the frame, door, bed arms or another station.
   - **Tubes and umbilical** (`checks/route_report.json`): no tube clashes; the umbilical stays at least 10.2 mm from every parked tube. See "PTFE tubes and the umbilical".
+  - **Re-run 2026-11-05 with every part rounded** (see "Rounded edges"):
+    - the motion and route reports are unchanged;
+    - the station check is unchanged apart from three buckets and one cradle standing 0.5–1.4 mm further from the bed arms;
+    - the top check is unchanged, with the coupler blocks still 0.96 mm under the hat's front wall.
   - **Station clearances to the bed:** 4.0 mm to the front bed arms at the top of their travel. As the bed moves past, the pads and pad shelves are 1.5 mm from the PEI sheet's front edge and the buckets' back rims 2.0 mm. Nothing on the bed reaches further forward than the PEI sheet.
   - **SolidCraft** (2026-10-30 run, before the station change) at the rear-right and front-left stops:
     - no unexpected overlaps;
