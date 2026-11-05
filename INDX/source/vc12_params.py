@@ -137,11 +137,10 @@ BUCKET_SLOPE_Z = 646.0         # the bucket's back slopes from (-323.5, 646) up 
 BUCKET_PULL = 60.0             # slide-out travel through the open door; then it lifts out
 DETENT_Y = -340.0              # ridge on the cradle floor, groove under the bucket: holds it home, no fasteners
 
-# ---------------------------------------------------------------- PTFE tubes and the head umbilical
+# ---------------------------------------------------------------- PTFE tubes and the head cable chain
 # Each tool's PTFE tube comes into the chamber from the top hat through a coupler block on the front top 3030, directly
-# above its dock, and hangs free to its tool. The head's cables keep the stock V-Core 4 umbilical from the back-middle
-# mount; a saddle on the head sends it out backward and level, so it stays under the parked tubes' arches when the
-# head works near the front. Shapes are solved as elastic rods (vc12_tubes.py) and checked in vc12_routecheck.py.
+# above its dock, and hangs free to its tool. The head's cable runs in a bought cable chain lying on its side (CHAIN
+# below). Shapes are solved as elastic rods (vc12_tubes.py) and checked in vc12_routecheck.py.
 TOP_FRONT_Z = (951.14, 981.14) # front top 3030 (the top hat sits on the top 3030s)
 TOP_FRONT_IN_Y = -337.5        # its inner face; T-slot centre at Z 966.14
 HAT_LID_Z = 1111.14            # lid seat in the owner's top hat, 130 mm above the frame top (vc12_hat.py)
@@ -151,19 +150,23 @@ TUBE_BEND = (993.0, 40.0)      # channel bends from vertical at this Z, radius 4
 TUBE_TILT = 30.0               # coupler axis: 30 deg below horizontal, pointing back ...
 TUBE_CANT = {0: 20.0, 4: 15.0} # ... and, for the end tools only, turned toward the middle (deg). Straight back, their
                                # long tubes bow out through the side frame when the head is on their side; turned more,
-                               # or the middle tools turned too, the parked arches lean into the umbilical's path
+                               # or the middle tools turned too, the parked arches lean into each other's path
 TUBE_FREE_FROM = 9.0           # free tube starts this far past the coupler boss face (PC4-M10 collet)
 TOOL_INLET_Z = (803.6, 801.1)  # INDX tool push-fit top: parked, on the head
 TUBE = dict(od=4.0, ei=17200.0, g_per_m=30.0, spare=60.0)   # PTFE 4 x 2 + filament + 1.0 mm piano wire; EI in N mm2
-UMB_ANCHOR = (0.0, 345.0, 775.0)       # stock V-Core 4 umbilical frame on the rear 3030, back middle
-UMB_LEAVE = 55.0               # deg forward of vertical where it leaves the frame
-UMB_SADDLE_DY = 107.4          # hinge pin (along X) at the saddle's tail: this far behind the nozzle ...
-UMB_SADDLE_Z = 852.5           # ... at this height. The umbilical is clamped in a swivel on the pin, so its end
-UMB_SWIVEL = (0.0, 90.0)       # turns freely from level-backward (0 deg) to straight up (a stop): it lies back when the
-                               # head works near the front (under the parked tubes) and swings up near the back
-                               # (fits inside the frame). Any single fixed angle fails one or the other; past
-                               # vertical it would lean over the head and cross the active tube.
-UMB = dict(od=12.0, ei=25000.0, g_per_m=95.0, spare=60.0)   # INDX Link cable in loom on 1.2 mm piano wire (stock V-Core 4)
+# Head cable chain (owner, 2026-11-05: a bought chain, brought in from the middle of the side). The INDX toolhead cable
+# (XT30 2+2: 24 V, GND, CAN) runs in an igus E2.10.16.018.0 lying on its side, so it bends only in the horizontal plane
+# and spans free from the left side wall to the head, like the K2 Plus / Bambu H-series chains. From a rear mount the
+# slack always pushed out behind the frame; from the middle of the side it folds into a U across the machine.
+CHAIN = dict(part="igus E2.10.16.018.0", bracket="igus E2.100.16.34PZ", inner=(10.0, 16.0), thick=15.0, tall=23.4,
+             pitch=20.0, r_min=18.0, spare=80.0, g_per_m=160.0, ei=20000.0)   # outer 15 x 23.4: 15 across, 23.4 tall
+CHAIN_Z = 865.0                # centre height: bottom 12.8 mm over the strain relief clip (840.5), top 29.8 mm under
+                               # the parked tubes' arches behind the docks (906.5 and up)
+CHAIN_MOUNT = (-354.5, 50.0)   # fixed end on the left side wall (inside the frame, 50 mm behind mid-depth), leaving +X
+CHAIN_HEAD_D = (30.0, 45.0)    # moving end this far right of and behind the nozzle, leaving +X: the cable comes up out
+                               # of Bondtech's strain relief clip and curves 30 mm sideways into the chain's end
+CHAIN_BRACKET_HOLES = 29.0     # igus E2.10 end bracket: 2 x M3 this far apart across the chain's width (vertical here);
+                               # from igus's drawing (Bi + 13), check against the bracket in hand
 # ---------------------------------------------------------------- Spool deck on the top hat
 # The dryers sit on a plywood deck carried by four printed feet, one on each corner of the owner's top hat
 # (vc12_hat.py). The hat's corners are solid and stand on the frame's corner uprights, so the load goes straight down

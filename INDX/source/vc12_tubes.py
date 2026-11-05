@@ -1,12 +1,12 @@
-"""PTFE tubes and the head umbilical as elastic rods (vc12_elastica), for the checks and the assembly.
+"""PTFE tubes and the head cable chain as elastic rods (vc12_elastica), for the checks and the assembly.
 
 Tubes: one continuous PTFE tube per tool, from its filament source, down through the top hat into its coupler block on
 the front top 3030 (directly above its dock), then free to the tool's push-fit. A 1.0 mm piano wire is taped along the
 free length. The free length is the farthest the tool can go from its coupler (any bed position, its purge station, its
 dock) plus TUBE['spare'].
-Umbilical: the stock V-Core 4 piano-wire umbilical from the back-middle frame mount to a swivel on a pin at the tail of
-a saddle on the head. The swivel turns freely, so the umbilical's end takes its natural angle: lying back when the head
-is near the front, standing up near the back. Its length is the farthest head position plus UMB['spare'].
+Cable chain: a bought chain lying on its side (P.CHAIN), so it bends only in the horizontal plane at CHAIN_Z. It leaves
+the mount on the left side wall toward +X and reaches the head's bracket travelling -X. Solved as a planar rod with no
+in-plane weight; its length is the farthest head position plus CHAIN['spare'].
 """
 import math
 import numpy as np
@@ -74,20 +74,13 @@ def head_positions(x_own):
     return pts
 
 
-def umb_end(x, y_nozzle):
-    return np.array([x, y_nozzle + P.UMB_SADDLE_DY, P.UMB_SADDLE_Z])
+def chain_end(x, y_nozzle):
+    return np.array([x + P.CHAIN_HEAD_D[0], y_nozzle + P.CHAIN_HEAD_D[1], P.CHAIN_Z])
 
 
-_U = math.radians(P.UMB_LEAVE)
-UMB_A = np.array(P.UMB_ANCHOR)
-UMB_TA = np.array([0.0, -math.sin(_U), math.cos(_U)])
-SWIVEL_STEPS = np.arange(P.UMB_SWIVEL[0], P.UMB_SWIVEL[1] + 0.1, 15.0)
-
-
-def swivel_dir(a):
-    """Direction the umbilical leaves the swivel, a deg up from level-backward (+Y)."""
-    r = math.radians(a)
-    return np.array([0.0, math.cos(r), math.sin(r)])
+CHAIN_A = np.array([P.CHAIN_MOUNT[0], P.CHAIN_MOUNT[1], P.CHAIN_Z])
+CHAIN_TA = np.array([1.0, 0.0, 0.0])            # leaving the side mount into the machine
+CHAIN_TB = np.array([-1.0, 0.0, 0.0])           # arriving at the head travelling -X (it leaves the head toward +X)
 
 
 def rod_energy(X, ei, w):
@@ -113,11 +106,11 @@ def tube_length(i):
     return _LEN[i]
 
 
-def umb_length():
-    if "umb" not in _LEN:
-        ends = [umb_end(hx, hy) for x in P.DOCK_X for hx, hy in head_positions(x)]
-        _LEN["umb"] = _length(UMB_A, ends, P.UMB["spare"])
-    return _LEN["umb"]
+def chain_length():
+    if "chain" not in _LEN:
+        ends = [chain_end(hx, hy) for x in P.DOCK_X for hx, hy in head_positions(x)]
+        _LEN["chain"] = _length(CHAIN_A, ends, P.CHAIN["spare"])
+    return _LEN["chain"]
 
 
 def _solve(A, tA, B, tB, L, ei, w):
@@ -142,19 +135,46 @@ def parked_nodes(i):
     return tube_nodes(i, P.DOCK_X[i], P.DOCK_NOZZLE_Y, parked=True)
 
 
-def umb_nodes(x_noz, y_noz, with_angle=False):
-    """Umbilical from the back-middle mount to the swivel: the swivel turns to the angle of least energy."""
-    best = None
-    for a in SWIVEL_STEPS:
-        X, ok = _solve(UMB_A, UMB_TA, umb_end(x_noz, y_noz), -swivel_dir(a), umb_length(), P.UMB["ei"], P.UMB["g_per_m"])
-        if ok:
-            e = rod_energy(X, P.UMB["ei"], P.UMB["g_per_m"])
-            if best is None or e < best[0]:
-                best = (e, X, a)
-    if best is None:
-        X, ok = _solve(UMB_A, UMB_TA, umb_end(x_noz, y_noz), -swivel_dir(45.0), umb_length(), P.UMB["ei"], P.UMB["g_per_m"])
-        return (X, False, 45.0) if with_angle else (X, False)
-    return (best[1], True, best[2]) if with_angle else (best[1], True)
+def chain_nodes(x_noz, y_noz):
+    """Centreline of the cable chain (flat, at CHAIN_Z) with the head's nozzle at (x_noz, y_noz)."""
+    return _solve(CHAIN_A, CHAIN_TA, chain_end(x_noz, y_noz), CHAIN_TB, chain_length(), P.CHAIN["ei"], 0.0)
+
+
+def chain_links(X):
+    """The chain as its links: one box per pitch along the centreline, 23.4 tall and 15 across (for the assembly)."""
+    import Part
+    from FreeCAD import Vector as V
+    s = np.concatenate([[0.0], np.cumsum(np.linalg.norm(np.diff(X, axis=0), axis=1))])
+    pitch, t, h = P.CHAIN["pitch"], P.CHAIN["thick"], P.CHAIN["tall"]
+    out = []
+    for u in np.arange(pitch / 2, s[-1], pitch):
+        c = np.array([np.interp(u, s, X[:, k]) for k in range(3)])
+        a = np.array([np.interp(max(u - pitch / 2, 0), s, X[:, k]) for k in range(3)])
+        b = np.array([np.interp(min(u + pitch / 2, s[-1]), s, X[:, k]) for k in range(3)])
+        ang = float(np.degrees(np.arctan2(b[1] - a[1], b[0] - a[0])))
+        bx = Part.makeBox(pitch - 0.6, t, h, V(-(pitch - 0.6) / 2, -t / 2, -h / 2))
+        bx.rotate(V(0, 0, 0), V(0, 0, 1), ang)
+        bx.translate(V(*c))
+        out.append(bx)
+    return Part.makeCompound(out)
+
+
+def chain_section(X, step=4.0):
+    """The chain as a solid for clash checks: a box per segment plus a post at each node, 15 across and 23.4 tall."""
+    import Part
+    from FreeCAD import Vector as V
+    t, h = P.CHAIN["thick"], P.CHAIN["tall"]
+    out = []
+    for a, b in zip(X[:-1], X[1:]):
+        L = float(np.linalg.norm(b - a))
+        if L < 1e-6:
+            continue
+        bx = Part.makeBox(L, t, h, V(0, -t / 2, -h / 2))
+        bx.rotate(V(0, 0, 0), V(0, 0, 1), float(np.degrees(np.arctan2(b[1] - a[1], b[0] - a[0]))))
+        bx.translate(V(*a))
+        out.append(bx)
+        out.append(Part.makeCylinder(t / 2, h, V(b[0], b[1], b[2] - h / 2)))
+    return Part.makeCompound(out)
 
 
 def pipe(X, r):
@@ -188,4 +208,4 @@ if __name__ == "__main__":
         X, ok = parked_nodes(i)
         print(f"T{i}: free tube {tube_length(i):.0f} mm; parked shape top Z {X[:, 2].max():.0f}, lowest Z "
               f"{X[2:-4, 2].min():.0f}, reaches back to Y {X[:, 1].max():.0f}, solved {ok}")
-    print(f"umbilical free length {umb_length():.0f} mm")
+    print(f"cable chain length {chain_length():.0f} mm")

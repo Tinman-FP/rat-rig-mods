@@ -15,11 +15,11 @@ Parts and hardware are in `BOM.md`. The printed parts are all in the Tinman proj
 
    | Plate | Parts | Time | PPS-CF |
    |---|---|---|---|
-   | 1 | carriage, 4 clamp caps, joints, front idlers | 14.6 h | 286 g |
+   | 1 | carriage, 4 clamp caps, joints, front idlers | 14.7 h | 287 g |
    | 2 | rear corner bases and tops | 11.1 h | 219 g |
-   | 3 | five cradles, dock and station rail brackets | 16.0 h | 313 g |
-   | 4 | five buckets | 13.5 h | 235 g |
-   | 5 | five PTFE coupler blocks, umbilical saddle and swivel | 7.0 h | 137 g |
+   | 3 | five cradles, dock and station rail brackets | 15.8 h | 311 g |
+   | 4 | five buckets | 13.6 h | 236 g |
+   | 5 | five PTFE coupler blocks and the two chain brackets | 9.2 h | 192 g |
    | 6 | four spool deck feet | 6.6 h | 150 g |
 
    Times and weights are from Tinman's slice.
@@ -32,7 +32,7 @@ Parts and hardware are in `BOM.md`. The printed parts are all in the Tinman proj
 ## 2. Strip the IDEX parts
 Power off and unplug the printer.
 
-1. Remove both IDEX toolheads with their Beacons, EBB42s and umbilicals, and the IDEX PTFE guides.
+1. Remove both IDEX toolheads with their Beacons, EBB42s and umbilicals, the stock umbilical frame at the back middle, and the IDEX PTFE guides.
 2. Release and remove all four belts.
 3. Remove the hybrid motor stacks and the front tensioners. Keep the **left lower** motor (it becomes motor A) and the **right upper** motor (motor B), with their cables.
 4. Remove the stock XY joiners from the beam ends. Keep the four M5 × 12 screws and square T-nuts in the beam.
@@ -139,8 +139,8 @@ Toothed idlers and pulleys run on the teeth; smooth idlers run on the back of th
    - To empty one: open the door, pull the flange, slide it out 60 mm and lift it out. No fasteners.
 6. Close the door. It should clear the bucket flanges by 3 mm and the dock fronts by 2 mm.
 
-## 10. PTFE tubes and the umbilical
-The tubes come in at the top front, directly above the docks, and hang free to the tools. The head's cables stay on the stock umbilical at the back middle. Its end is clamped in a swivel on a saddle on the head. The swivel turns freely: near the front the umbilical lies back, under the parked tubes' arches, and near the back it stands up, inside the frame.
+## 10. PTFE tubes and the cable chain
+The tubes come in at the top front, directly above the docks, and hang free to the tools. The head's cable runs in a cable chain lying on its side, from a mount on the left top 3030 to a bracket on the carriage beside the head. The chain only bends sideways, so it folds into a U across the machine as the head moves.
 
 1. **Coupler blocks.**
    - Bolt one block to the inner T-slot of the front top 3030 over each dock, with 2 × M6 × 10 into drop-in T-nuts. Centre each block on its dock's tool position, the same distances from the left upright as in the dock table.
@@ -157,17 +157,16 @@ The tubes come in at the top front, directly above the docks, and hang free to t
 
    - Tape a 1.0 mm piano wire along each free length, from the coupler to about 20 mm above the tool.
    - A parked tube then holds an arch above the front of the chamber, and the active tube swings clear above the head.
-3. **Umbilical saddle and swivel.**
-   - Clean the INDX PCB cover's top behind the cable strain relief, and stick the saddle on with VHB tape. Its arm points straight back.
-   - Fit an M3 heat-set insert in the swivel. Mount the swivel in the saddle's clevis with an M3 × 20 and a nyloc nut, snug but free to turn.
-   - The swivel turns from pointing straight back to pointing straight up. A stop on the saddle keeps it from leaning forward over the head.
-   - Lay the INDX Link cable from the strain relief along the saddle's groove and over the pin.
-4. **Umbilical.**
-   - Push the umbilical's 1.2 mm piano wire into the swivel's bore and lock it with an M3 set screw. Zip-tie the cable to the swivel and into the saddle's groove, with a little slack over the pin so the swivel can turn.
-   - At the back-middle mount, set the umbilical leaving about 55° forward of vertical.
-   - Leave 687 mm free between the mount and the swivel.
-5. **Hand check.** Move the head by hand to each front corner and each dock.
-   - The umbilical should pass under the parked tubes' arches.
+3. **Chain brackets.**
+   - Fit 2 M3 heat-set inserts in the carriage's top plate at its rear-right corner (they are modelled in), and 2 in each bracket's face.
+   - Bolt the head bracket to the carriage with 2 × M3 × 8. Its face stands behind and above the head's right side.
+   - Bolt the chain mount to the inner slot of the left top 3030 with 2 × M6 × 10 into drop-in T-nuts, 50 mm behind the 3030's middle (Y 25 to 95 from the frame centre).
+4. **Cable chain.**
+   - Take the igus E2.10.16.018.0 to 41 links (819 mm). Fit an igus end bracket on each end and screw them to the two brackets' faces (2 × M3 each), the chain lying on its side.
+   - Open the chain along its outer side and lay the INDX toolhead cable in, from the head end. The cable comes up out of Bondtech's strain relief clip and curves about 30 mm sideways into the chain's end.
+   - From the mount, run the cable up beside the mount, along the left top 3030 with slot clips to the left rear corner, and across the back to the electronics box.
+5. **Hand check.** Move the head by hand to each front corner, each dock and the back corners.
+   - The chain should fold flat into its U without dragging on the head or the frame, and stay under the parked tubes' arches.
    - No tube should touch the head.
    - Every tube top should stay below the top hat's lid.
 
@@ -219,4 +218,4 @@ Keep a hand on the power switch for every first move.
    - Then jog right 20 mm across the pad. The head should clear the next dock with room to spare.
 7. **Wiper height.** Adjust the station-rail brackets so each pad's top is 1.2 mm above the nozzle tip.
 8. **Purge test.** With each tool heated, run `PURGE_AND_WIPE TOOL=n`. Check the strand drops into that tool's bucket and the wipe crosses the pad.
-9. **First print.** Run a small single-tool print, then a tool-change test across all five tools. Watch the tubes and the umbilical during the first tool changes and at the front corners.
+9. **First print.** Run a small single-tool print, then a tool-change test across all five tools. Watch the tubes and the cable chain during the first tool changes and at the front corners.

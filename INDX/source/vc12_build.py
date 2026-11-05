@@ -166,7 +166,7 @@ def _concave(s, e):
 def soften(s, name=None, r_v=R_CORNER, r_h=R_EDGE, planes=(), boxes=(), hold=()):
     """Round a body made of boxes before its holes are cut: vertical corners with r_v, then the other straight edges
     and the arcs that pass made with r_h. Edges stay square where they lie in one of `planes` ((axis 0/1/2, value):
-    a face against an extrusion, rail, block, motor or the swivel). Inside corners stay square where they reach into
+    a face against an extrusion, rail, block or motor). Inside corners stay square where they reach into
     one of `boxes` (a mating part's space, grown by r_v + 0.5): a fillet there would add material into it; outside
     corners can only lose material, so they are rounded anyway. Every edge stays square in a `hold` box. The body's
     own bosses and posts (cylinders up to 8 mm radius) keep their edges and the edges near them. With `name`, the part's print-bed face (vc12_print.ORIENT)
@@ -324,6 +324,8 @@ def carriage():
     tools = []
     for dx, dy in P.X_BLOCK_HOLES:                                          # countersunk: the PCB cover is above
         tools.append(csk_z(dx, dy, top1))
+    for x in CHAIN_HEAD_SCREWS:                                             # chain head bracket: M3 inserts over the
+        tools.append(cyl_z(x, 16.5, M3_INSERT, top1 - 5.0, top1 + 1.0))     # rear-right leg
     for gx in (-10, 10):                                                    # INDX 20 x 20 grid, M3 inserts
         for gz in (grid_z - 10, grid_z + 10):
             tools.append(cyl_y(gx, gz, M3_INSERT, face - 1, face + 6.0))
@@ -634,7 +636,7 @@ def purge_bucket(i):
     return minus(b, tools)
 
 
-# ------------------------------------------------------------------ PTFE coupler blocks and the umbilical saddle
+# ------------------------------------------------------------------ PTFE coupler blocks and the cable chain brackets
 def rod(points, d):
     """Round bar along a polyline (cylinders and ball joints)."""
     out = []
@@ -675,44 +677,54 @@ def ptfe_coupler_block(i):
     return minus(body, tools)
 
 
-def umbilical_saddle():
-    """Stuck (VHB) to the INDX PCB cover's top behind the cable strain relief, at the head pose xc 0, yg 0. Its arm runs
-    back 46 mm past the head's rear face to a clevis; the umbilical swivel turns on an M3 pin there."""
-    ny = P.INDX_NOZZLE_DY
-    top = 794.0                                     # PCB cover top, 55-62 mm behind the nozzle (measured)
-    yp, zp = ny + P.UMB_SADDLE_DY, P.UMB_SADDLE_Z
-    pad = box(-16.0, 16.0, ny + 55.5, ny + 61.5, top + 0.3, top + 4.0)
-    post = box(-7.0, 7.0, ny + 55.5, ny + 61.5, top + 3.9, zp + 5.5)
-    arm = box(-9.0, 9.0, ny + 55.5, yp - 7.0, zp - 7.5, zp + 5.5)
-    cheeks = [box(sx * 5.6, sx * 9.0, yp - 7.1, yp + 7.0, zp - 7.5, zp + 7.0) for sx in (-1, 1)]
-    stop = box(-9.0, 9.0, yp - 9.5, yp - 6.4, zp + 7.0, zp + 12.0)                  # swivel stops at vertical
-    s = union([pad, post, arm, stop] + cheeks)
-    # square: the taped face, the clevis faces and everything the swivel sweeps
-    s = soften(s, "umbilical_saddle", r_v=3.0, r_h=1.5, planes=[(2, top + 0.3), (0, 5.6), (0, -5.6)],
-               hold=[bbox(-5.6, 5.6, yp - 9.5, yp + 30.0, zp - 7.0, zp + 30.0)])
-    tools = [box(-6.5, 6.5, ny + 50.0, yp - 6.0, zp - 3.5, zp + 6.0),                                 # cable groove
-             cyl_x(yp, zp, M3, -10.0, 10.0)]                                                         # pin
-    for yy in (ny + 70.0, ny + 90.0):                                                # zip-tie slots under the groove
-        tools.append(box(-9.5, 9.5, yy - 1.6, yy + 1.6, zp - 6.0, zp - 4.5))
-    return minus(s, tools)
+CHAIN_FACE_GAP = 4.0          # room for the igus end bracket between the chain's side and the printed face
 
 
-def umbilical_swivel(angle=0.0):
-    """Turns on the saddle's M3 pin. The umbilical's piano wire goes into its bore (M3 set screw in a heat-set insert);
-    the cable is zip-tied along its arm. Modelled at `angle` deg up from level-backward."""
-    ny = P.INDX_NOZZLE_DY
-    yp, zp = ny + P.UMB_SADDLE_DY, P.UMB_SADDLE_Z
-    hub = cyl_x(yp, zp, 12.0, -5.2, 5.2)
-    arm = box(-5.2, 5.2, yp, yp + 24.0, zp - 6.0, zp + 6.0)
-    sw = soften(union([hub, arm]), "umbilical_swivel", r_v=2.0, r_h=1.5)
-    tools = [cyl_x(yp, zp, M3 + 0.2, -6.0, 6.0),                                     # pin
-             cyl_y(0.0, zp + 2.5, 1.6, yp + 6.0, yp + 25.0),                         # piano wire bore (1.2 mm wire)
-             cyl_z(0.0, yp + 16.0, M3_INSERT, zp - 7.0, zp + 2.5),                   # set screw onto the wire
-             box(-5.6, 5.6, yp + 9.0, yp + 11.6, zp - 6.5, zp - 4.5)]                # zip-tie slot
-    sw = minus(sw, tools)
-    if angle:
-        sw.rotate(V(0, yp, zp), V(1, 0, 0), angle)
-    return sw
+def chain_head_bracket():
+    """Bolted to the carriage's rear-right corner (2 x M3 into inserts over the rear leg), beside the INDX PCB cover. It
+    rises to a face behind the chain's moving end, where the igus end bracket screws on (2 x M3 inserts, 29 mm apart
+    up and down). Printed lying on that face: base, upright and face share the plane Y = face0."""
+    top1 = P.X_BLOCK_Z[1] + 6.0                              # carriage top plate
+    bx, by = P.CHAIN_HEAD_D[0], P.INDX_NOZZLE_DY + P.CHAIN_HEAD_D[1]   # chain end over the head pose xc 0, yg 0
+    face0 = by + P.CHAIN["thick"] / 2 + CHAIN_FACE_GAP       # the face the igus bracket screws onto
+    z0, z1 = P.CHAIN_Z - P.CHAIN["tall"] / 2 - 2.0, P.CHAIN_Z + P.CHAIN["tall"] / 2 + 3.3
+    base = box(27.0, 45.0, face0, 22.0, top1, top1 + 6.0)
+    upright = box(33.0, 45.0, face0, 22.0, top1 + 5.9, z1)
+    face = box(bx, bx + 28.0, face0, face0 + 7.0, z0, z1)
+    b = union([base, upright, face])
+    b = soften(b, "chain_head_bracket", r_v=3.0, r_h=1.5, planes=[(2, top1)])
+    tools = []
+    for x in CHAIN_HEAD_SCREWS:                              # down into the carriage's inserts
+        tools += [cyl_z(x, 16.5, M3, top1 - 1.0, top1 + 7.0), cyl_z(x, 16.5, M3_CB, top1 + 3.0, top1 + 7.0)]
+    for dz in (-P.CHAIN_BRACKET_HOLES / 2, P.CHAIN_BRACKET_HOLES / 2):
+        tools.append(cyl_y(bx + 12.0, P.CHAIN_Z + dz, M3_INSERT, face0 - 1.0, face0 + 6.0))
+    return minus(b, tools)
+
+
+CHAIN_HEAD_SCREWS = (30.5, 41.5)  # X of the 2 x M3 into the carriage top plate, both at Y 16.5 over the rear-right leg
+
+
+def chain_mount():
+    """On the left top 3030's inner face (2 x M6 into its T-slot), mid-depth. A web drops to the chain's height and a face
+    behind the chain's fixed end takes the igus end bracket (2 x M3 inserts, 29 mm apart up and down). The cable comes
+    along the top 3030, down beside the web and into the chain's open end. Printed lying on its 3030 face."""
+    ax, ay = P.CHAIN_MOUNT
+    wall = -370.0                                            # left top 3030's inner face
+    zt0, zt1 = P.TOP_FRONT_Z
+    slot = (zt0 + zt1) / 2
+    face0 = ay + P.CHAIN["thick"] / 2 + CHAIN_FACE_GAP
+    z0, z1 = P.CHAIN_Z - P.CHAIN["tall"] / 2 - 2.0, P.CHAIN_Z + P.CHAIN["tall"] / 2 + 3.3
+    plate = box(wall, wall + 6.0, ay - 25.0, ay + 45.0, zt0 + 2.0, zt1 - 2.0)
+    web = box(wall, wall + 8.0, face0, ay + 38.0, z0, zt0 + 2.1)
+    face = box(wall + 6.0, ax + 24.5, face0, face0 + 7.0, z0, z1)
+    m = union([plate, web, face])
+    m = soften(m, "chain_mount", r_v=3.0, r_h=1.5)
+    tools = []
+    for y in (ay - 15.0, ay + 35.0):                         # M6 into the slot's T-nuts
+        tools += [cyl_x(y, slot, M6, wall - 1.0, wall + 7.0), cyl_x(y, slot, M6_CB, wall + 3.0, wall + 7.0)]
+    for dz in (-P.CHAIN_BRACKET_HOLES / 2, P.CHAIN_BRACKET_HOLES / 2):
+        tools.append(cyl_y(ax + 12.0, P.CHAIN_Z + dz, M3_INSERT, face0 - 1.0, face0 + 6.0))
+    return minus(m, tools)
 
 
 def _rounded_l(x0, x1, y0, y1, cx, cy, r, z0, z1):
@@ -780,8 +792,8 @@ def _build_parts():
         out[f"station_cradle_T{i}"] = station_cradle(i)
         out[f"purge_bucket_T{i}"] = purge_bucket(i)
         out[f"ptfe_coupler_block_T{i}"] = ptfe_coupler_block(i)
-    out["umbilical_saddle"] = umbilical_saddle()
-    out["umbilical_swivel"] = umbilical_swivel()
+    out["chain_head_bracket"] = chain_head_bracket()
+    out["chain_mount"] = chain_mount()
     for c in ("FR", "FL", "RR", "RL"):
         out[f"deck_foot_{c}"] = deck_foot(c)
     car, caps = carriage()

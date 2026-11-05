@@ -1,16 +1,19 @@
-"""Route check for the PTFE tubes and the head umbilical (run with FreeCAD's Python after vc12_build.py).
+"""Route check for the PTFE tubes and the head cable chain (run with FreeCAD's Python after vc12_build.py).
 
   VC12_CONTEXT=<stock_context.brep> VC12_INDX=<INDX FCStd>
   /Applications/FreeCAD.app/Contents/Resources/bin/python vc12_routecheck.py
 
 For each tool on the head in turn, at every bed position of a 9 x 9 grid (front clearance line to the rear stop), its
-purge spot, the end of its wipe and its own dock: the active tube and the umbilical are solved as elastic rods
-(vc12_tubes) and checked against the moving gantry (head, saddle, carriage, beam, joints) and the fixed parts (docks
+purge spot, the end of its wipe and its own dock: the active tube and the cable chain are solved as elastic rods
+(vc12_tubes; the chain lies flat, so it is a planar rod) and checked against the moving gantry (head, chain bracket,
+carriage, beam, joints) and the fixed parts (docks
 and parked tools, rails, coupler blocks, frame, top 3030s and the top hat). The four parked tubes are checked against
-the same at every pose. Each line's first and last 15 mm (its clamp and its tool or saddle) are left out.
-Reported, not counted as clashes: the gap from the umbilical to every parked tube (it must stay clear of them) and to
-every tube's feed (straight up from its block to the lid), the gap from the free tubes to the other tools' feeds, and
-tube-on-tube gaps (free tubes may touch, as on any multi-tool printer). Writes checks/route_report.json.
+the same at every pose. Each line's first and last 15 mm (its clamp and its tool or bracket) are left out; the chain
+is checked as its 15 x 23.4 section. Also reported for the chain: its tightest bend (igus minimum 18 mm), the gap
+between its own runs, and its reach. Reported, not counted as clashes: the gap from the chain to every parked tube, to
+the active tube and to every tube's feed (straight up from its block to the lid), the gap from the free tubes to the
+other tools' feeds, and tube-on-tube gaps (free tubes may touch, as on any multi-tool printer).
+Writes checks/route_report.json.
 """
 import json
 import os
@@ -68,6 +71,42 @@ def line_hits(Q, r, items):
     return out
 
 
+def chain_hits(X, items):
+    """The chain's section along X against (name, shape, bbox) items."""
+    out = {}
+    sol = T.chain_section(X)
+    bb = sol.BoundBox
+    for n, sh, sb in items:
+        if not bb.intersect(sb):
+            continue
+        try:
+            v = sol.common(sh).Volume
+        except Exception:
+            v = -1.0
+        if v > TOL or v < 0:
+            out[n] = round(v, 2)
+    return out
+
+
+def chain_gap(C, Q, rq):
+    """Clearance from line points Q (radius rq) to the flat chain's box section along C."""
+    dxy = np.linalg.norm(Q[:, None, :2] - C[None, :, :2], axis=2)
+    dz = np.abs(Q[:, None, 2] - C[None, :, 2])
+    ex = np.maximum(dxy - P.CHAIN["thick"] / 2, 0.0)
+    ez = np.maximum(dz - P.CHAIN["tall"] / 2, 0.0)
+    return float((np.hypot(ex, ez) - rq).min())
+
+
+def chain_shape(X):
+    d = np.diff(X, axis=0)
+    ds = np.linalg.norm(d, axis=1).mean()
+    t = d / np.linalg.norm(d, axis=1)[:, None]
+    r = ds / max(float(np.arccos(np.clip((t[1:] * t[:-1]).sum(1), -1, 1)).max()), 1e-9)
+    D = np.linalg.norm(X[:, None, :2] - X[None, :, :2], axis=2)
+    idx = np.abs(np.arange(len(X))[:, None] - np.arange(len(X))[None, :])
+    return r, float(D[idx > 4].min()) - P.CHAIN["thick"]
+
+
 def gap(A, B, ra, rb):
     d = A[:, None, :] - B[None, :, :]
     return float(np.sqrt((d * d).sum(-1)).min()) - ra - rb
@@ -102,12 +141,9 @@ def main():
     fixed.update(hat)
     fixed.update({n: s for n, s in zip(K.CTX_NAMES, ctx)})
     fixed_items = [(n, s, s.BoundBox) for n, s in fixed.items() if s.BoundBox.ZMax > 760.0]   # tubes stay above 800
-    saddle = Part.Shape()
-    saddle.read(os.path.join(K.PARTS, "umbilical_saddle.brep"))
-
-    rep = {"note": __doc__.split("\n")[0], "tube_free_length_mm": {}, "umbilical_free_length_mm": round(T.umb_length()),
-           "parked": {}, "clashes": [], "not_converged": [], "umbilical_to_parked_min_gap": None,
-           "umbilical_to_active_min_gap": None, "tube_contacts": 0, "tube_min_gap": None, "extremes": {}}
+    rep = {"note": __doc__.split("\n")[0], "tube_free_length_mm": {}, "chain_length_mm": round(T.chain_length()),
+           "chain": P.CHAIN["part"], "parked": {}, "clashes": [], "not_converged": [], "chain_to_parked_min_gap": None,
+           "chain_to_active_min_gap": None, "tube_contacts": 0, "tube_min_gap": None, "extremes": {}}
     parked = {}
     for i in range(P.INDX_TOOLS):
         X, ok = T.parked_nodes(i)
@@ -127,72 +163,77 @@ def main():
                                                      for j in parked for k in feeds if k != j), 1)
     print("parked tubes done", round(time.time() - T0), "s", flush=True)
 
-    umb_cache, worst_up, worst_ua, tube_gaps, ext = {}, [], [], [], dict(active_low=1e9, active_top=-1e9, umb_low=1e9, umb_top=-1e9)
+    ch_cache, worst_up, worst_ua, tube_gaps = {}, [], [], []
+    ext = dict(active_low=1e9, active_top=-1e9, chain_r_min=1e9, chain_self_gap=1e9, chain_x_max=-1e9, chain_y_max=-1e9,
+               chain_y_min=1e9)
     worst_uf, worst_af = [], []
     for i in range(P.INDX_TOOLS):
         for hx, hy in T.head_positions(P.DOCK_X[i]):
             yg = hy - P.INDX_NOZZLE_DY
             mov = K.moving_parts(hx, yg, indx)
-            sad = saddle.copy()
-            sad.translate(V(hx, yg, 0))
-            moving_items = [(n, s, s.BoundBox) for n, s in list(mov.items()) + [("umbilical_saddle", sad)]
+            moving_items = [(n, s, s.BoundBox) for n, s in mov.items()
                             if not n.startswith("belt_") and s.BoundBox.ZMax > 760.0]
             Xa, oka = T.tube_nodes(i, hx, hy)
             key = (round(hx, 1), round(hy, 1))
-            if key not in umb_cache:
-                umb_cache[key] = T.umb_nodes(hx, hy)
-            Xu, oku = umb_cache[key]
+            if key not in ch_cache:
+                ch_cache[key] = T.chain_nodes(hx, hy)
+            Xu, oku = ch_cache[key]
             pose = dict(tool=f"T{i}", x=hx, y=hy)
-            for nm, ok in (("active", oka), ("umbilical", oku)):
+            for nm, ok in (("active", oka), ("chain", oku)):
                 if not ok:
                     rep["not_converged"].append(dict(line=nm, **pose))
             Qa, Qu = trimmed(Xa), trimmed(Xu)
             ext["active_low"] = min(ext["active_low"], float(Qa[:, 2].min()))
             ext["active_top"] = max(ext["active_top"], float(Xa[:, 2].max()))
-            ext["umb_low"] = min(ext["umb_low"], float(Qu[:, 2].min()))
-            ext["umb_top"] = max(ext["umb_top"], float(Xu[:, 2].max()))
             skip_a = (f"ptfe_coupler_block_T{i}", f"dock_T{i}", f"parked_T{i}", "indx_held_tool")
             for n, v in line_hits(Qa, P.TUBE["od"] / 2 + 0.5, [it for it in moving_items + fixed_items if it[0] not in skip_a]).items():
                 rep["clashes"].append(dict(line="active tube", **pose, part=n, vol=v))
-            if key not in rep.setdefault("_umb_done", []):
-                rep["_umb_done"].append(key)
-                for n, v in line_hits(Qu, P.UMB["od"] / 2, [it for it in moving_items + fixed_items
-                                                            if it[0] not in ("umbilical_saddle", "umbilical_swivel")]).items():
-                    rep["clashes"].append(dict(line="umbilical", **pose, part=n, vol=v))
+            if key not in rep.setdefault("_chain_done", []):
+                rep["_chain_done"].append(key)
+                r_b, g_s = chain_shape(Xu)
+                ext["chain_r_min"] = min(ext["chain_r_min"], r_b)
+                ext["chain_self_gap"] = min(ext["chain_self_gap"], g_s)
+                ext["chain_x_max"] = max(ext["chain_x_max"], float(Xu[:, 0].max()))
+                ext["chain_y_max"] = max(ext["chain_y_max"], float(Xu[:, 1].max()))
+                ext["chain_y_min"] = min(ext["chain_y_min"], float(Xu[:, 1].min()))
+                for n, v in chain_hits(Qu, [it for it in moving_items + fixed_items
+                                            if it[0] not in ("chain_head_bracket", "chain_mount")]).items():
+                    rep["clashes"].append(dict(line="chain", **pose, part=n, vol=v))
             for j in range(P.INDX_TOOLS):                         # parked tubes against the head at this pose
                 if j == i:
                     continue
                 for n, v in line_hits(trimmed(parked[j]), P.TUBE["od"] / 2 + 0.5, moving_items).items():
                     rep["clashes"].append(dict(line=f"parked T{j}", **pose, part=n, vol=v))
-                g = gap(Qu, trimmed(parked[j]), P.UMB["od"] / 2, P.TUBE["od"] / 2 + 0.5)
+                g = chain_gap(Qu, trimmed(parked[j]), P.TUBE["od"] / 2 + 0.5)
                 worst_up.append((round(g, 1), f"T{j}", pose))
                 tg = gap(Qa, trimmed(parked[j]), P.TUBE["od"] / 2 + 0.5, P.TUBE["od"] / 2 + 0.5)
                 tube_gaps.append(tg)
-            worst_ua.append((round(gap(Qu[:-8], Qa[:-8], P.UMB["od"] / 2, P.TUBE["od"] / 2 + 0.5), 1), pose))
+            worst_ua.append((round(chain_gap(Qu, Qa[:-4], P.TUBE["od"] / 2), 1), pose))
             for k, F in feeds.items():                         # the feeds: straight up from each block to the lid
-                worst_uf.append((round(gap(Qu, F, P.UMB["od"] / 2, P.TUBE["od"] / 2), 1), f"T{k}", pose))
+                worst_uf.append((round(chain_gap(Qu, F, P.TUBE["od"] / 2), 1), f"T{k}", pose))
                 if k != i:
                     worst_af.append((round(gap(Qa, F, r_t, P.TUBE["od"] / 2), 1), f"T{k}", pose))
         print(f"T{i} active done, clashes so far {len(rep['clashes'])}, {round(time.time() - T0)} s", flush=True)
-    rep.pop("_umb_done", None)
+    rep.pop("_chain_done", None)
     worst_up.sort(key=lambda w: w[0])
     worst_ua.sort(key=lambda w: w[0])
-    rep["umbilical_to_parked_min_gap"] = dict(mm=worst_up[0][0], worst=[dict(gap=g, parked=t, **p) for g, t, p in worst_up[:6]])
-    rep["umbilical_to_active_min_gap"] = dict(mm=worst_ua[0][0], worst=[dict(gap=g, **p) for g, p in worst_ua[:6]])
+    rep["chain_to_parked_min_gap"] = dict(mm=worst_up[0][0], worst=[dict(gap=g, parked=t, **p) for g, t, p in worst_up[:6]])
+    rep["chain_to_active_min_gap"] = dict(mm=worst_ua[0][0], touching=sum(1 for g, p in worst_ua if g < 0),
+                                          worst=[dict(gap=g, **p) for g, p in worst_ua[:6]])
     worst_uf.sort(key=lambda w: w[0])
     worst_af.sort(key=lambda w: w[0])
-    rep["umbilical_to_feeds_min_gap"] = dict(mm=worst_uf[0][0], worst=[dict(gap=g, feed=t, **p) for g, t, p in worst_uf[:6]])
+    rep["chain_to_feeds_min_gap"] = dict(mm=worst_uf[0][0], worst=[dict(gap=g, feed=t, **p) for g, t, p in worst_uf[:6]])
     rep["active_to_other_feeds_min_gap"] = dict(mm=worst_af[0][0], worst=[dict(gap=g, feed=t, **p) for g, t, p in worst_af[:6]])
     rep["tube_contacts"] = sum(1 for g in tube_gaps if g < 0)
     rep["tube_min_gap"] = round(min(tube_gaps), 1)
     rep["extremes"] = {k: round(v, 1) for k, v in ext.items()}
     rep["head_top_z"] = 840.5
-    rep["saddle_top_z"] = round(saddle.BoundBox.ZMax, 1)
+    rep["chain_band_z"] = [round(P.CHAIN_Z - P.CHAIN["tall"] / 2, 1), round(P.CHAIN_Z + P.CHAIN["tall"] / 2, 1)]
     out = os.path.join(HERE, "..", "checks", "route_report.json")
     json.dump(rep, open(out, "w"), indent=1)
-    print(json.dumps({k: rep[k] for k in ("tube_free_length_mm", "umbilical_free_length_mm", "parked", "extremes",
-                                          "umbilical_to_parked_min_gap", "umbilical_to_active_min_gap",
-                                          "umbilical_to_feeds_min_gap", "active_to_other_feeds_min_gap",
+    print(json.dumps({k: rep[k] for k in ("tube_free_length_mm", "chain_length_mm", "parked", "extremes",
+                                          "chain_to_parked_min_gap", "chain_to_active_min_gap",
+                                          "chain_to_feeds_min_gap", "active_to_other_feeds_min_gap",
                                           "parked_to_other_feeds_min_gap", "tube_contacts",
                                           "tube_min_gap", "not_converged")}, indent=1)[:4000])
     print("clashes:", len(rep["clashes"]), rep["clashes"][:10])
