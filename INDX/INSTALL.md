@@ -15,12 +15,12 @@ Parts and hardware are in `BOM.md`. The printed parts are all in the Tinman proj
 
    | Plate | Parts | Time | PPS-CF |
    |---|---|---|---|
-   | 1 | carriage, 4 clamp caps, joints, front idlers | 15.2 h | 295 g |
-   | 2 | rear corner bases and tops | 11.4 h | 223 g |
-   | 3 | five cradles, dock and station rail brackets | 16.3 h | 322 g |
+   | 1 | carriage, 4 clamp caps, joints, front idlers | 15.2 h | 296 g |
+   | 2 | rear corner bases and tops | 11.3 h | 222 g |
+   | 3 | five cradles, dock and station rail brackets | 16.3 h | 321 g |
    | 4 | five buckets | 13.7 h | 241 g |
-   | 5 | five PTFE coupler blocks, umbilical saddle and swivel | 7.1 h | 138 g |
-   | 6 | four spool deck feet | 8.3 h | 190 g |
+   | 5 | five PTFE coupler blocks, umbilical saddle and swivel | 7.1 h | 139 g |
+   | 6 | four spool deck feet | 6.7 h | 152 g |
 
    Times and weights are from Tinman's slice.
 2. Remove the supports. On the left rear-corner top, clean up the feet before they sit on the 3030s.
@@ -172,12 +172,11 @@ The tubes come in at the top front, directly above the docks, and hang free to t
    - Every tube top should stay below the top hat's lid.
 
 ## 11. Spool deck and dryers
-The dryers sit on a plywood deck above the top hat, on four printed feet. Each foot stands on the hat's rim at one corner, straight over a frame upright, so the weight goes into the frame and nothing rests on the lid. The deck's underside sits 40 mm above the lid's top. That keeps the chamber's heat off the dryers and clears stock-height (33 mm) handles by 7 mm. The tubes rise straight out of their blocks, through five holes in the lid and up through a notch in the deck's front edge.
+The dryers sit on a plywood deck above the top hat, on four printed feet. Each foot stands on the hat's rim at one corner, straight over a frame upright, so the weight goes into the frame and nothing rests on the lid. The deck's underside sits 29 mm above the lid's top. That keeps the chamber's heat off the dryers and clears the lid's 22 mm handles by 7 mm. The tubes rise straight out of their blocks, through five holes in the lid and up through a notch in the deck's front edge.
 
 1. **Lid holes.** Take the lid out of the hat.
    - Mark five holes 43 mm from its front edge, at 125, 247, 369, 491 and 613 mm from its left edge (seen from the front).
    - Drill them 3 mm first. Put the lid back in its pocket and look down through each hole: it should sit straight above its block's channel. Then open the holes to 6 mm and deburr them. Use a bit suited to the panel and back it with scrap.
-   - Check the handles: with the lid in place, they should stand no more than 33 mm above it. If they are taller, the deck needs taller feet, or the handles need moving off the deck's corners.
 2. **Deck.** Cut 820 × 756 mm from 15 mm birch plywood.
    - Cut a notch in one long edge, which becomes the front: 538 mm wide and 72 mm deep, starting 110 mm from the left end (so 172 mm from the right end).
    - Round the notch's back edge, where the tubes bend over it. Seal or paint the deck.

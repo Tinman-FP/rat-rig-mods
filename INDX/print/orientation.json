@@ -517,10 +517,10 @@
   "size_mm": [
    44.0,
    44.0,
-   52.9
+   41.9
   ],
   "bed_contact_mm2": 1862,
-  "volume_cm3": 46.89,
+  "volume_cm3": 37.32,
   "solid": true,
   "non_manifold": false
  },
@@ -532,10 +532,10 @@
   "size_mm": [
    44.0,
    44.0,
-   52.9
+   41.9
   ],
   "bed_contact_mm2": 1862,
-  "volume_cm3": 46.89,
+  "volume_cm3": 37.32,
   "solid": true,
   "non_manifold": false
  },
@@ -547,10 +547,10 @@
   "size_mm": [
    44.0,
    44.0,
-   52.9
+   41.9
   ],
   "bed_contact_mm2": 1862,
-  "volume_cm3": 46.89,
+  "volume_cm3": 37.32,
   "solid": true,
   "non_manifold": false
  },
@@ -562,10 +562,10 @@
   "size_mm": [
    44.0,
    44.0,
-   52.9
+   41.9
   ],
   "bed_contact_mm2": 1862,
-  "volume_cm3": 46.89,
+  "volume_cm3": 37.32,
   "solid": true,
   "non_manifold": false
  }
