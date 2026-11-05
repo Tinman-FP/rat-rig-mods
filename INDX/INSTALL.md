@@ -200,13 +200,16 @@ The stock side spool holders are no longer needed. You can leave them on or take
    - Switch the Klipper folder to Kalico, then flash the INDX toolboard from it (Bondtech's guide).
    - Keep the chamber, heat-soak, precheck, counter, RGB and camera macros. Retire the IDEX kinematics files and the dual-Beacon setup.
    - Point INDX's saved state at the existing `variables.cfg`; Klipper allows only one `[save_variables]`.
-4. **Config.** Add `klipper/motion_corexy12_indx.cfg` in place of the old motion files and the hybrid CoreXY kinematics, and add `klipper/purge_wipe.cfg`. Both are drafts. Set the INDX values listed at the end of the motion file.
+4. **Config.** Add `klipper/motion_corexy12_indx.cfg` in place of the old motion files and the hybrid CoreXY kinematics, and add `klipper/purge_wipe.cfg` and `klipper/homing_indx.cfg`. All three are drafts. Include `homing_indx.cfg` after Bondtech's `homing.cfg` so its homing replaces Bondtech's. Set the INDX values listed at the end of the motion file.
 
 ## 13. Commissioning
 Keep a hand on the power switch for every first move.
 
 1. **Directions.** Run `STEPPER_BUZZ` on each motor. Check the CoreXY directions: motor A moves the head along X+Y, and motor B along X−Y.
-2. **Homing.** Home Y to the **rear** stop, then X on the clearance line (Klipper Y 0). Y must never home toward the docks.
+2. **Homing.** Y homes to the **rear** stop, never toward the docks. `homing_indx.cfg` homes Y then X twice each, ending 4 mm off the rear and left stops.
+   - Start with the head in the middle of the bed. Run `G28 Y` alone, then `G28 X`, each with a hand on the power switch. If an axis stops before reaching its stop, lower that motor's `driver_SGTHRS`. If it hits the stop and keeps pushing, raise it. Then try again.
+   - Then run `G28`. Check the head goes to Y 388.8 before homing X, and never comes forward of Y 0 except to fetch T0.
+   - Repeatability: run `G28` five times. After each, send `G0 X250 Y250 F6000`, `M400`, then `GET_POSITION`, and note the `mcu:` numbers for `stepper_x` and `stepper_y`. They should agree within 16 (0.05 mm; one microstep is 0.003 mm).
 3. **Limits.** Check the stops and soft limits: X −35 to 545, Y −41 to 488.8.
 4. **Z.** With the bed 20 mm higher, re-home Z, re-measure Z max, then level and mesh with the INDX probe.
 5. **Docks.** Calibrate them with Bondtech's procedure (`CAL_SET_DOCK_Y`, `CALIBRATE_DOCK_X TOOL=n`).

@@ -1,0 +1,204 @@
+{
+ "pass": true,
+ "limits": {
+  "x": [
+   -35.0,
+   545.0
+  ],
+  "y": [
+   -41.0,
+   488.8
+  ]
+ },
+ "endstops": {
+  "x": -35.0,
+  "y": 488.8
+ },
+ "clearance_y": 0.0,
+ "cases": [
+  {
+   "case": "G28",
+   "start": {
+    "x": 300,
+    "y": 200
+   },
+   "homed": "",
+   "offset": [
+    0,
+    0
+   ],
+   "error": null,
+   "sequence": [
+    "_INDX_SAFE_Z_HOP",
+    "home Y",
+    "move Y 388.8",
+    "home X at Y 388.8",
+    "move X 65.0",
+    "home Y",
+    "move Y 484.8",
+    "home X at Y 484.8",
+    "move X -31.0",
+    "_INDX_HOME_Z"
+   ],
+   "end": {
+    "x": -31.0,
+    "y": 484.8
+   }
+  },
+  {
+   "case": "G28 X Y",
+   "start": {
+    "x": 102,
+    "y": -40
+   },
+   "homed": "xyz",
+   "offset": [
+    0,
+    0
+   ],
+   "error": null,
+   "sequence": [
+    "_INDX_SAFE_Z_HOP",
+    "home Y",
+    "move Y 388.8",
+    "home X at Y 388.8",
+    "move X 65.0",
+    "home Y",
+    "move Y 484.8",
+    "home X at Y 484.8",
+    "move X -31.0"
+   ],
+   "end": {
+    "x": -31.0,
+    "y": 484.8
+   }
+  },
+  {
+   "case": "G28 X",
+   "start": {
+    "x": 149,
+    "y": -40
+   },
+   "homed": "xyz",
+   "offset": [
+    0,
+    0
+   ],
+   "error": null,
+   "sequence": [
+    "_INDX_SAFE_Z_HOP",
+    "move Y 388.8",
+    "home X at Y 388.8",
+    "move X 65.0",
+    "home X at Y 388.8",
+    "move X -31.0"
+   ],
+   "end": {
+    "x": -31.0,
+    "y": 388.8
+   }
+  },
+  {
+   "case": "G28 X",
+   "start": {
+    "x": 200,
+    "y": 100
+   },
+   "homed": "",
+   "offset": [
+    0,
+    0
+   ],
+   "error": null,
+   "sequence": [
+    "_INDX_SAFE_Z_HOP",
+    "home Y",
+    "move Y 388.8",
+    "home X at Y 388.8",
+    "move X 65.0",
+    "home Y",
+    "move Y 484.8",
+    "home X at Y 484.8",
+    "move X -31.0"
+   ],
+   "end": {
+    "x": -31.0,
+    "y": 484.8
+   }
+  },
+  {
+   "case": "G28 Y",
+   "start": {
+    "x": 250,
+    "y": 300
+   },
+   "homed": "xyz",
+   "offset": [
+    0,
+    0
+   ],
+   "error": null,
+   "sequence": [
+    "_INDX_SAFE_Z_HOP",
+    "home Y",
+    "move Y 388.8",
+    "home Y",
+    "move Y 484.8"
+   ],
+   "end": {
+    "x": 250,
+    "y": 484.8
+   }
+  },
+  {
+   "case": "G28 Z",
+   "start": {
+    "x": 250,
+    "y": 250
+   },
+   "homed": "xy",
+   "offset": [
+    0,
+    0
+   ],
+   "error": null,
+   "sequence": [
+    "_INDX_SAFE_Z_HOP",
+    "_INDX_HOME_Z"
+   ],
+   "end": {
+    "x": 250,
+    "y": 250
+   }
+  },
+  {
+   "case": "G28",
+   "start": {
+    "x": 250,
+    "y": 250
+   },
+   "homed": "xyz",
+   "offset": [
+    1.8,
+    -2.5
+   ],
+   "error": null,
+   "sequence": [
+    "_INDX_SAFE_Z_HOP",
+    "home Y",
+    "move Y 388.8",
+    "home X at Y 388.8",
+    "move X 65.0",
+    "home Y",
+    "move Y 484.8",
+    "home X at Y 484.8",
+    "move X -31.0",
+    "_INDX_HOME_Z"
+   ],
+   "end": {
+    "x": -31.0,
+    "y": 484.8
+   }
+  }
+ ]
+}

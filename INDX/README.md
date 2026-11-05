@@ -2,7 +2,7 @@
 
 An unofficial conversion for the Rat Rig V-Core 4.1 500 IDEX: a single carriage with a Bondtech INDX five-tool changer on true 12 mm-belt CoreXY, each tool with its own purge bucket and wiper. Not affiliated with or endorsed by Rat Rig, Bondtech or Qidi.
 
-Status (2026-11-03): **development design, checked in CAD only.** Nothing is printed, bought or fitted. The Klipper file is a draft that has not been run.
+Status (2026-11-03): **development design, checked in CAD only.** Nothing is printed, bought or fitted. The Klipper files are drafts that have not been run.
 
 - **Build documents:** [INSTALL.md](INSTALL.md) is the installation guide, and [BOM.md](BOM.md) (or `BOM.csv`) is the bill of materials.
 - **Print file:** `print/VC41_CoreXY12_INDX_PPSCF_QidiPlus4_06.3mf` holds every printed part.
@@ -323,6 +323,7 @@ The full purchase list, with screw lengths worked out from each part's clamping 
 - **SolidCraft 0.27.1** cross-check:
   - `inspect.clearance` with a 1 mm threshold;
   - `inspect.measure`, which confirmed every body is closed and printable.
+- `vc12_homingcheck.py` reads the Klipper drafts with Klipper's own config parser and template settings, then replays every move of `G28`, `G28 X Y`, `G28 X` (from a purge spot, and with Y unknown), `G28 Y`, `G28 Z` and `G28` with a tool offset (`checks/homing_report.json`). All pass: each X pass is at Y 388.8 or 484.8, every move stays inside the soft limits, and `G28 Z` alone makes no X/Y move. Bondtech's helper macros are stand-ins here, so the tool pickup and Z probe are not exercised.
 - `vc12_check.py --station` checks the five purge stations (`checks/station_report.json`), using Bondtech's real duct meshes for the head:
   - per tool: on the way in, at the purge spot, at the front stop, at both ends of the wipe stroke, and on the way out;
   - the purge spot again with the head 4 mm closer to its own dock, and the end of the stroke 4 mm closer to the next dock;
@@ -353,7 +354,11 @@ The full purchase list, with screw lengths worked out from each part's clamping 
 2. **X block.** INDX expects an MGN12H. This carriage sits on the stock MGN12C. An MGN12H, needing a matched rail and preload, would stiffen yaw.
 3. **Belt clamps.** These are a new design: a toothed rack plus a screw cap. Pull-test them before trusting them.
 4. **Head beside the docks.** At its purge spot the head is 5.6 mm further from its own dock than it needs to be, and at the end of the wipe it is 10.5 mm further from the next dock. Both figures come from Bondtech's duct model. Before the first purge, jog the real head slowly to each purge spot and the end of each wipe stroke and look at the gaps. The ducts must be mounted as in Bondtech's model.
-5. **Homing.** Y must home to the rear. The front stop is 1 mm past pickup, where the head already sits in the dock rail's slot.
+5. **Homing** (Y to the rear: owner agreed, 2026-11-05). Y must never home toward the docks: the front stop is 1 mm past pickup, where the head already sits in the dock rail's slot.
+   - `klipper/homing_indx.cfg` (draft) is Bondtech's INDX homing with the X/Y part done the way the owner's FibreSeek Seeker 3 does it: lift Z, home Y to the rear stop, go 100 mm in front of it, home X, go 100 mm right of it, then home Y and X again from there, with a 1 s pause before each pass. The head ends 4 mm off each stop. Then T0 is picked up and Z homes on the load cell, as in Bondtech's file.
+   - The second pass starts from the same spot every time, so the stall is detected at the same speed and distance. That replaces Klipper's slow 5 mm/s re-home, which Klipper's own docs say adds nothing for sensorless homing (`homing_retract_dist: 0` now).
+   - X is homed only at Y 388.8 or 484.8, far behind the clearance line. `G28 X` with Y already homed first moves straight back to Y 388.8.
+   - Still to do on the machine: tune `driver_SGTHRS` and check the homing repeats (INSTALL section 13).
 6. **Firmware: Kalico** (owner, 2026-11-03).
    - Bondtech calls Kalico its reference INDX firmware; `indx_klipper` follows it for mainline Klipper.
    - The INDX head's load cell is the Z probe. Bondtech's load-cell settings use Kalico's pullback tap analysis, which mainline Klipper lacks. The optional INDX bed scanner needs Kalico from 2026-10-08 on.
@@ -363,7 +368,7 @@ The full purchase list, with screw lengths worked out from each part's clamping 
    - These need redoing for the INDX:
      - the toolboard and extruder sections;
      - the filament sensors and prechecks, for five tools;
-     - homing, using Bondtech's macro with sensorless XY;
+     - homing: drafted in `klipper/homing_indx.cfg` (item 5);
      - power-loss recovery.
    - INDX's saved state goes in the existing `variables.cfg`, since Klipper allows only one `[save_variables]`.
    - Take a fresh snapshot of the live printer before changing anything.
