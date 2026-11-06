@@ -41,8 +41,8 @@ ORIENT = {
        for i in range(5)},
     **{f"ptfe_coupler_block_T{i}": ("-Y", "mounting plate down; supports under the bend and the coupler boss")
        for i in range(5)},
-    "umbilical_saddle": ("-Y", "front face down, arm standing up; no supports"),
-    "umbilical_swivel": ("-X", "flat side down"),
+    "chain_head_bracket": ("-Y", "lying on the face the igus end bracket screws onto; no supports"),
+    "chain_mount": ("-X", "lying on its 3030 face; no supports"),
     **{f"deck_foot_{c}": ("+Z", "deck plate down; the legs and skirt stand up, no supports") for c in ("FR", "FL", "RR", "RL")},
 }
 SUPPORT = {"carriage", "joint_L", "joint_R", "front_idler_L", "front_idler_R", "rear_corner_L_base",

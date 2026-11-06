@@ -269,25 +269,25 @@
   "solids": 1,
   "mass_g": 25.6
  },
- "umbilical_saddle": {
-  "rounded": 17,
-  "chamfered": 13,
-  "left_square": 6,
-  "volume_change_mm3": -268.6,
+ "chain_head_bracket": {
+  "rounded": 24,
+  "chamfered": 14,
+  "left_square": 9,
+  "volume_change_mm3": -741.6,
   "fallback": 0,
   "valid": true,
   "solids": 1,
-  "mass_g": 14.4
+  "mass_g": 41.0
  },
- "umbilical_swivel": {
-  "rounded": 5,
-  "chamfered": 3,
-  "left_square": 0,
-  "volume_change_mm3": -88.5,
+ "chain_mount": {
+  "rounded": 26,
+  "chamfered": 14,
+  "left_square": 18,
+  "volume_change_mm3": -611.1,
   "fallback": 0,
   "valid": true,
   "solids": 1,
-  "mass_g": 4.2
+  "mass_g": 48.7
  },
  "deck_foot_FR": {
   "rounded": 10,
@@ -325,7 +325,7 @@
   "fallback": 0,
   "valid": true,
   "solids": 1,
-  "mass_g": 79.2
+  "mass_g": 79.0
  },
  "carriage_clamp_cap_1": {
   "fallback": 0,

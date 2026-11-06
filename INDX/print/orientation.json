@@ -10,7 +10,7 @@
    49.0
   ],
   "bed_contact_mm2": 147,
-  "volume_cm3": 60.93,
+  "volume_cm3": 60.8,
   "solid": true,
   "non_manifold": false
  },
@@ -480,32 +480,32 @@
   "non_manifold": false
  },
  {
-  "part": "umbilical_saddle",
+  "part": "chain_head_bracket",
   "down": "-Y",
-  "why": "front face down, arm standing up; no supports",
+  "why": "lying on the face the igus end bracket screws onto; no supports",
   "support": false,
   "size_mm": [
-   32.0,
-   70.2,
-   58.9
+   31.0,
+   139.9,
+   17.2
   ],
-  "bed_contact_mm2": 766,
-  "volume_cm3": 11.06,
+  "bed_contact_mm2": 1830,
+  "volume_cm3": 31.55,
   "solid": true,
   "non_manifold": false
  },
  {
-  "part": "umbilical_swivel",
+  "part": "chain_mount",
   "down": "-X",
-  "why": "flat side down",
+  "why": "lying on its 3030 face; no supports",
   "support": false,
   "size_mm": [
-   12.0,
-   30.0,
-   10.4
+   127.8,
+   70.0,
+   40.0
   ],
-  "bed_contact_mm2": 258,
-  "volume_cm3": 3.21,
+  "bed_contact_mm2": 4063,
+  "volume_cm3": 37.5,
   "solid": true,
   "non_manifold": false
  },

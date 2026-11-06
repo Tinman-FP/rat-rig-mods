@@ -2,7 +2,7 @@
 
 Nothing on this list has been ordered or fitted yet. `BOM.csv` holds the same list for a spreadsheet.
 
-## Printed parts (38 parts, PPS-CF, about 1,425 g modelled)
+## Printed parts (38 parts, PPS-CF, about 1,496 g modelled)
 
 All of them are in the Tinman project `print/VC41_CoreXY12_INDX_PPSCF_QidiPlus4_06.3mf`.
 
@@ -40,8 +40,8 @@ All of them are in the Tinman project `print/VC41_CoreXY12_INDX_PPSCF_QidiPlus4_
 | ptfe_coupler_block_T2 | 1 | 38 x 59.6 x 47.9 | 5 | PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; cut back 2 mm clear of the top hat's front centre wall; 25 g; tree supports |
 | ptfe_coupler_block_T3 | 1 | 38 x 59.6 x 47.9 | 5 | PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; cut back 2 mm clear of the top hat's front centre wall; 25 g; tree supports |
 | ptfe_coupler_block_T4 | 1 | 38 x 59.6 x 47.2 | 5 | PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; cut back 2 mm clear of the top hat's front centre wall; 26 g; tree supports |
-| umbilical_saddle | 1 | 32 x 70.2 x 58.9 | 5 | Umbilical saddle on the INDX PCB cover, with a clevis at its tail; 14 g |
-| umbilical_swivel | 1 | 12 x 30 x 10.4 | 5 | Umbilical swivel: turns on the saddle's pin, so the umbilical lies back near the front and stands up near the back; 4 g |
+| chain_head_bracket | 1 | 31 x 139.9 x 17.2 | 5 | Cable chain's moving end: on the carriage's rear-right corner, beside the INDX PCB cover; the igus end bracket screws to its face; 41 g |
+| chain_mount | 1 | 127.8 x 70 x 40 | 5 | Cable chain's fixed end: on the left top 3030's inner slot, mid-depth; 49 g |
 | deck_foot_FR | 1 | 44 x 44 x 41.9 | 6 | Spool deck feet, one on each top-hat corner (all four the same part); the deck screws on; 48 g |
 | deck_foot_FL | 1 | 44 x 44 x 41.9 | 6 | Spool deck feet, one on each top-hat corner (all four the same part); the deck screws on; 48 g |
 | deck_foot_RR | 1 | 44 x 44 x 41.9 | 6 | Spool deck feet, one on each top-hat corner (all four the same part); the deck screws on; 48 g |
@@ -76,9 +76,12 @@ All of them are in the Tinman project `print/VC41_CoreXY12_INDX_PPSCF_QidiPlus4_
 | 8 | M3 x 16 socket head screw | — | Any | Belt clamp caps |
 | 4 | M3 x 20 socket head screw | — | Any | Front idler tension (push) screws |
 | 8 | M3 hex nut | — | Any | Belt clamp caps |
-| 8 | M3 heat-set insert | For 4.0 mm holes, about 5.7 mm long | Any | Carriage INDX grid 4, front idler tension screws 4 |
+| 14 | M3 heat-set insert | For 4.0 mm holes, about 5.7 mm long | Any | Carriage INDX grid 4 and chain bracket 2, front idler tension screws 4, chain bracket faces 4 |
+| 2 | M3 x 8 socket head screw | — | Any | Chain head bracket to the carriage |
+| 4 | M3 x 10 socket head screw | Length to suit the igus bracket | Any | igus end brackets to the two chain brackets |
 | 14 | 1515 M3 T-nut | MakerBeam XL compatible | MakerBeam | Cradles 10, rail brackets 4 |
-| 36 | 3030 M6 drop-in T-nut | — | Any | All M6 screws below |
+| 38 | 3030 M6 drop-in T-nut | — | Any | All M6 screws below |
+| 2 | M6 x 10 socket head screw | — | Any | Chain mount, into the left top 3030's inner slot |
 | 4 | M6 x 18 socket head screw | — | Any | Left rear corner base, up into the 3030s |
 | 4 | M6 x 14 socket head screw | — | Any | Right rear corner base, up into the 3030s |
 | 3 | M6 x 10 socket head screw | — | Any | Left rear corner top |
@@ -96,7 +99,7 @@ All of them are in the Tinman project `print/VC41_CoreXY12_INDX_PPSCF_QidiPlus4_
 | 5 | Qidi nozzle wiper pad | 15 x 27 x 4.7 mm | Qidi (owner's part) | One wiper per tool |
 | 1 | High-temperature RTV silicone | Rated 260 C or more | Any | Gluing the wiper pads |
 
-## Tubes and umbilical
+## Tubes and cable chain
 
 | Qty | Item | Specification | Source | Used for |
 |---|---|---|---|---|
@@ -104,11 +107,9 @@ All of them are in the Tinman project `print/VC41_CoreXY12_INDX_PPSCF_QidiPlus4_
 | 8 m | PTFE tube, 4 mm OD x 2 mm ID | One continuous tube per tool, dryer to tool: free length T0 791, T1 717, T2 649, T3 680, T4 750 mm, plus about 70 mm through the block, 181 mm up through the lid to 20 mm over the deck, and the run over the deck to its dryer's outlet; about 1.0 m plus that run each | Any (Capricorn or similar) | Filament to each tool |
 | 4 m | Piano (music) wire, 1.0 mm | Cut to each tube's free length | Any | Stiffener taped along each free tube so parked tubes hold their arch and the active one swings clear |
 | 1 | PTFE or polyimide tape, or 6 mm heat-shrink | — | Any | Holding the piano wire to the tubes |
-| 1 | Umbilical: piano wire 1.2 mm + loom | Reuse the stock V-Core 4 umbilical; free length 687 mm from the back-middle mount to the saddle | Stock (Rat Rig) | INDX Link cable to the head |
-| 1 | M3 heat-set insert + M3 x 6 set screw | — | Any | Piano-wire clamp in the swivel |
-| 1 | M3 x 20 socket head screw + nyloc nut | Snug, not tight: the swivel must turn freely | Any | Swivel pin through the saddle's clevis |
-| a strip | VHB tape, 20 mm | — | Any | Saddle onto the INDX PCB cover |
-| 4 | Zip ties, 2.5 mm | — | Any | Umbilical into the saddle groove |
+| 41 links | Cable chain igus E2.10.16.018.0 | 10 x 16 mm inside, 15 x 23.4 outside, 20 mm pitch, R18; opens along the outer radius. Chain length 819 mm end to end: buy 1 m and take links out (or two Bambu H2D chains snapped together, if they bend to 19 mm) | igus (about GBP 34/m) | INDX toolhead cable, mount to head, lying on its side |
+| 1 set | igus E2.100.16.34PZ mounting brackets | Both ends pivoting, M3 | igus | Chain ends onto the two printed brackets |
+| 6 | Cable clips for 3030 slot | — | Any | INDX cable from the electronics, along the left top 3030 to the chain mount |
 
 ## INDX (Bondtech)
 
@@ -141,7 +142,7 @@ All of them are in the Tinman project `print/VC41_CoreXY12_INDX_PPSCF_QidiPlus4_
 
 | Qty | Item | Specification | Source | Used for |
 |---|---|---|---|---|
-| 1.4 kg | PPS-CF | 1,340 g in Tinman's slice | Any | All printed parts |
+| 1.4 kg | PPS-CF | 1,395 g in Tinman's slice | Any | All printed parts |
 
 ## Reused from the printer
 

@@ -21,8 +21,8 @@ Status (2026-11-03): **development design, checked in CAD only.** Nothing is pri
 - Tools spread apart, each with its own purge bucket and wiper right beside its dock (owner, 2026-10-31). Every bucket keeps the earlier bucket's size, and slides out through the open front door with no fasteners.
 - Docks stay at the front (owner, 2026-11-03). The tools are now 122 mm apart, as far as the X travel allows with every station clear of the bed arms.
   - Rear docks, as on the Snapmaker U1, were considered. On this frame they would mean reversing the INDX head, which loses about 50 mm of print depth, and the buckets could no longer slide out of the front door.
-- PTFE tubes come in at the top front, above each dock, and are stiffened with 1.0 mm piano wire (owner, 2026-11-03). The head's umbilical stays at the back middle and must not interfere with the tubes.
-- Spools on top of the machine rather than in dryers at the sides (owner, 2026-11-03: "Design top mount"). The tubes stay short and straight and all enter at the front, away from the umbilical.
+- PTFE tubes come in at the top front, above each dock, and are stiffened with 1.0 mm piano wire (owner, 2026-11-03). The head's cable runs in a bought cable chain lying on its side, from the middle of the left side (owner, 2026-11-05).
+- Spools on top of the machine rather than in dryers at the sides (owner, 2026-11-03: "Design top mount"). The tubes stay short and straight and all enter at the front.
   - Dryers: a Sunlu FilaDryer S4 for four spools, and a single-spool dryer beside it for the fifth (owner). A Sunlu S2 is suggested because it also reaches 70 °C.
   - The owner places the dryers and routes each tube's last run to them. The design brings each tube up through the lid and the deck's notch to just behind the notch (owner: "Just put the PTFE inlets where they need to be and I will work around the dryer").
 - The top hat is the owner's own design, printed in PET-CF. `source/vc12_hat.py` places their file `Rat Rig Top Hat Modular.step` (exported 2026-11-03, "the complete top hat as it sits") on the frame.
@@ -55,7 +55,7 @@ Status (2026-11-03): **development design, checked in CAD only.** Nothing is pri
 | INDX | head and Link board |
 | Bed | 20 mm higher (see below) |
 | Purge and wipe | a second 1515 rail and, for each tool, a cradle, a slide-out bucket and a Qidi wiper pad |
-| Tubes and umbilical | five PTFE coupler blocks on the front top 3030, piano wire on the tubes, and a saddle and swivel that carry the stock umbilical off the head |
+| Tubes and cable chain | five PTFE coupler blocks on the front top 3030, piano wire on the tubes, and a bought igus cable chain on its side between two printed brackets |
 | Spool deck | a plywood deck for the dryers on four printed feet, one on each top-hat corner, and five tube holes in the lid |
 
 ### Changes outside the motion system
@@ -71,7 +71,7 @@ Status (2026-11-03): **development design, checked in CAD only.** Nothing is pri
   - An earlier draft asked for a 13 mm door spacer. That was a measuring error: it used the magnet holders as the door face.
 
 ## Assembly file (open in SolidCraft)
-`assembly/Rat Rig Vcore 4.1 INDX Core XY.solidcraft` is the owner's V-Core 4.1 500 IDEX model with the conversion applied: docks 122 mm apart, one purge station per tool, the PTFE tubes and umbilical in their solved shapes (T0 on the head, the others parked), and the owner's top hat with the spool deck on it.
+`assembly/Rat Rig Vcore 4.1 INDX Core XY.solidcraft` is the owner's V-Core 4.1 500 IDEX model with the conversion applied: docks 122 mm apart, one purge station per tool, the PTFE tubes and cable chain in their solved shapes (T0 on the head, the others parked), and the owner's top hat with the spool deck on it.
 - **Removed** (deleted, not hidden):
   - both IDEX toolheads;
   - the hybrid motor stacks and the front tensioners;
@@ -91,15 +91,15 @@ Status (2026-11-03): **development design, checked in CAD only.** Nothing is pri
   - the INDX head with tool T0 and radial cooling;
   - the 1515 dock rail with five docks and parked tools;
   - the purge stations: the second 1515 rail, and for each tool a cradle, a bucket and a red Qidi wiper pad;
-  - the PTFE coupler blocks and tubes (light grey), and the umbilical (black) with its saddle and swivel;
+  - the PTFE coupler blocks and tubes (light grey), and the cable chain (black) with its two brackets;
   - the owner's top hat (dark grey, see-through) and lid, the spool deck (birch) on its four feet, each tube's run from its block up through the lid and the deck's notch, and see-through outlines of a Sunlu S4 and S2 on the deck (their placement is the owner's).
 - **Pose:** the carriage is centred and the gantry is where the stock model has it (beam centre Y −21.2).
 
-Colours: orange is new PPS-CF, yellow the new bed spacers, steel the idlers, pulleys and bearings, black the belts and motors, and blue the INDX head. The panels and the unchanged door are 15 % opaque so you can see inside. Twelve saved views go straight to the overview, the carriage, each rear corner, a joint, the dock rail, the five purge stations, a close-up of T2's dock, bucket and wiper, the tubes and umbilical, the spool deck, a deck foot on a hat corner, and the tubes rising through the lid and the deck's notch.
+Colours: orange is new PPS-CF, yellow the new bed spacers, steel the idlers, pulleys and bearings, black the belts and motors, and blue the INDX head. The panels and the unchanged door are 15 % opaque so you can see inside. Twelve saved views go straight to the overview, the carriage, each rear corner, a joint, the dock rail, the five purge stations, a close-up of T2's dock, bucket and wiper, the tubes and cable chain, the spool deck, a deck foot on a hat corner, and the tubes rising through the lid and the deck's notch.
 
 `assembly/conversion_new.step` holds only the new and moved items, so it can be laid over the original model in any CAD program. `source/vc12_assembly.py` regenerates it and the stock-parts STEP the SolidCraft file is built from.
 
-Pictures are in `images/`: the whole machine (`assembly_overview.png`), the tubes and umbilical (`tubes_and_umbilical.png`), the spool deck (`spool_deck.png`, `deck_foot_on_hat.png`, `tubes_through_lid.png`), the row of stations, two stations close up, a bucket slid out, and each main printed part.
+Pictures are in `images/`: the whole machine (`assembly_overview.png`), the tubes and cable chain (`tubes_and_chain.png`), the spool deck (`spool_deck.png`, `deck_foot_on_hat.png`, `tubes_through_lid.png`), the row of stations, two stations close up, a bucket slid out, and each main printed part.
 
 ## Layout (source of truth: `source/vc12_params.py`)
 
@@ -194,7 +194,7 @@ The closed door also holds the buckets in, 3 mm in front of the flanges. Each bu
 
 **Wiper depth.** The nozzle can't come further forward than the tool pickup, and the pad must stay ahead of the PEI sheet. So the nozzle wipes 3 mm in from the pad's rear edge, across the pad's 15 mm width, and the rest of the 27 mm length is support.
 
-## PTFE tubes and the umbilical
+## PTFE tubes and the cable chain
 **Where the tubes come in.** Each tool's PTFE tube comes into the chamber from the top hat through a coupler block on the inner T-slot of the front top 3030, directly above its dock.
 - **Coupler block.** The tube runs down the block's channel, bends 60° at a 40 mm radius, and leaves through a PC4-M10 coupler 30° below horizontal, pointing back into the chamber.
 - **Free tube.** From the coupler the tube hangs free to its tool, with a 1.0 mm piano wire taped along it.
@@ -206,22 +206,24 @@ The closed door also holds the buckets in, 3 mm in front of the flanges. Each bu
 |---|---|---|---|---|---|
 | Free tube, coupler to tool (mm) | 791 | 717 | 649 | 680 | 750 |
 
-**Umbilical.** The head's cables stay on the stock V-Core 4 umbilical: 1.2 mm piano wire from the back-middle mount, leaving it about 55° forward of vertical.
-- **Saddle and swivel.** Its end is clamped in a swivel that turns on an M3 pin at the tail of a saddle stuck to the INDX PCB cover, 60 mm behind the cable strain relief. A stop on the saddle keeps the swivel between level-backward and straight up.
-- **Why it swivels.** Near the front the umbilical lies back, under the parked tubes' arches. Near the back it stands up and stays inside the frame. Any fixed angle at the head fails one or the other:
-  - straight down into the head, the stock way, it touches the parked tubes;
-  - clamped level-backward, its spare length folds back into the rear panel.
-- **Length.** Free length 687 mm, mount to swivel.
+**Cable chain** (owner, 2026-11-05: buy one, and bring the cable in from the middle of the side). The INDX toolhead cable runs in a bought cable chain lying on its side, like the K2 Plus and Bambu H-series chains. It replaces the stock umbilical, its back-middle frame, and the saddle and swivel.
+- **Chain:** igus E2.10.16.018.0, 10 × 16 mm inside, 15 × 23.4 mm outside, 20 mm pitch, 18 mm bend radius. It opens along its outer side, so the cable lays in without threading the XT30 plug. Ends: igus E2.100.16.34PZ brackets.
+- **On its side** it only bends in the horizontal plane, at Z 853–877: 12.8 mm over Bondtech's strain relief clip and about 30 mm under the parked tubes' arches.
+- **Fixed end:** `chain_mount`, on the left top 3030's inner slot, 50 mm behind mid-depth. The chain leaves it pointing straight into the machine. The cable comes along the top 3030 from the electronics and down beside the mount into the chain's open end.
+- **Moving end:** `chain_head_bracket`, on the carriage's rear-right corner beside the PCB cover (2 × M3 into inserts over the rear leg). The chain arrives from the right; its end is 30 mm right of and 45 mm behind the nozzle, so the cable comes up out of the strain relief clip and curves sideways into it.
+- **Why the side:** from a mount at the back, the spare chain always pushed out behind the rear frame when the head came back (200 layouts tried). From mid-side it folds into a U across the machine instead.
+- **Length:** 819 mm, 41 links. The cable runs about 1.67 m from the electronics box, inside Bondtech's 178 cm toolhead cable.
+- **igus bracket holes:** the printed faces take 2 × M3 inserts 29 mm apart, from igus's drawing. Check them against the brackets in hand.
 
-**Checks** (`source/vc12_routecheck.py`, `checks/route_report.json`). Every tube and the umbilical are solved as elastic rods with the method from the SV08 INDX project. They are checked with each tool on the head in turn, at every point of a 9 × 9 bed grid, its purge stroke and its dock. The check runs against the head, saddle, carriage, beam and joints, and the docks, rails, coupler blocks, frame, top 3030s and top hat.
-- **No clashes for the tubes.** No tube, parked or active, touches the head, saddle, carriage, gantry, docks, rails, coupler blocks, frame, top 3030s or top hat at any position.
-- **Umbilical to parked tubes:** 10.2 mm at the closest. That is with the head near the front at X 191, beside T4's parked tube.
+**Checks** (`source/vc12_routecheck.py`, `checks/route_report.json`). Every tube is solved as an elastic rod with the method from the SV08 INDX project, and the chain as a flat rod. They are checked with each tool on the head in turn, at every point of a 9 × 9 bed grid, its purge stroke and its dock. The check runs against the head, chain bracket, carriage, beam and joints, and the docks, rails, coupler blocks, frame, top 3030s and top hat; the chain as its full 15 × 23.4 section.
+- **No clashes.** No tube, parked or active, and no part of the chain touches the head, brackets, carriage, gantry, docks, rails, coupler blocks, frame, top 3030s or top hat at any position.
+- **Chain shape:** tightest bend 19.0 mm (its minimum is 18), at least 59.5 mm between its own runs, and it stays inside the frame (X ≤ 341, Y ≤ 257).
+- **Chain to tubes:** at least 30.3 mm from every parked tube and 136.5 mm from the tubes' runs up to the lid.
 - **What the check reports but doesn't count:**
-  - The umbilical and the active tube both ride on the head and touch at a few front positions (up to 6.6 mm).
+  - The active tube touches the chain's side at 1 of the checked positions (T0 with the head at the front left, where its spare tube loops sideways) and comes within 2 mm at one more. Everywhere else it is at least 5.5 mm away.
   - Active and parked tubes cross and rub in 39 of the checked cases (up to 4.5 mm), as on any multi-tool printer.
-  - With the head at the back centre, the umbilical's spare length rests on the top of the INDX head. The stock V-Core 4 umbilical has the same length and mount.
-- **Heights:** the umbilical stays between Z 784 and 1092, under the lid and inside the frame at the back. Every tube stays under the lid.
-- **The tubes' runs up to the lid** (each straight up from its block): the umbilical stays at least 182 mm from them, an active tube at least 31 mm from the other tools' runs, and a parked tube at least 123 mm.
+- **Heights:** every tube stays under the lid. The active tube never comes lower than Z 828.
+- **The tubes' runs up to the lid** (each straight up from its block): an active tube stays at least 31 mm from the other tools' runs, and a parked tube at least 123 mm.
 
 ## Spool deck on the top hat
 The dryers sit on a deck above the top hat. Pictures: `images/spool_deck.png`, `images/deck_foot_on_hat.png`, `images/tubes_through_lid.png`.
@@ -269,7 +271,7 @@ The dryers sit on a deck above the top hat. Pictures: `images/spool_deck.png`, `
 
 The purge-station parts (two rail brackets, five cradles, five buckets) are listed under the stations above.
 
-**Print file.** `print/VC41_CoreXY12_INDX_PPSCF_QidiPlus4_06.3mf` is a Tinman project holding all 38 parts on six plates: one of each motion part, the five cradles and five buckets labelled T0–T4, the five PTFE coupler blocks, the umbilical saddle and swivel, and the four spool deck feet. Open it in Tinman as a project. It is saved unsliced.
+**Print file.** `print/VC41_CoreXY12_INDX_PPSCF_QidiPlus4_06.3mf` is a Tinman project holding all 38 parts on six plates: one of each motion part, the five cradles and five buckets labelled T0–T4, the five PTFE coupler blocks, the two cable chain brackets, and the four spool deck feet. Open it in Tinman as a project. It is saved unsliced.
 - **Presets.** These are the owner's saved Qidi Plus 4 PPS-CF settings:
   - machine "Qidi X-Plus 4 0.6 nozzle - TinMan Codex";
   - process "0.24mm Tank @Qidi X-Plus 4 0.6 nozzle - TinMan Codex - Copy": 6 walls, 45 % gyroid, 8 top and bottom layers;
@@ -279,13 +281,13 @@ The purge-station parts (two rail brackets, five cradles, five buckets) are list
 
 | Plate | Parts | Time | PPS-CF |
 |---|---|---|---|
-| 1 Carriage, joints, front idlers | carriage, 4 clamp caps, joint L/R, front idler L/R | 14.6 h | 286 g |
+| 1 Carriage, joints, front idlers | carriage, 4 clamp caps, joint L/R, front idler L/R | 14.7 h | 287 g |
 | 2 Rear corners | base L/R, top L/R | 11.1 h | 219 g |
-| 3 Purge cradles and rail brackets | station cradles T0–T4, dock brackets L/R, station brackets L/R | 16.0 h | 313 g |
-| 4 Purge buckets | purge buckets T0–T4 | 13.5 h | 235 g |
-| 5 PTFE coupler blocks and umbilical saddle | coupler blocks T0–T4, saddle, swivel | 7.0 h | 137 g |
+| 3 Purge cradles and rail brackets | station cradles T0–T4, dock brackets L/R, station brackets L/R | 15.8 h | 311 g |
+| 4 Purge buckets | purge buckets T0–T4 | 13.6 h | 236 g |
+| 5 PTFE coupler blocks and chain brackets | coupler blocks T0–T4, chain head bracket, chain mount | 9.2 h | 192 g |
 | 6 Spool deck feet | deck feet ×4 | 6.6 h | 150 g |
-| **Total** | 38 parts | **68.8 h** | **1,340 g** |
+| **Total** | 38 parts | **71.0 h** | **1,395 g** |
 
 - **Test slice.** No warnings and no path conflicts. Every plate starts with `PRINT_START BED=110 HOTEND=320 CHAMBER=65`.
 - **Orientation.** Each part lies on the face listed in `print/orientation.json`.
@@ -298,9 +300,9 @@ The purge-station parts (two rail brackets, five cradles, five buckets) are list
     - Left top: it stands on its idler spacer, with support under the plate and the 1.4 mm feet. Clean up the feet before they sit on the 3030.
   - **Dock and station brackets:** upright plate down.
   - **Station cradles and purge buckets:** floor down. The buckets' flange and sloped back print without support.
-  - **Coupler blocks:** mounting plate down. **Saddle:** front face down, arm standing up. **Swivel:** flat side down.
+  - **Coupler blocks:** mounting plate down. **Chain brackets:** each lies on its flat face, the head bracket on the face the igus bracket screws to and the mount on its 3030 face, with no supports.
   - **Deck feet:** top plate down; the legs and skirt stand up.
-- **Supports.** Tree supports are on only for the 19 parts that need them: the carriage, both joints, both front idlers, all four rear-corner parts, the five station cradles (under the crossbar and the pad shelf) and the five coupler blocks (under the bend). The clamp caps, brackets, buckets, saddle, swivel and deck feet print without support.
+- **Supports.** Tree supports are on only for the 19 parts that need them: the carriage, both joints, both front idlers, all four rear-corner parts, the five station cradles (under the crossbar and the pad shelf) and the five coupler blocks (under the bend). The clamp caps, brackets, buckets, chain brackets and deck feet print without support.
 - **Spacing.** Parts are at least 20 mm apart. When Tinman's auto-arrange packed them closer, the tree supports of a joint and the carriage ran into each other. Don't auto-arrange this project; if you move parts, keep the gaps.
 - **Rebuilding the file.**
   1. `vc12_print.py` (FreeCAD) writes print-ready STLs to `print/stl/`.
@@ -312,11 +314,11 @@ Bosses are sized for M3 heat-set inserts (Ø4.0) and M5/M6 clearance.
 
 **Rounded edges** (owner, 2026-11-05: "round them like Bondtech's").
 - Every printed part's body is rounded before its holes, slots and pockets are cut, so those keep their sizes.
-- Radii: 5 mm on vertical corners and 2.5 mm on the other edges of the large parts; 2–4 mm on the small ones (coupler blocks, saddle, swivel, deck feet, bucket flange). Each bucket's inside is rounded to match its outside, so the walls stay 2.4 mm.
+- Radii: 5 mm on vertical corners and 2.5 mm on the other edges of the large parts; 2–4 mm on the small ones (coupler blocks, chain brackets, deck feet, bucket flange). Each bucket's inside is rounded to match its outside, so the walls stay 2.4 mm.
 - Square where a part seats or something must fit:
   - faces against a 3030, rail or block, the motor faces, the INDX X-carriage face;
   - the bucket's floor and side walls in its cradle, the wiper pad's pocket, the detent;
-  - the swivel's clevis, the dock and station rail ends, the coupler blocks' face and top;
+  - the dock and station rail ends, the coupler blocks' face and top;
   - edges next to bosses and posts, and inside corners next to idlers, belts and the MGN12 blocks, where a fillet would add material.
 - The face that goes on the print bed gets a 1 mm 45° chamfer instead of a round, so nothing overhangs at the first layer.
 - `checks/rounding_report.json` lists what was rounded on each part. On `rear_corner_L_base` the corner rounds broke the later hole cuts, so its vertical corners stay square; its other edges are rounded.
@@ -343,7 +345,7 @@ The full purchase list, with screw lengths worked out from each part's clamping 
 - Results, 2026-10-31, docks 116 mm apart with one station per tool:
   - **FreeCAD motion check: no overlaps at any of the 31 poses, and none between the fixed parts and the stock frame, door, panels and electronics** (`checks/interference_report.json`; re-run 2026-11-03 with the coupler blocks refitted to the real top hat, same result).
   - **Station check: no overlaps at any of the 40 purge and wipe poses, the 4 mm shifted ones included.** Each nozzle touches only its own pad, and only during the wipe. All five buckets slide out clear. No station part touches the frame, door, bed arms or another station.
-  - **Tubes and umbilical** (`checks/route_report.json`): no tube clashes; the umbilical stays at least 10.2 mm from every parked tube. See "PTFE tubes and the umbilical".
+  - **Tubes and cable chain** (`checks/route_report.json`): no clashes for the tubes or the chain; the chain stays at least 30.3 mm from every parked tube. See "PTFE tubes and the cable chain".
   - **Re-run 2026-11-05 with every part rounded** (see "Rounded edges"):
     - the motion and route reports are unchanged;
     - the station check is unchanged apart from three buckets and one cradle standing 0.5–1.4 mm further from the bed arms;
@@ -388,13 +390,15 @@ The full purchase list, with screw lengths worked out from each part's clamping 
    - INDX's saved state goes in the existing `variables.cfg`, since Klipper allows only one `[save_variables]`.
    - Take a fresh snapshot of the live printer before changing anything.
 7. **Electronics and filament.**
-   - The INDX Link cable (178 cm) plus the host USB must total 2 m or less, so the USB can be at most 22 cm and the Link board has to sit near the Pi.
+   - The INDX Link cable (178 cm) plus the host USB must total 2 m or less, so the USB can be at most 22 cm and the Link board has to sit near the Pi. Through the cable chain the run is about 1.67 m: from the electronics box along the back to the left rear corner, along the left top 3030 to the chain mount, then 819 mm of chain.
    - The five PTFE tubes run up to the dryers on the spool deck (see "Spool deck on the top hat"). The owner routes each tube's last run to its outlet.
 8. **Tension and current.** Belt tension targets and motor current (draft 1.4 A) still need setting against the motor rating. No FEA was done.
 9. **Wiper height and depth.** Set the pad top 1.2 mm above the nozzle tip with the station-rail brackets' ±5 mm slots. The nozzle wipes only 3 mm in from the pad's rear edge (see the stations section); if that proves too shallow, the pad can't move back without hitting the bed.
-10. **Tubes and umbilical.** Their shapes are modelled: a free tube settles where its stiffness and weight put it. Set them by hand on the machine as the stock umbilical is, and watch the first tool changes.
+10. **Tubes and cable chain.** Their shapes are modelled: a free tube settles where its stiffness and weight put it, and a chain on its side where its ends put it. Set the tubes by hand on the machine and watch the first tool changes.
     - The top hat is the owner's own file. On the machine, check the coupler blocks' 1–2 mm to the hat's front wall and its overhang on the top 3030. Also check that the back of the display doesn't reach more than about 10 mm into the chamber past the wall's inside face; T4's tube rises 12.7 mm behind that face.
-    - The umbilical rests on the head when the head is at the back centre. If it rubs, trim its spare length a little.
+    - igus lists the E2.10's unsupported length on its side only on request. Ask igus, or watch the chain's span at full stretch (front pickups) for droop.
+    - The igus end brackets' 2 × M3 holes are 29 mm apart in igus's drawing. Check them against the brackets in hand before fitting the inserts.
+    - The cable's bend from the strain relief clip into the chain's end is short (about 25 mm up and 30 mm across). Check it isn't forced.
 11. **Spool deck on the hat.**
     - **Load on the corners:** the printed hat corners carry the deck and dryers, about 45 N each. The hat is PET-CF, which stays stiff at the chamber's 65 °C.
     - **Front right corner:** it is hollow at the top for the display cables. The foot's legs stand over its outer walls.

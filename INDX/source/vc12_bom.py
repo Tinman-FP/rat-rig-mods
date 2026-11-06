@@ -10,7 +10,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 _route = json.loads((ROOT / "checks/route_report.json").read_text()) if (ROOT / "checks/route_report.json").exists() else {}
 TUBE_LENGTHS = ", ".join(f"T{i} {_route.get('tube_free_length_mm', {}).get(f'T{i}', '?')}" for i in range(5))
-UMB_LENGTH = str(_route.get("umbilical_free_length_mm", "?"))
+CHAIN_LENGTH = _route.get("chain_length_mm", 0)
+CHAIN_LINKS = int(-(-CHAIN_LENGTH // 20)) if CHAIN_LENGTH else "?"
 DENSITY = 1.30
 
 PRINTED = [  # (parts, qty, plate, what it is)
@@ -28,9 +29,9 @@ PRINTED = [  # (parts, qty, plate, what it is)
     ([f"ptfe_coupler_block_T{i}" for i in range(5)], 1, 5,
      "PTFE coupler blocks on the front top 3030, one above each dock; T0's turns the tube 20 deg toward the middle, T4's 15 deg; "
      "cut back 2 mm clear of the top hat's front centre wall"),
-    (["umbilical_saddle"], 1, 5, "Umbilical saddle on the INDX PCB cover, with a clevis at its tail"),
-    (["umbilical_swivel"], 1, 5, "Umbilical swivel: turns on the saddle's pin, so the umbilical lies back near the front "
-     "and stands up near the back"),
+    (["chain_head_bracket"], 1, 5, "Cable chain's moving end: on the carriage's rear-right corner, beside the INDX PCB "
+     "cover; the igus end bracket screws to its face"),
+    (["chain_mount"], 1, 5, "Cable chain's fixed end: on the left top 3030's inner slot, mid-depth"),
     (["deck_foot_FR", "deck_foot_FL", "deck_foot_RR", "deck_foot_RL"], 1, 6,
      "Spool deck feet, one on each top-hat corner (all four the same part); the deck screws on"),
 ]
@@ -61,10 +62,14 @@ HARDWARE = [
     ("Fasteners", "M3 x 16 socket head screw", 8, "", "Any", "Belt clamp caps"),
     ("Fasteners", "M3 x 20 socket head screw", 4, "", "Any", "Front idler tension (push) screws"),
     ("Fasteners", "M3 hex nut", 8, "", "Any", "Belt clamp caps"),
-    ("Fasteners", "M3 heat-set insert", 8, "For 4.0 mm holes, about 5.7 mm long", "Any",
-     "Carriage INDX grid 4, front idler tension screws 4"),
+    ("Fasteners", "M3 heat-set insert", 14, "For 4.0 mm holes, about 5.7 mm long", "Any",
+     "Carriage INDX grid 4 and chain bracket 2, front idler tension screws 4, chain bracket faces 4"),
+    ("Fasteners", "M3 x 8 socket head screw", 2, "", "Any", "Chain head bracket to the carriage"),
+    ("Fasteners", "M3 x 10 socket head screw", 4, "Length to suit the igus bracket", "Any",
+     "igus end brackets to the two chain brackets"),
     ("Fasteners", "1515 M3 T-nut", 14, "MakerBeam XL compatible", "MakerBeam", "Cradles 10, rail brackets 4"),
-    ("Fasteners", "3030 M6 drop-in T-nut", 36, "", "Any", "All M6 screws below"),
+    ("Fasteners", "3030 M6 drop-in T-nut", 38, "", "Any", "All M6 screws below"),
+    ("Fasteners", "M6 x 10 socket head screw", 2, "", "Any", "Chain mount, into the left top 3030's inner slot"),
     ("Fasteners", "M6 x 18 socket head screw", 4, "", "Any", "Left rear corner base, up into the 3030s"),
     ("Fasteners", "M6 x 14 socket head screw", 4, "", "Any", "Right rear corner base, up into the 3030s"),
     ("Fasteners", "M6 x 10 socket head screw", 3, "", "Any", "Left rear corner top"),
@@ -77,22 +82,23 @@ HARDWARE = [
      "Dock rail and station rail"),
     ("Docks and stations", "Qidi nozzle wiper pad", 5, "15 x 27 x 4.7 mm", "Qidi (owner's part)", "One wiper per tool"),
     ("Docks and stations", "High-temperature RTV silicone", 1, "Rated 260 C or more", "Any", "Gluing the wiper pads"),
-    ("Tubes and umbilical", "PC4-M10 push-fit coupler", 5, "For 4 mm OD tube; threads into the block (tap M10 x 1 or let it cut)",
+    ("Tubes and cable chain", "PC4-M10 push-fit coupler", 5, "For 4 mm OD tube; threads into the block (tap M10 x 1 or let it cut)",
      "Any (BIQU or similar)", "One per coupler block"),
-    ("Tubes and umbilical", "PTFE tube, 4 mm OD x 2 mm ID", "8 m", "One continuous tube per tool, dryer to tool: free length "
+    ("Tubes and cable chain", "PTFE tube, 4 mm OD x 2 mm ID", "8 m", "One continuous tube per tool, dryer to tool: free length "
      + TUBE_LENGTHS + " mm, plus about 70 mm through the block, 181 mm up through the lid to 20 mm over the deck, and the "
      "run over the deck to its dryer's outlet; about 1.0 m plus that run each", "Any (Capricorn or similar)",
      "Filament to each tool"),
-    ("Tubes and umbilical", "Piano (music) wire, 1.0 mm", "4 m", "Cut to each tube's free length", "Any",
+    ("Tubes and cable chain", "Piano (music) wire, 1.0 mm", "4 m", "Cut to each tube's free length", "Any",
      "Stiffener taped along each free tube so parked tubes hold their arch and the active one swings clear"),
-    ("Tubes and umbilical", "PTFE or polyimide tape, or 6 mm heat-shrink", 1, "", "Any", "Holding the piano wire to the tubes"),
-    ("Tubes and umbilical", "Umbilical: piano wire 1.2 mm + loom", 1, "Reuse the stock V-Core 4 umbilical; free length "
-     + UMB_LENGTH + " mm from the back-middle mount to the saddle", "Stock (Rat Rig)", "INDX Link cable to the head"),
-    ("Tubes and umbilical", "M3 heat-set insert + M3 x 6 set screw", 1, "", "Any", "Piano-wire clamp in the swivel"),
-    ("Tubes and umbilical", "M3 x 20 socket head screw + nyloc nut", 1, "Snug, not tight: the swivel must turn freely",
-     "Any", "Swivel pin through the saddle's clevis"),
-    ("Tubes and umbilical", "VHB tape, 20 mm", "a strip", "", "Any", "Saddle onto the INDX PCB cover"),
-    ("Tubes and umbilical", "Zip ties, 2.5 mm", 4, "", "Any", "Umbilical into the saddle groove"),
+    ("Tubes and cable chain", "PTFE or polyimide tape, or 6 mm heat-shrink", 1, "", "Any", "Holding the piano wire to the tubes"),
+    ("Tubes and cable chain", "Cable chain igus E2.10.16.018.0", f"{CHAIN_LINKS} links",
+     f"10 x 16 mm inside, 15 x 23.4 outside, 20 mm pitch, R18; opens along the outer radius. Chain length "
+     f"{CHAIN_LENGTH} mm end to end: buy 1 m and take links out (or two Bambu H2D chains snapped together, if they bend "
+     "to 19 mm)", "igus (about GBP 34/m)", "INDX toolhead cable, mount to head, lying on its side"),
+    ("Tubes and cable chain", "igus E2.100.16.34PZ mounting brackets", "1 set", "Both ends pivoting, M3",
+     "igus", "Chain ends onto the two printed brackets"),
+    ("Tubes and cable chain", "Cable clips for 3030 slot", 6, "", "Any",
+     "INDX cable from the electronics, along the left top 3030 to the chain mount"),
     ("INDX (Bondtech)", "INDX Smart Head with MGN-12 X-carriage", 1, "", "Bondtech", "Toolhead"),
     ("INDX (Bondtech)", "INDX nozzle tool, 0.6 mm Steel CHT", 5, "", "Bondtech", "Tools T0-T4"),
     ("INDX (Bondtech)", "INDX Tool Dock 1515 (MakerBeam)", 5, "With its M3 screw and square nut", "Bondtech",
@@ -112,7 +118,7 @@ HARDWARE = [
      "Replaces the two 6 mm spacers at each kinematic ball"),
     ("Bed", "Longer M5 for the threaded balls", "3 if needed", "Keep at least 6 mm of thread engaged", "Any",
      "Bed balls"),
-    ("Filament", "PPS-CF", "1.4 kg", "1,340 g in Tinman's slice", "Any", "All printed parts"),
+    ("Filament", "PPS-CF", "1.4 kg", "1,395 g in Tinman's slice", "Any", "All printed parts"),
 ]
 
 REUSED = ["Frame, panels, door and electronics", "Y rails and both Y-rail MGN12C blocks",
