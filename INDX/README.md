@@ -2,7 +2,7 @@
 
 An unofficial conversion for the Rat Rig V-Core 4.1 500 IDEX: a single carriage with a Bondtech INDX five-tool changer on true 12 mm-belt CoreXY, each tool with its own purge bucket and wiper. Not affiliated with or endorsed by Rat Rig, Bondtech or Qidi.
 
-Status (2026-11-03): **development design, checked in CAD only.** Nothing is printed, bought or fitted. The Klipper files are drafts that have not been run.
+Status (2026-11-03): **development design, checked in CAD only.** Nothing is printed, bought or fitted. The Kalico config in `klipper/` is a draft: it loads cleanly in Kalico's offline batch mode but has not been run on the printer.
 
 - **Build documents:** [INSTALL.md](INSTALL.md) is the installation guide, and [BOM.md](BOM.md) (or `BOM.csv`) is the bill of materials.
 - **Print file:** `print/VC41_CoreXY12_INDX_PPSCF_QidiPlus4_06.3mf` holds every printed part.
@@ -187,7 +187,7 @@ Positions are CAD X / printer X, all at Y −317.5 (printer Y −40.0). Wipe str
 The closed door also holds the buckets in, 3 mm in front of the flanges. Each bucket fits any cradle, but the engraved numbers keep each tool's purge in its own bucket.
 
 **How it is used.**
-1. `klipper/purge_wipe.cfg` (draft) adds `PURGE_AND_WIPE TOOL=n`.
+1. `klipper/config/Stations.cfg` (draft) adds `PURGE_AND_WIPE TOOL=n`, and `CLEAN_NOZZLE` (wipe only).
 2. From the clearance line, the macro moves to that tool's purge X, comes forward to Y −40, purges into the bucket and retracts.
 3. It wipes three times across the pad, 4 → 20 mm right of the purge spot, starting and ending just off the pad's left end so the wipings drop into the bucket. Then it goes back to the clearance line.
 4. Call it after the INDX tool change has heated the new tool.
@@ -241,7 +241,7 @@ The dryers sit on a deck above the top hat. Pictures: `images/spool_deck.png`, `
   - Its legs stand 2 mm outside the lid's pocket and it is open over the lid, so it touches only the rim even though the lid stands above it.
   - Two 4 × 16 mm wood screws hold the deck to its top plate.
   - At the front right corner, the hat is hollow at the top for the display cables. The foot's legs stand right over that corner's 6 and 7.5 mm outer walls, which carry the load down to the solid part below.
-- **Deck.** 15 mm birch plywood, 820 × 756 mm, flush with the hat's corners. Its underside is 29 mm above the lid's top, an air gap that keeps the chamber's heat (65 °C for PPS-CF) off the dryers. It clears the lid's two 22 mm handles by 6.9 mm.
+- **Deck.** 15 mm birch plywood, 820 × 756 mm, flush with the hat's corners. Its underside is 29 mm above the lid's top, an air gap that keeps the chamber's heat (55 °C at most with the INDX head) off the dryers. It clears the lid's two 22 mm handles by 6.9 mm.
 - **Notch.** A 538 × 72 mm notch in the front edge lets the tubes rise past the deck. So the deck lifts off without unthreading them, and taking the lid off means lifting the dryers and deck, then the lid over the tube ends.
 - **Tubes.** Each one rises straight from its block's channel (Z 1005) through a 6 mm hole in the lid, 42.7 mm behind the pocket's front edge, to 20 mm above the deck. It then bends back over the notch's edge at 60 mm radius or more and ends just behind the notch. That is one continuous tube from the tool to the dryer; the only bend below the deck is the block's own 60° turn.
 - **Dryers.** A Sunlu S4 (four spools) and a single-spool dryer beside it, shown as outlines of a Sunlu S4 lengthways for T0–T3 and an S2 side-on at the right end for T4. They use about 634 of the deck's 820 mm width. Where they stand and how each tube reaches its outlet is the owner's call; keep each bend at 60 mm radius or more.
@@ -336,7 +336,12 @@ The full purchase list, with screw lengths worked out from each part's clamping 
 - **SolidCraft 0.27.1** cross-check:
   - `inspect.clearance` with a 1 mm threshold;
   - `inspect.measure`, which confirmed every body is closed and printable.
-- `vc12_homingcheck.py` reads the Klipper drafts with Klipper's own config parser and template settings, then replays every move of `G28`, `G28 X Y`, `G28 X` (from a purge spot, and with Y unknown), `G28 Y`, `G28 Z` and `G28` with a tool offset (`checks/homing_report.json`). All pass: each X pass is at Y 388.8 or 484.8, every move stays inside the soft limits, and `G28 Z` alone makes no X/Y move. Bondtech's helper macros are stand-ins here, so the tool pickup and Z probe are not exercised.
+- `vc12_homingcheck.py` reads `klipper/config/` with Klipper's own config parser and template settings, then replays every move of `G28`, `G28 X Y`, `G28 X` (from a purge spot, and with Y unknown), `G28 Y`, `G28 Z` and `G28` with a tool offset (`checks/homing_report.json`). All pass: each X pass is at Y 388.8 or 484.8, every move stays inside the soft limits, and `G28 Z` alone makes no X/Y move. Bondtech's helper macros are stand-ins here, so the tool pickup and Z probe are not exercised.
+- **Kalico config** (`checks/kalico_config_check.json`, 2026-11-06), with no printer involved:
+  - **Batch mode:** `klipper/config/` was assembled over the owner's config and loaded in Kalico's offline batch mode with real data files for the Octopus and the INDX head. It loads with no errors.
+  - **Static check:** includes resolve, there are no unexpected duplicate sections, and every called macro exists. Clean.
+  - **Power-loss recovery:** its offline test passes, 21 cases on made-up data.
+  - See `klipper/README.md`.
 - `vc12_check.py --station` checks the five purge stations (`checks/station_report.json`), using Bondtech's real duct meshes for the head:
   - per tool: on the way in, at the purge spot, at the front stop, at both ends of the wipe stroke, and on the way out;
   - the purge spot again with the head 4 mm closer to its own dock, and the end of the stroke 4 mm closer to the next dock;
@@ -372,23 +377,30 @@ The full purchase list, with screw lengths worked out from each part's clamping 
 3. **Belt clamps.** These are a new design: a toothed rack plus a screw cap. Pull-test them before trusting them.
 4. **Head beside the docks.** At its purge spot the head is 5.6 mm further from its own dock than it needs to be, and at the end of the wipe it is 10.5 mm further from the next dock. Both figures come from Bondtech's duct model. Before the first purge, jog the real head slowly to each purge spot and the end of each wipe stroke and look at the gaps. The ducts must be mounted as in Bondtech's model.
 5. **Homing** (Y to the rear: owner agreed, 2026-11-05). Y must never home toward the docks: the front stop is 1 mm past pickup, where the head already sits in the dock rail's slot.
-   - `klipper/homing_indx.cfg` (draft) is Bondtech's INDX homing with the X/Y part done the way the owner's FibreSeek Seeker 3 does it: lift Z, home Y to the rear stop, go 100 mm in front of it, home X, go 100 mm right of it, then home Y and X again from there, with a 1 s pause before each pass. The head ends 4 mm off each stop. Then T0 is picked up and Z homes on the load cell, as in Bondtech's file.
+   - `klipper/config/homing_indx.cfg` (draft) is Bondtech's INDX homing with the X/Y part done the way the owner's FibreSeek Seeker 3 does it: lift Z, home Y to the rear stop, go 100 mm in front of it, home X, go 100 mm right of it, then home Y and X again from there, with a 1 s pause before each pass. The head ends 4 mm off each stop. Then T0 is picked up and Z homes on the load cell, as in Bondtech's file.
    - The second pass starts from the same spot every time, so the stall is detected at the same speed and distance. That replaces Klipper's slow 5 mm/s re-home, which Klipper's own docs say adds nothing for sensorless homing (`homing_retract_dist: 0` now).
    - X is homed only at Y 388.8 or 484.8, far behind the clearance line. `G28 X` with Y already homed first moves straight back to Y 388.8.
    - Still to do on the machine: tune `driver_SGTHRS` and check the homing repeats (INSTALL section 13).
-6. **Firmware: Kalico** (owner, 2026-11-03).
+6. **Firmware: Kalico** (owner, 2026-11-03). The config is drafted in `klipper/config/` (see `klipper/README.md`).
    - Bondtech calls Kalico its reference INDX firmware; `indx_klipper` follows it for mainline Klipper.
    - The INDX head's load cell is the Z probe. Bondtech's load-cell settings use Kalico's pullback tap analysis, which mainline Klipper lacks. The optional INDX bed scanner needs Kalico from 2026-10-08 on.
-   - Kalico also has `gcode_shell_command` built in, which the printer's power-loss-recovery and heat-soak shell helpers wait on.
-   - The custom kinematics and dual-Beacon code in the owner's config (`Tinman-FP/rat-rig-dual-beacon-500-idex-config`) are for IDEX and are retired by this conversion.
-   - The chamber, heat-soak, precheck, counter, RGB and camera macros carry over.
-   - These need redoing for the INDX:
-     - the toolboard and extruder sections;
-     - the filament sensors and prechecks, for five tools;
-     - homing: drafted in `klipper/homing_indx.cfg` (item 5);
-     - power-loss recovery.
+   - Kalico also has `gcode_shell_command` built in, so the power-loss-recovery shell helpers are now included.
+   - **What the draft does** (built on the owner's config `Tinman-FP/rat-rig-dual-beacon-500-idex-config`, commit 277d85e):
+     - plain `corexy`, two belts;
+     - one INDX head with Bondtech's sections;
+     - five tools from Bondtech's macros, pinned at commit ae64179;
+     - homing from item 5;
+     - Z tilt and mesh on the load cell with T0;
+     - one runout switch per tool, and prechecks for every tool a print uses;
+     - print start that levels on T0, then picks up the first tool, then heats;
+     - load and unload over each tool's bucket;
+     - power-loss recovery that tracks the tool on the head.
+   - **Retired:** the custom IDEX kinematics, the two EBB42 toolboards, the two Beacons, the IDEX camera-offset macros (Bondtech's `CAL_ONE`/`TWO`/`THREE` replace them) and the Apus-switch autoload.
+   - **Carried over unchanged:** the chamber, heat-soak, counter, RGB and HE2-fan macros.
+   - **Checked:** in Kalico's offline batch mode with the real data files of both boards (no errors), and with a static check of includes, duplicate sections and called macros (clean). Kalico requires `sense_resistor` on every TMC2209, which mainline defaulted. That was fixed. Not checked: anything that only happens when a macro runs on the machine.
+   - **INDX limits:** 300 °C at the nozzle and 60 °C ambient (Bondtech's sheet). The chamber target is capped at 55 °C. PPS-CF (320 °C, 65 °C chamber) is outside the INDX's range, so these parts stay on the Qidi Plus 4.
    - INDX's saved state goes in the existing `variables.cfg`, since Klipper allows only one `[save_variables]`.
-   - Take a fresh snapshot of the live printer before changing anything.
+   - Take a fresh snapshot of the live printer before changing anything: the draft is built on the GitHub copy.
 7. **Electronics and filament.**
    - The INDX Link cable (178 cm) plus the host USB must total 2 m or less, so the USB can be at most 22 cm and the Link board has to sit near the Pi. Through the cable chain the run is about 1.67 m: from the electronics box along the back to the left rear corner, along the left top 3030 to the chain mount, then 819 mm of chain.
    - The five PTFE tubes run up to the dryers on the spool deck (see "Spool deck on the top hat"). The owner routes each tube's last run to its outlet.
@@ -400,6 +412,6 @@ The full purchase list, with screw lengths worked out from each part's clamping 
     - The igus end brackets' 2 × M3 holes are 29 mm apart in igus's drawing. Check them against the brackets in hand before fitting the inserts.
     - The cable's bend from the strain relief clip into the chain's end is short (about 25 mm up and 30 mm across). Check it isn't forced.
 11. **Spool deck on the hat.**
-    - **Load on the corners:** the printed hat corners carry the deck and dryers, about 45 N each. The hat is PET-CF, which stays stiff at the chamber's 65 °C.
+    - **Load on the corners:** the printed hat corners carry the deck and dryers, about 45 N each. The hat is PET-CF, which stays stiff well above the chamber's 55 °C cap.
     - **Front right corner:** it is hollow at the top for the display cables. The foot's legs stand over its outer walls.
     - **Loading spools:** the deck's top is about 1.16 m above whatever the printer stands on, so loading spools needs a step stool.

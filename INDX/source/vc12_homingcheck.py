@@ -1,14 +1,14 @@
-"""Offline check of klipper/homing_indx.cfg: parse the configs as Klipper does, render the macros with
+"""Offline check of klipper/config/homing_indx.cfg: parse the configs as Klipper does, render the macros with
 Klipper's Jinja settings, and replay every move for several G28 cases. Bondtech's helper macros are stubs.
 
-  python3 vc12_homingcheck.py ../klipper <folder with Bondtech's macros/indx.cfg and homing.cfg> ../checks/homing_report.json
+  python3 vc12_homingcheck.py ../klipper/config <Bondtech's INDX/macros folder (homing.cfg)> ../checks/homing_report.json
 """
 import configparser, sys, json, re
 import jinja2
 
-KL, BT = sys.argv[1], sys.argv[2]           # our klipper folder, Bondtech's macros folder
+KL, BT = sys.argv[1], sys.argv[2]           # our klipper/config folder, Bondtech's macros folder
 fc = configparser.RawConfigParser(strict=False, inline_comment_prefixes=(';', '#'))
-fc.read([f"{BT}/indx.cfg", f"{BT}/homing.cfg", f"{KL}/motion_corexy12_indx.cfg", f"{KL}/homing_indx.cfg"])
+fc.read([f"{KL}/INDX_Tools.cfg", f"{BT}/homing.cfg", f"{KL}/Motion_XY.cfg", f"{KL}/homing_indx.cfg"])
 ho = fc.get("homing_override", "gcode")
 assert "_HOME_XY_TWICE" in ho, "our [homing_override] did not replace Bondtech's"
 assert fc.get("homing_override", "axes").strip() == "xyz"

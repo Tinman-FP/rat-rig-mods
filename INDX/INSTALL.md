@@ -194,28 +194,39 @@ The stock side spool holders are no longer needed. You can leave them on or take
 ## 12. Electronics and Klipper
 1. **Motors.** Motor A goes to MOTOR0 (the old `stepper_x` socket) and motor B to MOTOR1 (the old `stepper_y` socket). MOTOR3 and MOTOR4 become free.
 2. **INDX electronics.** Fit the INDX Link board near the Pi. The Link cable (178 cm) plus the host USB must total 2 m or less.
-3. **Firmware: Kalico.** Its INDX support and toolboard firmware are built in.
-   - Take a full snapshot of the live printer's config, `variables.cfg` and Klipper version first.
-   - Switch the Klipper folder to Kalico, then flash the INDX toolboard from it (Bondtech's guide).
-   - Keep the chamber, heat-soak, precheck, counter, RGB and camera macros. Retire the IDEX kinematics files and the dual-Beacon setup.
-   - Point INDX's saved state at the existing `variables.cfg`; Klipper allows only one `[save_variables]`.
-4. **Config.** Add `klipper/motion_corexy12_indx.cfg` in place of the old motion files and the hybrid CoreXY kinematics, and add `klipper/purge_wipe.cfg` and `klipper/homing_indx.cfg`. All three are drafts. Include `homing_indx.cfg` after Bondtech's `homing.cfg` so its homing replaces Bondtech's. Set the INDX values listed at the end of the motion file.
+3. **Snapshot first.** Copy the live printer's whole config folder, `variables.cfg` and its Klipper version somewhere safe. The draft is built on the GitHub copy of the config, and the live one may differ.
+4. **Firmware: Kalico.** Its INDX support and the INDX head's firmware are built in.
+   - Switch the Klipper folder to Kalico and reflash the Octopus from it, with the same board settings as before.
+   - Flash the INDX head from the Kalico tree: `KCONFIG_CONFIG=board_configs/bondtech_indx_usb.config make`, then `make flash FLASH_DEVICE=04d8:e483`, with the head in bootloader mode (Bondtech's guide).
+5. **Config.** The draft is in `klipper/config/`; `klipper/README.md` lists every file.
+   - Copy the new and changed files over the old ones.
+   - Move the retired files out of the config folder (the list is in `klipper/README.md` and at the end of the new `printer.cfg`).
+   - Get Bondtech's macros, pinned to the version the draft was checked against:
+     `git clone https://github.com/BondtechAB/INDX.git ~/printer_data/config/INDX`, then `git -C ~/printer_data/config/INDX checkout ae64179`.
+   - In `MCU.cfg`, put back the Octopus serial line from the old file. Add the INDX head's line from `ls /dev/serial/by-id/` (the one starting `usb-Bondtech_INDX`).
+   - In the slicer (Orca), set the change-filament G-code to `CHANGE_TOOL TOOL={next_extruder} TEMP={new_filament_temp}`, then `AFTER_TOOL_CHANGE TOOL={next_extruder}`, then `M400`. Add `TOOLS=` to the `START_PRINT` line (see `klipper/README.md`).
+6. **Filament sensors.** Fit one runout switch per tool at the spool side and wire T0–T4 to the Octopus inputs PG10–PG14. Check each with `QUERY_FILAMENT_SENSOR SENSOR=Tn_runout`, with filament in and out.
 
 ## 13. Commissioning
 Keep a hand on the power switch for every first move.
 
 1. **Directions.** Run `STEPPER_BUZZ` on each motor. Check the CoreXY directions: motor A moves the head along X+Y, and motor B along X−Y.
-2. **Homing.** Y homes to the **rear** stop, never toward the docks. `homing_indx.cfg` homes Y then X twice each, ending 4 mm off the rear and left stops.
+2. **Homing.** Y homes to the **rear** stop, never toward the docks. `klipper/config/homing_indx.cfg` homes Y then X twice each, ending 4 mm off the rear and left stops.
    - Start with the head in the middle of the bed. Run `G28 Y` alone, then `G28 X`, each with a hand on the power switch. If an axis stops before reaching its stop, lower that motor's `driver_SGTHRS`. If it hits the stop and keeps pushing, raise it. Then try again.
    - Then run `G28`. Check the head goes to Y 388.8 before homing X, and never comes forward of Y 0 except to fetch T0.
    - Repeatability: run `G28` five times. After each, send `G0 X250 Y250 F6000`, `M400`, then `GET_POSITION`, and note the `mcu:` numbers for `stepper_x` and `stepper_y`. They should agree within 16 (0.05 mm; one microstep is 0.003 mm).
 3. **Limits.** Check the stops and soft limits: X −35 to 545, Y −41 to 488.8.
-4. **Z.** With the bed 20 mm higher, re-home Z, re-measure Z max, then level and mesh with the INDX probe.
-5. **Docks.** Calibrate them with Bondtech's procedure (`CAL_SET_DOCK_Y`, `CALIBRATE_DOCK_X TOOL=n`).
-6. **Purge stations.** Before the first purge, fit-check them with no filament, cold:
+4. **INDX head, in Bondtech's order.**
+   - Calibrate the load cell with the head empty (`CALIBRATE_LOAD_CELL`, then `SAVE_CONFIG`) before the first Z home. Z homes on it.
+   - Heater model: `INDX_CALIBRATE` with T0 seated by hand.
+   - Until the docks are measured INDX refuses to drive into them. Seat T0 by hand and run `MANUAL_TOOL_SEAT TOOL=0`, then `G28`.
+5. **Z.** With the bed 20 mm higher, re-measure Z max (`position_max` 480 in `Motion_Z.cfg` is a placeholder). Then run `Z_TILT_ADJUST` and a mesh, both on the load cell with T0.
+6. **Docks.** Measure them with Bondtech's procedure (`CAL_SET_DOCK_Y`, `CALIBRATE_DOCK_X TOOL=n`). Paste the results into `INDX_Tools.cfg`, set `docks_calibrated: True` and `RESTART`. Then set the tool offsets (`CAL_Z`, and `CAL_ONE`/`TWO`/`THREE` or a test print for X/Y).
+7. **Purge stations.** Before the first purge, fit-check them with no filament, cold:
    - On the clearance line, jog to each tool's purge X (27, 149, 271, 393, 515).
    - Step forward in Y to −40 a few millimetres at a time, watching the gaps to the docks on both sides.
    - Then jog right 20 mm across the pad. The head should clear the next dock with room to spare.
-7. **Wiper height.** Adjust the station-rail brackets so each pad's top is 1.2 mm above the nozzle tip.
-8. **Purge test.** With each tool heated, run `PURGE_AND_WIPE TOOL=n`. Check the strand drops into that tool's bucket and the wipe crosses the pad.
-9. **First print.** Run a small single-tool print, then a tool-change test across all five tools. Watch the tubes and the cable chain during the first tool changes and at the front corners.
+8. **Wiper height.** Adjust the station-rail brackets so each pad's top is 1.2 mm above the nozzle tip.
+9. **Purge test.** With each tool heated, run `PURGE_AND_WIPE TOOL=n`. Check the strand drops into that tool's bucket and the wipe crosses the pad.
+10. **Power-loss recovery.** Before trusting it, do the dry run in `klipper/config/PLR_INDX_NOTES.md`: no filament, cut power at layer 3, then walk the staged plan one line at a time. The Z restore is new.
+11. **First print.** Run a small single-tool print, then a tool-change test across all five tools. Watch the tubes and the cable chain during the first tool changes and at the front corners.

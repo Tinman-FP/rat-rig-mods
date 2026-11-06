@@ -1,0 +1,39 @@
+{
+ "date": "2026-11-06",
+ "what": "klipper/config assembled over the owner's config and loaded offline",
+ "inputs": {
+  "owner_config": "Tinman-FP/rat-rig-dual-beacon-500-idex-config 277d85e",
+  "bondtech_indx": "BondtechAB/INDX ae64179",
+  "mainsail_config": "mainsail-crew/mainsail-config ff3869a",
+  "kalico": "KalicoCrew/kalico 648194e",
+  "mcu_dictionaries": "built locally: Octopus STM32F446 (12 MHz, 32 KiB bootloader, USB) and INDX head (Kalico board_configs/bondtech_indx_usb.config); nothing flashed"
+ },
+ "kalico_batch_mode": {
+  "pass": true,
+  "warnings": [
+   "Option 'off_below' in section 'fan_generic hp_fan_he2' is deprecated.",
+   "Option 'off_below' in section 'fan_generic chamber_cooling_fan' is deprecated.",
+   "Option 'off_below' in section 'fan_generic controller_fan' is deprecated."
+  ]
+ },
+ "static_check": {
+  "pass": true,
+  "sections": 320,
+  "macros": 254,
+  "expected_duplicates": [
+   "[display_status] in ['mainsail.cfg', 'System.cfg']  (expected)",
+   "[gcode_macro PAUSE] in ['mainsail.cfg', 'macros.cfg']  (expected)",
+   "[gcode_macro RESUME] in ['mainsail.cfg', 'macros.cfg']  (expected)",
+   "[homing_override] in ['INDX/macros/homing.cfg', 'homing_indx.cfg']  (expected)",
+   "[pause_resume] in ['mainsail.cfg', 'System.cfg']  (expected)",
+   "[respond] in ['mainsail.cfg', 'System.cfg']  (expected)",
+   "[virtual_sdcard] in ['mainsail.cfg', 'System.cfg']  (expected)"
+  ]
+ },
+ "plr_offline_test": "Ran 21 tests in 1.179s OK",
+ "found_and_fixed": [
+  "Kalico requires sense_resistor on every TMC2209 (mainline defaulted to 0.110); added to stepper_x/stepper_y",
+  "leftover calls to the retired toolboard-fan macros in Test_Macros.cfg"
+ ],
+ "not_covered": "anything that only happens when a macro runs on the machine; homing sensitivity, load-cell and heater calibration, dock positions"
+}
